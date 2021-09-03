@@ -6,7 +6,7 @@ input/ouputディレクトリはgitignoreに追加しています。
 # 今後の予定
 
 - 第一段階
-JupyterNoteBook上ある程度の自動化を実現する。
+JupyterNoteBook上である程度の自動化を実現する。
 （実行環境を整備を相手側で整備する必要あり）
 
 - 第二段階
