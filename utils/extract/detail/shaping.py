@@ -21,6 +21,7 @@ def shaping(data: dict):
         else:
             pass
     # 東京都 町田など、固有名詞に 市、町、区、町、村があるもの
+    # 町田市
     for index in range(len(data['district'])):
         if data['district'][index] == "":
             continue
@@ -32,3 +33,8 @@ def shaping(data: dict):
                 pass
         else:
             pass
+    # 市川市
+    # 市原市
+    # 野々市市
+    # 四日市市
+    # 陶火待ちし

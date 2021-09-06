@@ -1,14 +1,6 @@
 import re
 
 
-def find_prefacture(string: str):
-    # 北海道,大阪府,京都府,東京都は別扱い
-    special_prefactures: list = ["北海道", "大阪府", "京都府", "東京都"]
-    for _ in special_prefactures:
-        if _ in string:
-            return (_,)
-
-
 def erase_special_address_expression(string: str, index: int):
     size: int = len(string)
     # 丁目を置換することのみ行う
@@ -64,6 +56,8 @@ def erase_special_address_expression(string: str, index: int):
         numbers: list = []
         for i in range(10):
             numbers.append(str(i))
+        # 全角数字と半角数字を加える
+        numbers.extend(['０', '１', '２', '３', '４', '５', '６', '７', '８', '９'])
         for i in range(size):
             if i > 0 and i + 1 < size and string[i] == "の" and string[i - 1] in numbers:
                 res = res + "-"
@@ -115,12 +109,14 @@ def japanese_style_number_to_number(string: str):
         mapping_dictionary: dict = \
             {"１": "1", "２": "2", "３": "3", "４": "4", "５": "5",
                 "６": "6", "７": "7", "８": "8", "９": "9", "０": "10"}
-        full_width_number: list = ["１", "２", "３", "４", "５", "６", "７", "８", "９", "０"]
+        full_width_number: list = ["１", "２", "３",
+                                   "４", "５", "６", "７", "８", "９", "０"]
         if char in full_width_number:
             return mapping_dictionary[c]
         else:
             return char
-    japanese_style_number: list = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"]
+    japanese_style_number: list = [
+        "一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"]
     # 十と表記する際は高確率で地名なので
     res: str = ""
     for c in string:
