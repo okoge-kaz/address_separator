@@ -12,7 +12,9 @@ import utils.extract.detail.check
 import utils.extract.detail.munipulate
 import utils.extract.detail.building_detail
 import utils.extract.detail.shaping
+import utils.extract.detail.caution
 import utils.extract.detail.shaping_building_info
+import utils.extract.detail.data_check
 
 
 def input(PATH: str):
@@ -74,7 +76,11 @@ def main():
     utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(
         data, munipulated_others_tail)
     # others_tail内のデータを整形
-    utils.extract.detail.shaping.shaping(data, munipulated_others_tail, caution)
+    utils.extract.detail.shaping.shaping(data)
+    # caution
+    utils.extract.detail.caution.caution(data, munipulated_others_tail, caution)
+    # 実在する市町村かどうか
+    utils.extract.detail.data_check.data_check(data)
     # dict -> dataFrame
     df = pd.DataFrame(data)
     df = df.reindex(columns=['original', 'prefacture', 'city', 'town', 'district', 'invalid',
