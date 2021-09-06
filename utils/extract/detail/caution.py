@@ -2,6 +2,7 @@ import re
 
 
 def caution(data: dict, munipulated_others_tail: list, caution: list):
+    '''不適切な形で分割されていると思われるデータを検知し、cautionを出す。一部データ整形機能も持つ'''
     # others_tail内部の半角-を全角に直す
     def replace_half_hypen_with_full_width_hypen(string: str):
         res: str = ""
@@ -20,7 +21,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
     data['building_detail_info'] = data['building_detail_info']
     data['caution'] = caution
 
-    # cautionについて
+    '''ビル情報の列にビルの詳細情報の断片と思われるデータが存在するとき'''
     for index in range(len(data['building_info'])):
         if re.search('(^号)|(^号館)', data["building_info"][index]) is not None:
             data['caution'][index] = True
@@ -35,6 +36,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             data['caution'][index] = True
         else:
             pass
+    # townにおかしなところがないか調査
     for index in range(len(data['town'])):
         if data['town'][index] == "":
             continue
@@ -43,6 +45,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             data['caution'][index] = True
         else:
             pass
+    # districtにおかしなところがないか調査
     for index in range(len(data['district'])):
         if data['district'][index] == "":
             continue
