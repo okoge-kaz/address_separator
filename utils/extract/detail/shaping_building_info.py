@@ -157,9 +157,27 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
         else:
             pass
 
+    def extract_building_detail_info_from_others_tail_6(index: int):
+        '''45号館のようなかたちを検出しbuilding_detail_infoにデータを付け替える'''
+        if re.search('[0-9]+号室$', munipulated_others_tail[index]) is not None:
+            start: int = re.search(
+                '[0-9]+号室$', munipulated_others_tail[index]).start()
+            end: int = re.search(
+                '[0-9]+号室$', munipulated_others_tail[index]).end()
+            # ここ順番注意
+            building_info = munipulated_others_tail[index][start:end]
+            munipulated_others_tail[index] = munipulated_others_tail[index][:start]
+            print(building_info)
+            # 順番に注意
+            data['building_detail_info'][index] = building_info + \
+                data['building_detail_info'][index]
+        else:
+            pass
+
     for index in range(len(munipulated_others_tail)):
         extract_building_detail_info_from_others_tail_1(index)
         extract_building_detail_info_from_others_tail_2(index)
         extract_building_detail_info_from_others_tail_3(index)
         extract_building_detail_info_from_others_tail_4(index)
         extract_building_detail_info_from_others_tail_5(index)
+        extract_building_detail_info_from_others_tail_6(index)

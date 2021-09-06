@@ -1,3 +1,5 @@
+import time
+
 import pandas as pd
 
 import utils.shaping
@@ -19,7 +21,7 @@ def input(PATH: str):
 
 
 def main():
-    PATH: str = "input/input.csv"  # path to csv file
+    PATH: str = "input/test_input.csv"  # path to csv file
     csv_data = input(PATH)
     replaced_address_data: list = []
     # 'addressという名前がついた列しかデータを収集しない
@@ -78,9 +80,11 @@ def main():
     df = df.reindex(columns=['original', 'prefacture', 'city', 'town', 'district', 'invalid',
                     'house_number', 'special_characters', 'building_info', 'building_detail_info', 'caution'])
     # output
-    df.to_csv('output/output.csv', encoding='utf-8_sig')
+    df.to_csv('output/test_output.csv', encoding='utf-8_sig')
     # 文字化けについて https://qiita.com/y4m3/items/674423b596284bbc7cf7
 
 
 if __name__ == '__main__':
+    start = time.time()
     main()
+    print(time.time() - start)
