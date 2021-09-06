@@ -16,13 +16,13 @@ def erase_special_address_expression(string: str, index: int):
         res: str = ""
         i: int = 0
         while i < (size):
-            if i == size-1:
+            if i == size - 1:
                 res = res + string[i]
                 i += 1
             else:
-                if(string[i] == '丁' and string[i+1] == '目'):
+                if(string[i] == '丁' and string[i + 1] == '目'):
                     # 丁目店などは特殊ケースとして除外
-                    if i+2 < size and string[i+2] == "店":
+                    if i + 2 < size and string[i + 2] == "店":
                         res = res + string[i]
                         i += 1
                         continue
@@ -37,11 +37,11 @@ def erase_special_address_expression(string: str, index: int):
         res: str = ""
         i: int = 0
         while i < size:
-            if i == size-1:
+            if i == size - 1:
                 res = res + string[i]
                 i += 1
             else:
-                if(string[i] == "番" and string[i+1] == "地"):
+                if(string[i] == "番" and string[i + 1] == "地"):
                     res = res + ("-")
                     i += 2
                 else:
@@ -65,7 +65,7 @@ def erase_special_address_expression(string: str, index: int):
         for i in range(10):
             numbers.append(str(i))
         for i in range(size):
-            if i > 0 and i+1 < size and string[i] == "の" and string[i-1] in numbers:
+            if i > 0 and i + 1 < size and string[i] == "の" and string[i - 1] in numbers:
                 res = res + "-"
             else:
                 res = res + string[i]
@@ -91,7 +91,7 @@ def replace_japanese_address_expression(string: str):
 
 def erase_last_hyphen(string: str):
     if string[-1] == "-":
-        return string[0:len(string)-1]
+        return string[0:len(string) - 1]
     else:
         return string
 
