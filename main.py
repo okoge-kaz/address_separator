@@ -60,7 +60,7 @@ def main():
     data["invalid"] = others_head
     data["house_number"] = house_numbers
     # check 不正なデータが存在しないかどうかを確認
-    cation: list = utils.extract.detail.check.check(data)
+    caution: list = utils.extract.detail.check.check(data)
     print(pd.DataFrame(data))  # for debug
     # データ整形＋分裂してしまったデータを統合整理
     munipulated_others_tail = utils.extract.detail.munipulate.munipulate(
@@ -72,11 +72,11 @@ def main():
     utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(
         data, munipulated_others_tail)
     # others_tail内のデータを整形
-    utils.extract.detail.shaping.shaping(data, munipulated_others_tail, cation)
+    utils.extract.detail.shaping.shaping(data, munipulated_others_tail, caution)
     # dict -> dataFrame
     df = pd.DataFrame(data)
     df = df.reindex(columns=['original', 'prefacture', 'city', 'town', 'district', 'invalid',
-                    'house_number', 'special_characters', 'building_info', 'building_detail_info', 'cation'])
+                    'house_number', 'special_characters', 'building_info', 'building_detail_info', 'caution'])
     # output
     df.to_csv('output/output.csv', encoding='utf-8_sig')
     # 文字化けについて https://qiita.com/y4m3/items/674423b596284bbc7cf7

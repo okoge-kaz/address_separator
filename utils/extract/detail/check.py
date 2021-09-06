@@ -19,16 +19,16 @@ def check(data: dict):
         else:
             return ""
 
-    cation: list = []
+    caution: list = []
     for index in range(len(data['original'])):
         response: str = check_vaild_word_or_not(index)
         if data['invalid'][index] == "":
-            cation.append(False)
+            caution.append(False)
         elif response == "":
             # 不正な文字列
-            cation.append(True)
+            caution.append(True)
         else:
-            cation.append(False)
+            caution.append(False)
             data['invalid'][index] = ""
             data['district'][index] += response
-    return cation
+    return caution
