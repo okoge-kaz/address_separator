@@ -100,4 +100,6 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
         if data['building_info'][index] == '' and data['building_detail_info'][index] != '':
             data['caution'][index] = True
     # 都道府県名が空欄ならcaution
-    
+    for index in range(len(data['prefacture'])):
+        if data['prefacture'][index] == '':
+            data['caution'][index] = True
