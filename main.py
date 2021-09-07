@@ -22,9 +22,18 @@ def input(PATH: str):
     return csv_data
 
 
+def read_excel(PATH: str):
+    excel_data = pd.read_excel(PATH)
+    return excel_data
+
+
 def main():
     PATH: str = "input/test_input.csv"  # path to csv file
-    csv_data = input(PATH)
+    global csv_data
+    try:
+        csv_data = input(PATH)
+    except Exception:
+        csv_data = read_excel('input/input.xlsx')
     replaced_address_data: list = []
     # 'addressという名前がついた列しかデータを収集しない
     for address_data in csv_data['address']:
