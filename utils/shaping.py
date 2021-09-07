@@ -101,6 +101,8 @@ def replace_slash_with_hyphen(string: str):
     string = re.sub(' ', '-', string)
     string = re.sub('　', '-', string)
     string = re.sub('\t', '-', string)
+    # 日本語で数字をつなぐ際に出現しうる
+    string = re.sub('−', '-', string)
     # 正規表現で/を-に置き換える
     return re.sub("/", "-", string)
 
@@ -116,7 +118,7 @@ def japanese_style_number_to_number(string: str):
         '''全角数字を半角数字に変換'''
         mapping_dictionary: dict = \
             {"１": "1", "２": "2", "３": "3", "４": "4", "５": "5",
-                "６": "6", "７": "7", "８": "8", "９": "9", "０": "10"}
+                "６": "6", "７": "7", "８": "8", "９": "9", "０": "0"}
         if re.search('[０-９]', char):
             # 全角数字が存在する
             return mapping_dictionary[char]
