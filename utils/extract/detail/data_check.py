@@ -13,3 +13,13 @@ def data_check(data: dict):
             pass
         else:
             data['caution'][index] = True
+    CHECH_PATH = 'data/Ordinance_designated_city.csv'
+    Ordinance_designated_city_csv = pd.read_csv(CHECH_PATH)
+    print(list(Ordinance_designated_city_csv.columns))
+    for index in range(len(data['city'])):
+        if data['city'][index] in list(Ordinance_designated_city_csv.columns):
+            city_name = data['city'][index]
+            if data['town'][index] in list(Ordinance_designated_city_csv[city_name]):
+                pass
+            else:
+                data['caution'][index] = True
