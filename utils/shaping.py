@@ -25,7 +25,7 @@ def erase_special_address_expression(string: str, index: int):
                     i += 1
         return res
     # 番地を置換することのみ行う
-    if index == 2:
+    elif index == 2:
         res: str = ""
         i: int = 0
         while i < size:
@@ -41,7 +41,7 @@ def erase_special_address_expression(string: str, index: int):
                     i += 1
         return res
     # 番を置換することのみ行う
-    if index == 3:
+    elif index == 3:
         res: str = ""
         for i in range(size):
             if string[i] == "番":
@@ -49,22 +49,28 @@ def erase_special_address_expression(string: str, index: int):
             else:
                 res = res + (string[i])
         return res
-    # の を置換する
-    if index == 4:
-        res: str = ""
-
-        numbers: list = []
-        for i in range(10):
-            numbers.append(str(i))
-        # 全角数字と半角数字を加える
-        numbers.extend(['０', '１', '２', '３', '４', '５', '６', '７', '８', '９'])
-        for i in range(size):
-            if i > 0 and i + 1 < size and string[i] == "の" and string[i - 1] in numbers:
-                res = res + "-"
-            else:
-                res = res + string[i]
-        return res
-    if index == 5:
+    # 1の4 -> 1-4に置換する && 全角数字の置き換え
+    elif index == 4:
+        while re.search('[0-9 ０-９]+の[0-9 ０-９]', string) is not None:
+            start: int = re.search('[0-9 ０-９]+の[0-9 ０-９]', string).start()
+            end: int = re.search('[0-9 ０-９]+の[0-9 ０-９]', string).end()
+            res: str = ""
+            res += string[:start]
+            for index in range(start, end):
+                if string[index] == 'の':
+                    res += '-'
+                else:
+                    if re.search('[０-９]', string[index]) is not None:
+                        mapping_dictionary: dict = \
+                            {"１": "1", "２": "2", "３": "3", "４": "4", "５": "5",
+                             "６": "6", "７": "7", "８": "8", "９": "9", "０": "10"}
+                        res += mapping_dictionary[string[index]]
+                    else:
+                        res += string[index]
+            res += string[end:]
+            string = res
+        return string
+    elif index == 5:
         return string.translate(str.maketrans({chr(0xFF01 + i): chr(0x21 + i) for i in range(94)}))
 
 
@@ -92,8 +98,9 @@ def erase_last_hyphen(string: str):
 
 def replace_slash_with_hyphen(string: str):
     # 空白を取り除く
-    string = string.replace(' ', '-')
-    string = string.replace('　', '-')
+    string = re.sub(' ', '-', string)
+    string = re.sub('　', '-', string)
+    string = re.sub('\t', '-', string)
     # 正規表現で/を-に置き換える
     return re.sub("/", "-", string)
 
@@ -106,15 +113,16 @@ def japanese_style_number_to_number(string: str):
         return dictionary_japanese_style_number[char]
 
     def full_width_to_half_width(char: str):
+        '''全角数字を半角数字に変換'''
         mapping_dictionary: dict = \
             {"１": "1", "２": "2", "３": "3", "４": "4", "５": "5",
                 "６": "6", "７": "7", "８": "8", "９": "9", "０": "10"}
-        full_width_number: list = ["１", "２", "３",
-                                   "４", "５", "６", "７", "８", "９", "０"]
-        if char in full_width_number:
-            return mapping_dictionary[c]
+        if re.search('[０-９]', char):
+            # 全角数字が存在する
+            return mapping_dictionary[char]
         else:
             return char
+    # 以降実際の処理
     japanese_style_number: list = [
         "一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"]
     # 十と表記する際は高確率で地名なので

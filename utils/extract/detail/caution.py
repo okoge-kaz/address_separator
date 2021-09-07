@@ -95,3 +95,9 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             data['caution'][index] = True
         else:
             pass
+    # building_info が空なのに building_detail_infoが空ではなかったらcaution
+    for index in range(len(data['building_info'])):
+        if data['building_info'][index] == '' and data['building_detail_info'][index] != '':
+            data['caution'][index] = True
+    # 都道府県名が空欄ならcaution
+    

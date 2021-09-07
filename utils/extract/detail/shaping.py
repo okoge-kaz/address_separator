@@ -20,6 +20,25 @@ def shaping(data: dict):
             data['city'][index] = shaped
         else:
             pass
+    # 上記と同様のことをtownでもやる。ただし漢字+ひらがな+算用数字のときのみ
+
+    # city の先頭または末尾に-があったら除去
+    for index in range(len(data['city'])):
+        if data['city'][index] == "":
+            continue
+        if data['city'][index][0] == '-':
+            data['city'][index] = data['city'][index][1:]
+        if data['city'][index][-1] == '-':
+            data['city'][index] = data['city'][index][:-1]
+    # town の先頭または末尾に-があったら除去
+    for index in range(len(data['town'])):
+        if data['town'][index] == "":
+            continue
+        if data['town'][index][0] == '-':
+            data['town'][index] = data['town'][index][1:]
+        if data['town'][index][-1] == '-':
+            data['town'][index] = data['town'][index][:-1]
+
     # 東京都 町田など、固有名詞に 市、町、区、町、村があるもの
     # 町田市
     for index in range(len(data['district'])):
@@ -34,7 +53,145 @@ def shaping(data: dict):
         else:
             pass
     # 市川市
+    for index in range(len(data['city'])):
+        if data['city'][index] == '市' and re.search('^川市', data['district'][index]):
+            start: int = re.search('^川市', data['district'][index]).start()
+            end: int = re.search('^川市', data['district'][index]).end()
+            if start != 0:
+                print('something wrong')  # for debug
+            data['city'][index] = '市川市'
+            data['district'][index] = data['district'][index][end:]
+
+        elif data['district'][index] == '':
+            # どこに残骸があるか不明なので
+            if data['city'][index] == '市' and re.search('^川市', data['town'][index]):
+                start: int = re.search('^川市', data['town'][index]).start()
+                end: int = re.search('^川市', data['town'][index]).end()
+                if start != 0:
+                    print('something wrong')  # for debug
+                data['city'][index] = '市川市'
+                data['town'][index] = data['town'][index][end:]
     # 市原市
+    for index in range(len(data['city'])):
+        if data['city'][index] == '市' and re.search('^原市', data['district'][index]):
+            start: int = re.search('^原市', data['district'][index]).start()
+            end: int = re.search('^原市', data['district'][index]).end()
+            if start != 0:
+                print('something wrong')  # for debug
+            data['city'][index] = '市原市'
+            data['district'][index] = data['district'][index][end:]
+
+        elif data['district'][index] == '':
+            # どこに残骸があるか不明なので
+            if data['city'][index] == '市' and re.search('^原市', data['town'][index]):
+                start: int = re.search('^原市', data['town'][index]).start()
+                end: int = re.search('^原市', data['town'][index]).end()
+                if start != 0:
+                    print('something wrong')  # for debug
+                data['city'][index] = '市原市'
+                data['town'][index] = data['town'][index][end:]
     # 野々市市
+    for index in range(len(data['city'])):
+        if data['city'][index] == '野々市' and re.search('^市', data['district'][index]):
+            start: int = re.search('^市', data['district'][index]).start()
+            end: int = re.search('^市', data['district'][index]).end()
+            if start != 0:
+                print('something wrong')  # for debug
+            data['city'][index] = '野々市市'
+            data['district'][index] = data['district'][index][end:]
+
+        elif data['district'][index] == '':
+            # どこに残骸があるか不明なので
+            if data['city'][index] == '野々市' and re.search('^市', data['town'][index]):
+                start: int = re.search('^市', data['town'][index]).start()
+                end: int = re.search('^市', data['town'][index]).end()
+                if start != 0:
+                    print('something wrong')  # for debug
+                data['city'][index] = '野々市市'
+                data['town'][index] = data['town'][index][end:]
     # 四日市市
-    # 陶火待ちし
+    for index in range(len(data['city'])):
+        if data['city'][index] == '四日市' and re.search('^市', data['district'][index]):
+            start: int = re.search('^市', data['district'][index]).start()
+            end: int = re.search('^市', data['district'][index]).end()
+            if start != 0:
+                print('something wrong')  # for debug
+            data['city'][index] = '四日市市'
+            data['district'][index] = data['district'][index][end:]
+
+        elif data['district'][index] == '':
+            # どこに残骸があるか不明なので
+            if data['city'][index] == '四日市' and re.search('^市', data['town'][index]):
+                start: int = re.search('^市', data['town'][index]).start()
+                end: int = re.search('^市', data['town'][index]).end()
+                if start != 0:
+                    print('something wrong')  # for debug
+                data['city'][index] = '四日市市'
+                data['town'][index] = data['town'][index][end:]
+    # 廿日市市
+    for index in range(len(data['city'])):
+        if data['city'][index] == '廿日市' and re.search('^市', data['district'][index]):
+            start: int = re.search('^市', data['district'][index]).start()
+            end: int = re.search('^市', data['district'][index]).end()
+            if start != 0:
+                print('something wrong')  # for debug
+            data['city'][index] = '廿日市市'
+            data['district'][index] = data['district'][index][end:]
+
+        elif data['district'][index] == '':
+            # どこに残骸があるか不明なので
+            if data['city'][index] == '廿日市' and re.search('^市', data['town'][index]):
+                start: int = re.search('^市', data['town'][index]).start()
+                end: int = re.search('^市', data['town'][index]).end()
+                if start != 0:
+                    print('something wrong')  # for debug
+                data['city'][index] = '廿日市市'
+                data['town'][index] = data['town'][index][end:]
+    # 余市軍
+    for index in range(len(data['city'])):
+        if data['city'][index] == '余市' and re.search('^郡', data['district'][index]):
+            start: int = re.search('^郡', data['district'][index]).start()
+            end: int = re.search('^郡', data['district'][index]).end()
+            if start != 0:
+                print('something wrong')  # for debug
+            data['city'][index] = '余市郡'
+            data['district'][index] = data['district'][index][end:]
+
+        elif data['district'][index] == '':
+            # どこに残骸があるか不明なので
+            if data['city'][index] == '余市' and re.search('^郡', data['town'][index]):
+                start: int = re.search('^郡', data['town'][index]).start()
+                end: int = re.search('^郡', data['town'][index]).end()
+                if start != 0:
+                    print('something wrong')  # for debug
+                data['city'][index] = '余市郡'
+                data['town'][index] = data['town'][index][end:]
+        elif re.search('^[- 0-9 町 市]', data['district'][index]) is None:
+            # どこに残骸があるか不明なので
+            if data['city'][index] == '余市' and re.search('^郡', data['town'][index]):
+                start: int = re.search('^郡', data['town'][index]).start()
+                end: int = re.search('^郡', data['town'][index]).end()
+                if start != 0:
+                    print('something wrong')  # for debug
+                data['city'][index] = '余市郡'
+                data['town'][index] = data['town'][index][end:]
+                if data['town'][index] == '' and re.search('[町]$', data['district'][index]):
+                    # 文字列の分解位置をずらす
+                    data['town'][index] = data['district'][index]
+                    data['district'][index] = ''
+    # 市貝町
+    for index in range(len(data['city'])):
+        if re.search('-市$', data['city'][index]):
+            start: int = re.search('-市$', data['city'][index]).start()
+            end: int = re.search('-市$', data['city'][index]).end()
+            if data['town'][index] == '貝町':
+                data['town'][index] = '市貝町'
+                data['city'][index] = data['city'][index][:start]
+    # 市川三郷町
+    for index in range(len(data['city'])):
+        if re.search('-市$', data['city'][index]):
+            start: int = re.search('-市$', data['city'][index]).start()
+            end: int = re.search('-市$', data['city'][index]).end()
+            if data['town'][index] == '川3郷町':
+                data['town'][index] = '市川三郷町'
+                data['city'][index] = data['city'][index][:start]
