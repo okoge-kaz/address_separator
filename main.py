@@ -35,7 +35,7 @@ def main():
     except Exception:
         csv_data = read_excel('input/input.xlsx')
     replaced_address_data: list = []
-    # 'addressという名前がついた列しかデータを収集しない
+    # addressという名前がついた列しかデータを収集しない
     for address_data in csv_data['address']:
         replaced_address_data.append(utils.shaping.operation(address_data))
     print(pd.DataFrame(replaced_address_data))  # for debug
