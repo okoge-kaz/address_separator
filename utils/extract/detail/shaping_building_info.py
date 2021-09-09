@@ -2,6 +2,7 @@ import re
 
 
 def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: list):
+    '''ビル名、建物名など、building_infoに含まれる。または、building_detail_infoに含まれるデータを抽出、整形する'''
     def find_kai(string: str):
         '''階という文字単体が配列munipulated_others_tailに存在する場合検知する'''
         if string == "階":

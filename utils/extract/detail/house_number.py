@@ -2,6 +2,7 @@ import re
 
 
 def operation(others: list):
+    '''1-7-6 のような番地を抽出する。'''
     house_numbers: list = []
     others_head: list = []
     others_tail: list = []

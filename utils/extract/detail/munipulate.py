@@ -2,6 +2,7 @@ import re
 
 
 def munipulate(data: dict, others_tail: list):
+    '''番地を取り除いた後のデータに関して、処理を行い後の操作で処理を行いやすくする。'''
     munipulated_others_tail: list = []
 
     for id in range(len(others_tail)):

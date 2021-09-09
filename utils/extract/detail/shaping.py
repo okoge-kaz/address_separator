@@ -2,6 +2,7 @@ import re
 
 
 def shaping(data: dict):
+    '''分割等が終了したデータに対して、これらを出力用に整形する'''
     # データの最終整形 都市名のうち半角数字のものは漢字に直す
     for index in range(len(data['city'])):
         if data['city'][index] == "":

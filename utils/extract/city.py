@@ -1,5 +1,7 @@
 def extract_city(non_prefacture_address_data: list):
-    '''市、区、群、町、村の順で文字列を探索し、分割する'''
+    '''市、区、群、町、村の順で文字列を探索し、分割する。
+    if文の順番が 市->区->郡->町->村であるのは、分割パターンの都合上最もうまくいくように
+    '''
     cities: list = []
     non_city_address_data: list = []
 
