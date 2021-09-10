@@ -15,6 +15,7 @@ import utils.extract.detail.shaping
 import utils.extract.detail.caution
 import utils.extract.detail.shaping_building_info
 import utils.extract.detail.data_check
+import utils.shape.output_data_shaping
 
 
 def input(PATH: str):
@@ -90,10 +91,10 @@ def main():
     utils.extract.detail.caution.caution(data, munipulated_others_tail, caution)
     # 実在する市町村かどうか
     utils.extract.detail.data_check.data_check(data)
+    # 最終整形
+    data = utils.shape.output_data_shaping.shape(data)
     # dict -> dataFrame
     df = pd.DataFrame(data)
-    df = df.reindex(columns=['original', 'prefacture', 'city', 'town', 'district', 'invalid',
-                    'house_number', 'special_characters', 'building_info', 'building_detail_info', 'caution'])
     # output
     df.to_csv('output/test_output.csv', encoding='utf-8_sig')
     # 文字化けについて https://qiita.com/y4m3/items/674423b596284bbc7cf7

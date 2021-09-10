@@ -12,7 +12,7 @@ def data_check(data: dict):
         if data['city'][index] in list(administrative_data_csv[prefacture]):
             pass
         else:
-            data['caution'][index] = True
+            data['caution'][index] += "VALUE ERROR: The address1 column's cell is INVALID. Prefacture data is something wrong. "
     CHECH_PATH = 'data/Ordinance_designated_city.csv'
     Ordinance_designated_city_csv = pd.read_csv(CHECH_PATH)
     print(list(Ordinance_designated_city_csv.columns))
@@ -22,4 +22,4 @@ def data_check(data: dict):
             if data['town'][index] in list(Ordinance_designated_city_csv[city_name]):
                 pass
             else:
-                data['caution'][index] = True
+                data['caution'][index] += "VALUE ERROR: The address2 column's cell is INVALID. address2 data is something wrong. "

@@ -22,12 +22,12 @@ def check(data: dict):
     for index in range(len(data['original'])):
         response: str = check_vaild_word_or_not(index)
         if data['invalid'][index] == "":
-            caution.append(False)
+            caution.append('')
         elif response == "":
             # 不正な文字列
-            caution.append(True)
+            caution.append('ERROR: Original data is out of order. The automation system cannot work collectly. Please Check ALL the Result. ')
         else:
-            caution.append(False)
+            caution.append('')
             data['invalid'][index] = ""
             data['district'][index] += response
     return caution
