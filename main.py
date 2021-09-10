@@ -16,6 +16,7 @@ import utils.extract.detail.caution
 import utils.extract.detail.shaping_building_info
 import utils.extract.detail.data_check
 import utils.shape.output_data_shaping
+import utils.extract.detail.detail_data_check
 
 
 def input(PATH: str):
@@ -93,6 +94,8 @@ def main():
     utils.extract.detail.data_check.data_check(data)
     # 最終整形
     data = utils.shape.output_data_shaping.shape(data)
+    # 実在する町域かどうかのチェック
+    utils.extract.detail.detail_data_check.detail_check(data)
     # dict -> dataFrame
     df = pd.DataFrame(data)
     # output
