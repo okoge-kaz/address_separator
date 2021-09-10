@@ -6,6 +6,8 @@ def detail_check(data: dict):
     data_set = utils.data_create.shapping.main()
     for index in range(len(data['address1'])):
         address1_value = data['address1'][index]
+        if address1_value == '':
+            continue
         address2_value = data['address2'][index]
         try:
             if address2_value in data_set[address1_value]:
