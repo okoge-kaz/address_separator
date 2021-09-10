@@ -208,7 +208,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
                 data['building_detail_info'][index]
         else:
             pass
- 
+
     def extract_building_detail_info_from_others_tail_9(index: int):
         '''最後が-のものを取り除く'''
         if re.search('-$', munipulated_others_tail[index]) is not None:
