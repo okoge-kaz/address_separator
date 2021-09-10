@@ -13,6 +13,7 @@ def data_check(data: dict):
             pass
         else:
             data['caution'][index] += "VALUE ERROR: The address1 column's cell is INVALID. Address1 column's data is something wrong. "
+    # 政令指定都市に関してはさらに詳しくチェック
     CHECH_PATH = 'data/Ordinance_designated_city.csv'
     Ordinance_designated_city_csv = pd.read_csv(CHECH_PATH)
     print(list(Ordinance_designated_city_csv.columns))
@@ -22,4 +23,4 @@ def data_check(data: dict):
             if data['town'][index] in list(Ordinance_designated_city_csv[city_name]):
                 pass
             else:
-                data['caution'][index] += "VALUE ERROR: The address2 column's cell is INVALID. address2 data is something wrong. "
+                data['caution'][index] += "VALUE ERROR: The address2 column's cell is INVALID. Address2 data is something wrong. "
