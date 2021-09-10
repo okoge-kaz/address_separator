@@ -92,11 +92,11 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
 
     def extract_building_detail_info_from_others_tail_2(index: int):
         '''401のようなかたちを検出しbuilding_detail_infoにデータを付け替える'''
-        if re.search('[0-9]+$', munipulated_others_tail[index]) is not None:
+        if re.search('(([0-9]+)-)*[0-9]+$', munipulated_others_tail[index]) is not None:
             start: int = re.search(
-                '[0-9]+$', munipulated_others_tail[index]).start()
+                '(([0-9]+)-)*[0-9]+$', munipulated_others_tail[index]).start()
             end: int = re.search(
-                '[0-9]+$', munipulated_others_tail[index]).end()
+                '(([0-9]+)-)*[0-9]+$', munipulated_others_tail[index]).end()
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
@@ -175,6 +175,40 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
         else:
             pass
 
+    def extract_building_detail_info_from_others_tail_7(index: int):
+        '''45Fのようなかたちを検出しbuilding_detail_infoにデータを付け替える'''
+        if re.search('[0-9]+F$', munipulated_others_tail[index]) is not None:
+            start: int = re.search(
+                '[0-9]+F$', munipulated_others_tail[index]).start()
+            end: int = re.search(
+                '[0-9]+F$', munipulated_others_tail[index]).end()
+            # ここ順番注意
+            building_info = munipulated_others_tail[index][start:end]
+            munipulated_others_tail[index] = munipulated_others_tail[index][:start]
+            print(building_info)
+            # 順番に注意
+            data['building_detail_info'][index] = building_info + \
+                data['building_detail_info'][index]
+        else:
+            pass
+
+    def extract_building_detail_info_from_others_tail_8(index: int):
+        '''45階のようなかたちを検出しbuilding_detail_infoにデータを付け替える'''
+        if re.search('[0-9]+階$', munipulated_others_tail[index]) is not None:
+            start: int = re.search(
+                '[0-9]+階$', munipulated_others_tail[index]).start()
+            end: int = re.search(
+                '[0-9]+階$', munipulated_others_tail[index]).end()
+            # ここ順番注意
+            building_info = munipulated_others_tail[index][start:end]
+            munipulated_others_tail[index] = munipulated_others_tail[index][:start]
+            print(building_info)
+            # 順番に注意
+            data['building_detail_info'][index] = building_info + \
+                data['building_detail_info'][index]
+        else:
+            pass
+
     for index in range(len(munipulated_others_tail)):
         extract_building_detail_info_from_others_tail_1(index)
         extract_building_detail_info_from_others_tail_2(index)
@@ -182,3 +216,5 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
         extract_building_detail_info_from_others_tail_4(index)
         extract_building_detail_info_from_others_tail_5(index)
         extract_building_detail_info_from_others_tail_6(index)
+        extract_building_detail_info_from_others_tail_7(index)
+        extract_building_detail_info_from_others_tail_8(index)
