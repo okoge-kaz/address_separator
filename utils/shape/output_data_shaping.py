@@ -62,5 +62,16 @@ def shape(data: dict):
     res_data['address5'] = address5
     # caution
     res_data['caution'] = data['caution']
+    # address4について
+    for index in range(len(res_data['address4'])):
+        if re.search('[0-9]+$', res_data['address4'][index]):
+            start: int = re.search('[0-9]+$', res_data['address4'][index]).start()
+            end: int = re.search('[0-9]+$', res_data['address4'][index]).end()
+            if res_data['address5'][index] == '':
+                res_data['address5'][index] = res_data['address4'][index][start:end]
+                res_data['address4'][index] = res_data['address4'][index][:start]
+            else:
+                res_data['caution'][index] += "CAUTION: address4's column's cell is something wrong. "
+
     # 返値
     return res_data
