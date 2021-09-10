@@ -102,4 +102,4 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
     # 都道府県名が空欄ならcaution
     for index in range(len(data['prefacture'])):
         if data['prefacture'][index] == '':
-            data['caution'][index] += "VALUE ERROR: The address1 column's cell is empty. The original informaition may not containe prefactre name data.  "
+            data['caution'][index] += "VALUE ERROR: The prefacture column's cell is empty. The original informaition may not containe prefactre name data.  "
