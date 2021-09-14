@@ -30,7 +30,7 @@ def read_excel(PATH: str):
 
 
 def main():
-    PATH: str = "input/test_input.csv"  # path to csv file
+    PATH: str = "input/input.csv"  # path to csv file
     global csv_data
     try:
         csv_data = input(PATH)
@@ -99,7 +99,7 @@ def main():
     # dict -> dataFrame
     df = pd.DataFrame(data)
     # output
-    df.to_csv('output/test_output.csv', encoding='utf-8_sig')
+    df.to_csv('output/output.csv', encoding='utf-8_sig')
     # 文字化けについて https://qiita.com/y4m3/items/674423b596284bbc7cf7
 
 
