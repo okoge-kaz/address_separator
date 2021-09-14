@@ -30,7 +30,7 @@ def read_excel(PATH: str):
 
 
 def main():
-    PATH: str = "input/input.csv"  # path to csv file
+    PATH: str = "input/test_input.csv"  # path to csv file
     global csv_data
     try:
         csv_data = input(PATH)
@@ -90,16 +90,14 @@ def main():
     utils.extract.detail.shaping.shaping(data)
     # caution
     utils.extract.detail.caution.caution(data, munipulated_others_tail, caution)
-    # 実在する市町村かどうか
-    utils.extract.detail.data_check.data_check(data)
     # 最終整形
     data = utils.shape.output_data_shaping.shape(data)
-    # 実在する町域かどうかのチェック
+    # 実在する町域かどうかのチェック + 出力形式チェック
     utils.extract.detail.detail_data_check.detail_check(data)
     # dict -> dataFrame
     df = pd.DataFrame(data)
     # output
-    df.to_csv('output/output.csv', encoding='utf-8_sig')
+    df.to_csv('output/test_output.csv', encoding='utf-8_sig')
     # 文字化けについて https://qiita.com/y4m3/items/674423b596284bbc7cf7
 
 
