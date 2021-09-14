@@ -2,7 +2,6 @@ import pandas as pd
 
 
 def main():
-    '''main.py実行時に実行される関数ではなく、main関数の処理を実行する際に参照するデータ作成用の関数'''
     csv_data = pd.read_csv('data/zenkoku.csv')
     csv_data = csv_data.fillna('')
     # print(csv_data)

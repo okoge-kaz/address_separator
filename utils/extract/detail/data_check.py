@@ -1,3 +1,5 @@
+import re
+
 import pandas as pd
 
 
@@ -11,6 +13,8 @@ def data_check(data: dict):
             continue
         if data['city'][index] in list(administrative_data_csv[prefecture]):
             pass
+        elif re.search('郡', data['city'][index]):
+            continue
         else:
             data['caution'][index] += "VALUE ERROR: The address1 column's cell is INVALID. Address1 column's data is something wrong.  "
     # 政令指定都市に関してはさらに詳しくチェック
