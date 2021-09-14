@@ -3,7 +3,7 @@ import time
 import pandas as pd
 
 import utils.shaping
-import utils.extract.prefacture
+import utils.extract.prefecture
 import utils.extract.city
 import utils.extract.town
 import utils.extract.district
@@ -45,17 +45,17 @@ def main():
     data: dict = {}
     # dataに整形後のデータを入れる
     data['original'] = csv_data['address']
-    prefactures: list = []
-    non_prefacture_address_data: list = []
+    prefectures: list = []
+    non_prefecture_address_data: list = []
     for string in replaced_address_data:
-        tuple_data: tuple = utils.extract.prefacture.extract_prefacture(string)
-        prefactures.append(tuple_data[0])
-        non_prefacture_address_data.append(tuple_data[1])
+        tuple_data: tuple = utils.extract.prefecture.extract_prefecture(string)
+        prefectures.append(tuple_data[0])
+        non_prefecture_address_data.append(tuple_data[1])
     # dataに県名を抽出したデータを入れる
-    data["prefacture"] = prefactures
+    data["prefecture"] = prefectures
     print(pd.DataFrame(data))  # for debug
     # dataに市と同等の行政区分を入れる
-    city_data = utils.extract.city.extract_city(non_prefacture_address_data)
+    city_data = utils.extract.city.extract_city(non_prefecture_address_data)
     data['city'] = city_data[0]
     non_city_address_data: list = city_data[1]
     # dataに市より小さな区分の行政区分を入れる

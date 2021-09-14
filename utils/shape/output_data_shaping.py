@@ -12,7 +12,7 @@ def shape(data: dict):
     Ordinance_designated_city_csv = pd.read_csv(PATH)
     # データをコピー
     res_data['original'] = data['original']
-    res_data['prefacture'] = data['prefacture']
+    res_data['prefecture'] = data['prefecture']
     # 最終出力結果に合わせて整形 市区町村郡
     address1: list = []
     for index in range(len(data['city'])):

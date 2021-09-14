@@ -100,6 +100,6 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
         if data['building_info'][index] == '' and data['building_detail_info'][index] != '':
             data['caution'][index] += "CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both. "
     # 都道府県名が空欄ならcaution
-    for index in range(len(data['prefacture'])):
-        if data['prefacture'][index] == '':
-            data['caution'][index] += "VALUE ERROR: The prefacture column's cell is empty. The original informaition may not containe prefactre name data.  "
+    for index in range(len(data['prefecture'])):
+        if data['prefecture'][index] == '':
+            data['caution'][index] += "VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefactre name data.  "

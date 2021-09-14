@@ -5,11 +5,11 @@ def data_check(data: dict):
     '''総務省のデータから実在する市町村であるかどうか調べる'''
     PATH = 'data/administrative_district.csv'
     administrative_data_csv = pd.read_csv(PATH)
-    for index in range(len(data['prefacture'])):
-        prefacture: str = data['prefacture'][index]
-        if prefacture == "":
+    for index in range(len(data['prefecture'])):
+        prefecture: str = data['prefecture'][index]
+        if prefecture == "":
             continue
-        if data['city'][index] in list(administrative_data_csv[prefacture]):
+        if data['city'][index] in list(administrative_data_csv[prefecture]):
             pass
         else:
             data['caution'][index] += "VALUE ERROR: The address1 column's cell is INVALID. Address1 column's data is something wrong. "
