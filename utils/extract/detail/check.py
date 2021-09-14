@@ -25,7 +25,7 @@ def check(data: dict):
             caution.append('')
         elif response == "":
             # 不正な文字列
-            caution.append('ERROR: Original data is out of order. The automation system cannot work collectly. Please Check ALL the Result. ')
+            caution.append('ERROR: Original data is out of order. The automation system cannot work collectly. Please Check ALL the Result.  ')
         else:
             caution.append('')
             data['invalid'][index] = ""

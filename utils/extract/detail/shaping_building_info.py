@@ -83,7 +83,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
-            print(building_info)
+            # print(building_info)
             # 順番に注意
             data['building_detail_info'][index] = building_info + \
                 data['building_detail_info'][index]
@@ -100,7 +100,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
-            print(building_info)
+            # print(building_info)
             # 順番に注意
             data['building_detail_info'][index] = building_info + \
                 data['building_detail_info'][index]
@@ -117,7 +117,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
-            print(building_info)
+            # print(building_info)
             # 順番に注意
             data['building_detail_info'][index] = building_info + \
                 data['building_detail_info'][index]
@@ -134,7 +134,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
-            print(building_info)
+            # print(building_info)
             # 順番に注意
             data['building_detail_info'][index] = building_info + \
                 data['building_detail_info'][index]
@@ -151,7 +151,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
-            print(building_info)
+            # print(building_info)
             # 順番に注意
             data['building_detail_info'][index] = building_info + \
                 data['building_detail_info'][index]
@@ -168,7 +168,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
-            print(building_info)
+            # print(building_info)
             # 順番に注意
             data['building_detail_info'][index] = building_info + \
                 data['building_detail_info'][index]
@@ -185,7 +185,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
-            print(building_info)
+            # print(building_info)
             # 順番に注意
             data['building_detail_info'][index] = building_info + \
                 data['building_detail_info'][index]
@@ -202,7 +202,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
-            print(building_info)
+            # print(building_info) # for debug
             # 順番に注意
             data['building_detail_info'][index] = building_info + \
                 data['building_detail_info'][index]

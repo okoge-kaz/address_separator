@@ -72,6 +72,13 @@ def shape(data: dict):
                 res_data['address4'][index] = res_data['address4'][index][:start]
             else:
                 res_data['caution'][index] += "CAUTION: address4's column's cell is something wrong. "
-
+    # address 4の - ハイフン除去
+    for index in range(len(res_data['address4'])):
+        if res_data['address4'][index] == '':
+            continue
+        if res_data['address4'][index][0] == '-':
+            res_data['address4'][index] = res_data['address4'][index][1:]
+        if res_data['address4'][index][-1] == '-':
+            res_data['address4'][index] = res_data['address4'][index][:-1]
     # 返値
     return res_data

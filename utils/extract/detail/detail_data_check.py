@@ -13,6 +13,6 @@ def detail_check(data: dict):
             if address2_value in data_set[address1_value]:
                 pass
             else:
-                data['caution'][index] += "ERROR: The address2's value doesn't match the data set. Please CHECK the Address2 column's cell. "
+                data['caution'][index] += "ERROR: The address2's value doesn't match the data set. Please CHECK the address2 column's cell.  "
         except KeyError:
-            data['caution'][index] += "ERROR: The address2's value doesn't match the address3's data. Please CHECK the Address2 AND Address3 column's cells.  Maybe, One of the column's data is something wrong. "
+            data['caution'][index] += "ERROR: The address2's value doesn't match the address3's data. Please CHECK the address2 AND address3 column's cells.  Maybe, One of the column's data is something wrong.  "
