@@ -46,6 +46,8 @@ def shaping(data: dict):
         if data['district'][index] == "":
             continue
         if data['district'][index] == "田":
+            if data['town'][index] == '':
+                continue
             if data['town'][index][-1] == "町":
                 data['town'][index] += "田"
                 data['district'][index] = ""
