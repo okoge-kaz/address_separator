@@ -142,12 +142,12 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
             pass
 
     def extract_building_detail_info_from_others_tail_5(index: int):
-        '''C号のようなかたちを検出しbuilding_detail_infoにデータを付け替える'''
-        if re.search('[A-Z]号$', munipulated_others_tail[index]) is not None:
+        '''C館のようなかたちを検出しbuilding_detail_infoにデータを付け替える'''
+        if re.search('[A-Z]館$', munipulated_others_tail[index]) is not None:
             start: int = re.search(
-                '[A-Z]号$', munipulated_others_tail[index]).start()
+                '[A-Z]館$', munipulated_others_tail[index]).start()
             end: int = re.search(
-                '[A-Z]号$', munipulated_others_tail[index]).end()
+                '[A-Z]館$', munipulated_others_tail[index]).end()
             # ここ順番注意
             building_info = munipulated_others_tail[index][start:end]
             munipulated_others_tail[index] = munipulated_others_tail[index][:start]
