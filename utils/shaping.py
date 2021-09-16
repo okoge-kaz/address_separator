@@ -91,7 +91,7 @@ def replace_japanese_address_expression(string: str):
 
 def erase_last_hyphen(string: str):
     if string[-1] == "-":
-        return string[0:len(string) - 1]
+        return string[0:-1]
     else:
         return string
 
