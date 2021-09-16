@@ -79,6 +79,14 @@ def shape(data: dict):
         if res_data['address4'][index][0] == '-':
             res_data['address4'][index] = res_data['address4'][index][1:]
         if res_data['address4'][index][-1] == '-':
-            res_data['address4'][index] = res_data['address4'][index][:-1]
+            if re.search('[ア-ン]$', res_data['address4'][index][:-1]) is None:
+                res_data['address4'][index] = res_data['address4'][index][:-1]
+            else:
+                # タワーなどのカタカナが入った名詞かもしれないので
+                res_data['address4'][index] = res_data['address4'][index][:-1] + 'ー'
+    # invalid について
+    for index in range(len(data['invalid'])):
+        if data['invalid'][index] != '':
+            res_data['caution'][index] += "ERROR: Original data is out of order. The automation system cannot work collectly. Please Check ALL the Result.  "
     # 返値
     return res_data
