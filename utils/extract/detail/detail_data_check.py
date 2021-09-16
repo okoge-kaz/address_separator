@@ -16,7 +16,7 @@ def detail_check(data: dict):
             else:
                 data['caution'][index] += "ERROR: The address2's value doesn't match the data set. Please CHECK the address2 column's cell.  "
         except KeyError:
-            data['caution'][index] += "ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 column's cells.  Maybe, One of the column's data is something wrong.  "
+            data['caution'][index] += "ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 columns' cells.  Maybe, One of the column's data is something wrong.  "
     # 番地に関するテスト
     for index in range(len(data['address3'])):
         if data['address3'][index] == '':
