@@ -7,7 +7,6 @@ def munipulate(data: dict, others_tail: list):
 
     for id in range(len(others_tail)):
         if re.match('[0-9]+$', others_tail[id]):
-            # print(others_tail[id]) # for debug
             data['house_number'][id] = data['house_number'][id] + others_tail[id]
             munipulated_others_tail.append("")
         else:

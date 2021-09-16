@@ -15,8 +15,6 @@ def extract_building_detail(data: dict):
     def cutting_number_from_last(index: int):
         '''上記の関数と同時に使用する。8Fのように、建物の階数情報のみを抽出する'''
         if re.search('-([0-9]+)$', data['house_number'][index]) is None:
-            # print(re.search('-([0-9]+)$', data['house_number'][index]))
-            # print(data['house_number'][index])
             print('something wrong1')  # for debug
         else:
             start: int = re.search(

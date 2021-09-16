@@ -40,7 +40,6 @@ def main():
     # addressという名前がついた列しかデータを収集しない
     for address_data in csv_data['address']:
         replaced_address_data.append(utils.shaping.operation(address_data))
-    # print(pd.DataFrame(replaced_address_data))  # for debug
     # 出力データのもととなるdata: dictを作成
     data: dict = {}
     # dataに整形後のデータを入れる
@@ -53,7 +52,6 @@ def main():
         non_prefecture_address_data.append(tuple_data[1])
     # dataに県名を抽出したデータを入れる
     data["prefecture"] = prefectures
-    # print(pd.DataFrame(data))  # for debug
     # dataに市と同等の行政区分を入れる
     city_data = utils.extract.city.extract_city(non_prefecture_address_data)
     data['city'] = city_data[0]
@@ -76,7 +74,6 @@ def main():
     data["house_number"] = house_numbers
     # check 不正なデータが存在しないかどうかを確認
     caution: list = utils.extract.detail.check.check(data)
-    # print(pd.DataFrame(data))  # for debug
     # データ整形＋分裂してしまったデータを統合整理
     munipulated_others_tail = utils.extract.detail.munipulate.munipulate(
         data, others_tail)
@@ -98,7 +95,6 @@ def main():
     df = pd.DataFrame(data)
     # output
     df.to_csv('output/output.csv', encoding='utf-8_sig')
-    # 文字化けについて https://qiita.com/y4m3/items/674423b596284bbc7cf7
 
 
 if __name__ == '__main__':
