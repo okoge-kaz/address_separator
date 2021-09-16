@@ -22,7 +22,28 @@ def shaping(data: dict):
         else:
             pass
     # 上記と同様のことをtownでもやる。ただし漢字+ひらがな+算用数字のときのみ
+    for index in range(len(data['town'])):
+        if data['town'][index] == "":
+            continue
+        if re.search('[1-9]', data['town'][index]) is not None:
+            shaped: str = ""
+            mapping_dictionary: dict = {"1": "一", "2": "二", "3": "三", "4": "四", "5": "五",
+                                        "6": "六", "7": "七", "8": "八", "9": "九"}
+            numbers: list = [
+                "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+            for char in data['town'][index]:
+                if char in numbers:
+                    shaped += mapping_dictionary[char]
+                else:
+                    shaped += char
+            # 一-町 -> 一番町に変える
+            if re.search('[一-九]-町', shaped):
+                start: int = re.search('[一-九]-町', shaped).start()
+                shaped = shaped[:start + 1] + '番' + shaped[start + 2:]
 
+            data['town'][index] = shaped
+        else:
+            pass
     # city の先頭または末尾に-があったら除去
     for index in range(len(data['city'])):
         if data['city'][index] == "":
