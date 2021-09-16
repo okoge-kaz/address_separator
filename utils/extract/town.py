@@ -7,7 +7,7 @@ def extract_town(non_city_address_data: list):
         if "区" in town_address_data:
             index: int = town_address_data.find("区")
             towns.append(town_address_data[0:index + 1])
-            if len(non_city_address_data) > index + 1:
+            if len(town_address_data) > index + 1:
                 # index out of rangeを避けるため
                 non_town_address_data.append(town_address_data[index + 1:])
         elif "郡" in town_address_data:
