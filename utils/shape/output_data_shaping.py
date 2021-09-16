@@ -84,6 +84,17 @@ def shape(data: dict):
             else:
                 # タワーなどのカタカナが入った名詞かもしれないので
                 res_data['address4'][index] = res_data['address4'][index][:-1] + 'ー'
+    # address4の表記修正
+    for index in range(len(res_data['address4'])):
+        # タワー,センターなどの表記が破壊されてしまっている場合は修正する
+        if res_data['address4'][index] == '':
+            continue
+        if re.search('センタ$', res_data['address4'][index]):
+            start: int = re.search('センタ$', res_data['address4'][index]).start()
+            res_data['address4'][index] = res_data['address4'][index][:start] + 'センター'
+        if re.search('タワ$', res_data['address4'][index]):
+            start: int = re.search('タワ$', res_data['address4'][index]).start()
+            res_data['address4'][index] = res_data['address4'][index][:start] + 'タワー'
     # invalid について
     for index in range(len(data['invalid'])):
         if data['invalid'][index] != '':
