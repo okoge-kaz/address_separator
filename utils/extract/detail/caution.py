@@ -24,7 +24,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
     '''ビル情報の列にビルの詳細情報の断片と思われるデータが存在するとき'''
     for index in range(len(data['building_info'])):
         if re.search('(^号)|(^号館)', data["building_info"][index]) is not None:
-            data['caution'][index] += "CAUTION: The address4 column's cell may contain the data which have to be in address5 column's cell. Please CHECK.  "
+            data['caution'][index] += "CAUTION: address4のデータは、address5にあるべきはずのデータを含んでいる場合があります。周辺のデータ分割が正しいかどうか確認することを推奨します.  "
         else:
             pass
     # cityにおかしなところがないか調査
@@ -33,7 +33,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             continue
         if re.search('[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]+', data['city'][index]) is None:
             # 日本語が見つからない
-            data['caution'][index] += "ERROR: The address1 column's cell contains INVALID syntax.  "
+            data['caution'][index] += "ERROR: address1のデータには不正な文字列が含まれています。  "
         else:
             pass
     # townにおかしなところがないか調査
@@ -42,7 +42,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             continue
         if re.search('[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]+', data['town'][index]) is None:
             # 日本語が見つからない
-            data['caution'][index] += "ERROR: The address1 or address2 column's cell contains INVALID syntax.  "
+            data['caution'][index] += "ERROR: address1または、address2のデータには不正な文字列が含まれています。  "
         else:
             pass
     # districtにおかしなところがないか調査
@@ -51,7 +51,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             continue
         if re.search('[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]+', data['district'][index]) is None:
             # 日本語が見つからない
-            data['caution'][index] += "ERROR: The address2 column's cell contains INVALID syntax.  "
+            data['caution'][index] += "ERROR: address2のデータには不正な文字列が含まれています。  "
         else:
             pass
     for index in range(len(data['house_number'])):
@@ -59,7 +59,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             continue
         if re.search('[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]+', data['house_number'][index]) is not None:
             # 日本語が見つかった
-            data['caution'][index] += "ERROR: The address3 column's cell contains INVALID syntax.  "
+            data['caution'][index] += "ERROR: address3のデータには不正な文字列が含まれています。  "
         else:
             pass
     for index in range(len(data['special_characters'])):
@@ -67,7 +67,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             continue
         if re.search('[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]+', data['special_characters'][index]) is not None:
             # 日本語が見つかった
-            data['caution'][index] += "CAUTION: The address4 column's cell may contain INVALID syntax.  "
+            data['caution'][index] += "CAUTION: address4のデータには不正な文字列が含まれています。  "
         else:
             pass
     for index in range(len(data['original'])):
@@ -75,7 +75,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             continue
         if re.search('[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]+', data['original'][index]) is None:
             # 日本語が見つからない
-            data['caution'][index] += "ERROR: The orginal data is something wrong. Please Check the original data.  "
+            data['caution'][index] += "ERROR: 入力された元データに何らかの問題があります。入力されたデータを確認してください。  "
         else:
             pass
     # 不正なデータを検出
@@ -84,7 +84,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             continue
         if re.search('[0-9]+', data['town'][index]) is not None:
             # 半角算用数字がある
-            data['caution'][index] += "VALUE ERROR: The address1 column's cell may contain Alabic numerals.  "
+            data['caution'][index] += "VALUE ERROR: address1のデータには存在しないはずのアラビア数字が含まれています。  "
         else:
             pass
     for index in range(len(data['district'])):
@@ -92,14 +92,14 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
             continue
         if re.search('[一-十]{2,}', data['district'][index]) is not None:
             # 日本語数字が2回以上続く、地名の可能性もあるが、高確率番地
-            data['caution'][index] += "CAUTION: The address2 column's cell may contain INVALID syntax.  "
+            data['caution'][index] += "CAUTION: address2のデータには不正な文字列が含まれている可能性があります。  "
         else:
             pass
     # building_info が空なのに building_detail_infoが空ではなかったらcaution
     for index in range(len(data['building_info'])):
         if data['building_info'][index] == '' and data['building_detail_info'][index] != '':
-            data['caution'][index] += "CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  "
+            data['caution'][index] += "CAUTION: address4と、address5のデータには不正な文字列が含まれている可能性があります。両方について確認することを推奨します。  "
     # 都道府県名が空欄ならcaution
     for index in range(len(data['prefecture'])):
         if data['prefecture'][index] == '':
-            data['caution'][index] += "VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  "
+            data['caution'][index] += "VALUE ERROR: prefectureの列の情報がありません。元データに都道府県情報が欠落している可能性があります。入力されたデータ形式は、自動チェック機構が推奨する形式ではありません。  "

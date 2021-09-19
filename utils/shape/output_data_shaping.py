@@ -73,7 +73,7 @@ def shape(data: dict):
                 res_data['address5'][index] = res_data['address4'][index][start:end]
                 res_data['address4'][index] = res_data['address4'][index][:start]
             else:
-                res_data['caution'][index] += "CAUTION: address4's column's cell is something wrong.  "
+                res_data['caution'][index] += "CAUTION: address4に何らかの問題がある可能性があります。  "
     # address 4の - ハイフン除去
     for index in range(len(res_data['address4'])):
         if res_data['address4'][index] == '':
@@ -100,6 +100,6 @@ def shape(data: dict):
     # invalid について
     for index in range(len(data['invalid'])):
         if data['invalid'][index] != '':
-            res_data['caution'][index] += "ERROR: Original data is out of order. The automation system cannot work collectly. Please Check ALL the Result.  "
+            res_data['caution'][index] += "ERROR: データは、整形不可能な状態です。自動整形システムは正しく動作しません。この行の全ての結果を確認することを推奨します。  "
     # 返値
     return res_data

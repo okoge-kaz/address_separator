@@ -19,7 +19,7 @@ def data_check(data: dict):
         elif re.search('郡', data['city'][index]):
             continue
         else:
-            data['caution'][index] += "VALUE ERROR: The address1 column's cell is INVALID. Address1 column's data is something wrong.  "
+            data['caution'][index] += "VALUE ERROR: address1の列の情報が不正です。自動整形過程で何らかの問題が発生しました。  "
     # 政令指定都市に関してはさらに詳しくチェック
     CHECH_PATH = 'data/Ordinance_designated_city.csv'
     Ordinance_designated_city_csv = pd.read_csv(CHECH_PATH)
@@ -29,4 +29,4 @@ def data_check(data: dict):
             if data['town'][index] in list(Ordinance_designated_city_csv[city_name]):
                 pass
             else:
-                data['caution'][index] += "VALUE ERROR: The address2 column's cell is INVALID. Address2 data is something wrong.  "
+                data['caution'][index] += "VALUE ERROR: address2の列の情報が不正です。自動整形過程で何らかの問題が発生しました。  "
