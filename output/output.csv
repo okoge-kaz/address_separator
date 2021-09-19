@@ -1,0 +1,63 @@
+﻿,original,prefecture,address1,address2,address3,address4,address5,caution
+0,東京都大田区大森本町1-8-12-S-1203,東京都,大田区,大森本町,1-8-12,S,1203,
+1,東京都大田区山王1-7-8山王薬局1丁目店,東京都,大田区,山王,1-7-8,山王薬局1丁目店,,
+2,東京都台東区浅草橋1-32-6-2F,東京都,台東区,浅草橋,1-32-6,,2F,CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  
+3,東京都品川区高輪4-8-10-5階,東京都,品川区,高輪,4-8-10,,5階,CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  ERROR: The address2's value doesn't match the data set. Please CHECK the address2 column's cell.  
+4,東京都大田区西六郷4-30-7音金六郷マンション1-C号,東京都,大田区,西六郷,4-30-7,音金6郷マンション1,-C号,CAUTION: address4's column's cell is something wrong.  
+5,北海道蛭田郡豊浦町字桜207,北海道,蛭田郡豊浦町,字桜,207,,,"ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 columns' cells.  Maybe, One of the column's data is something wrong.  "
+6,東京都千代田区一番町8,東京都,千代田区,一番町,8,,,
+7,豊平区豊平4条3-3-10-403,,豊平区,豊平四条,3-3-10-403,,,"VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 columns' cells.  Maybe, One of the column's data is something wrong.  "
+8,住吉1-17-18　アルぺ-ジュ401,,,住吉,1-17-18,アルぺージュ,401,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address1 column's data is empty.  
+9,本町田2428-ハ-10-109,,本町,田,10-109,,,"ERROR: Original data is out of order. The automation system cannot work collectly. Please Check ALL the Result.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: Original data is out of order. The automation system cannot work collectly. Please Check ALL the Result.  ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 columns' cells.  Maybe, One of the column's data is something wrong.  "
+10,鷹取町2-7-Ｂ203,,鷹取町,,2-7,B,203,"VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 columns' cells.  Maybe, One of the column's data is something wrong.  "
+11,走水2-21-E-201,,,走水,2-21,E,201,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address1 column's data is empty.  
+12,つきみ野4-6-Ｃ1-502,,,つきみ野,4-6,C1,502,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address1 column's data is empty.  
+13,豊四季357-55B-105,,,豊四季,357-55,B,105,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address1 column's data is empty.  
+14,大久保町540-C-402,,大久保町,,,540-C,402,"VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 columns' cells.  Maybe, One of the column's data is something wrong.  ERROR: The address3's column's data is empty.  "
+15,長府東侍町10-C205,,長府東侍町,,,10-C,205,"VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 columns' cells.  Maybe, One of the column's data is something wrong.  ERROR: The address3's column's data is empty.  "
+16,秋葉通2-3722-R2-104,,,秋葉通,2-3722,R2,104,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address1 column's data is empty.  
+17,高輪4-8-10-3F,,,高輪,4-8-10,,3F,CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address1 column's data is empty.  
+18,高輪4-8-10-4F,,,高輪,4-8-10,,4F,CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address1 column's data is empty.  
+19,東京都稲城市坂浜562都議会維新の党,東京都,稲城市,坂浜,562,都議会維新の党,,
+20,秋田県横手市大森町字大中島268番地横手市役所まちづくり推進部大森地域課,秋田県,横手市,大森町字大中島,268,横手市役所まちづくり推進部大森地域課,,ERROR: The address2's value doesn't match the data set. Please CHECK the address2 column's cell.  
+21,東京都小金井市中町3-7-1-A,東京都,小金井市,中町,3-7-1,A,,
+22,大田区平和島5丁目3-2 首都圏営業本部京浜営業所,,大田区,平和島,5-3-2,首都圏営業本部京浜営業所,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+23,大田区蒲田1丁目,,大田区,蒲田,1,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+24,高砂町朝日町1丁目9-14 3F,,高砂町,朝日町,1-9-14,,3F,"CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address2's value doesn't match the address1's data. Please CHECK the address1 AND address2 columns' cells.  Maybe, One of the column's data is something wrong.  "
+25,名古屋市名東区一社1-143-4Ｃ,,名古屋市名東区,一社,1-143-4,C,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+26,名古屋市中村区烏森町7-39　ソレイユJX-1-205,,名古屋市中村区,烏森町,7-39,ソレイユJX,1-205,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+27,刈谷市豊田町2丁目1番地,,刈谷市,豊田町,2-1,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+28,大府市中央町5-94-Ｃ,,大府市,中央町,5-94,C,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+29,瀬戸市塩草町98の88,,瀬戸市,塩草町,98-88,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+30,豊明市前後町鎌ケ須1806/10,,豊明市,前後町鎌ケ須,1806-10,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address2's value doesn't match the data set. Please CHECK the address2 column's cell.  
+31,名古屋市中区三の丸3丁目1番2号,,名古屋市中区,三の丸,3-1,,2号,CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+32,豊明市沓掛町勅使台20B-12,,豊明市,沓掛町勅使台,,20B,12,CAUTION: The address2 column's cell may contain INVALID syntax.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address2's value doesn't match the data set. Please CHECK the address2 column's cell.  ERROR: The address3's column's data is empty.  
+33,東京都千代田区永田町２-2-1衆議院第一会館501号,東京都,千代田区,永田町,2-2-1,衆議院第1会館,501号,
+34,千葉県船橋市金杉町141ー2 船橋健恒会ケアセンター東棟,千葉県,船橋市,金杉町,141-2,船橋健恒会ケアセンター東棟,,
+35,東京都千代田区永田町1-11-23,東京都,千代田区,永田町,1-11-23,,,
+36,東京都品川区大井1-11-6-4F,東京都,品川区,大井,1-11-6,,4F,CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  
+37,福島県いわき市常磐西郷町落合86,福島県,いわき市,常磐西郷町落合,86,,,ERROR: The address2's value doesn't match the data set. Please CHECK the address2 column's cell.  
+38,東京都中央区うまい棒村五丁目2番地53 お菓子タワー１５,東京都,中央区,うまい棒村,5-2-53,お菓子タワー,15,ERROR: The address2's value doesn't match the data set. Please CHECK the address2 column's cell.  
+39,秋葉通2-3722-R2-104,,,秋葉通,2-3722,R2,104,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  ERROR: The address1 column's data is empty.  
+40,大田区大森東3丁目9-18 第2浜秀荘1号,,大田区,大森東,3-9-18,第2浜秀荘,1号,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+41,葛飾区白鳥4-11-17,,葛飾区,白鳥,4-11-17,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+42,江戸川区新堀2-8-3,,江戸川区,新堀,2-8-3,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+43,江戸川区春江町1-1-20,,江戸川区,春江町,1-1-20,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+44,江戸川区春江町2-41-13,,江戸川区,春江町,2-41-13,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+45,江戸川区瑞江3-4-6,,江戸川区,瑞江,3-4-6,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+46,江戸川区江戸川2-31-18,,江戸川区,江戸川,2-31-18,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+47,江戸川区江戸川2-5-9,,江戸川区,江戸川,2-5-9,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+48,江戸川区東瑞江1-56-2,,江戸川区,東瑞江,1-56-2,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+49,江戸川区東瑞江2-18-25,,江戸川区,東瑞江,2-18-25,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+50,江戸川区東瑞江2-23-21,,江戸川区,東瑞江,2-23-21,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+51,江戸川区東瑞江3-41-14,,江戸川区,東瑞江,3-41-14,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+52,江戸川区西瑞江3-35,,江戸川区,西瑞江,3-35,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+53,江戸川区中央1-10-15,,江戸川区,中央,1-10-15,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+54,江戸川区中央2-3-18,,江戸川区,中央,2-3-18,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+55,江戸川区中央2-7-14,,江戸川区,中央,2-7-14,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+56,江戸川区中央3-24-15,,江戸川区,中央,3-24-15,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+57,名古屋市熱田区神宮四丁目７番２７号,,名古屋市熱田区,神宮,4-7,,27号,CAUTION: address4 and address5 column's cells may be something wrong. Please CHECK Both.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+58,名古屋市熱田区神宮四丁目７番２７号Bビル,,名古屋市熱田区,神宮,4-7-27,号Bビル,,CAUTION: The address4 column's cell may contain the data which have to be in address5 column's cell. Please CHECK.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+59,名古屋市港区空見町36番地,,名古屋市港区,空見町,36,,,VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+60,名古屋市港区十一屋3丁目63番地,,名古屋市港区,十一屋,3-63,,,CAUTION: The address2 column's cell may contain INVALID syntax.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
+61,名古屋市港区十一屋3丁目63番地Aビル,,名古屋市港区,十一屋,3-63,Aビル,,CAUTION: The address2 column's cell may contain INVALID syntax.  VALUE ERROR: The prefecture column's cell is empty. The original informaition may not containe prefectre name data.  
