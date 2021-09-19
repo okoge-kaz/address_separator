@@ -1,11 +1,14 @@
 import re
+import os
+
 
 import pandas as pd
 
 
 def data_check(data: dict):
     '''総務省のデータから実在する市町村であるかどうか調べる'''
-    PATH = 'data/administrative_district.csv'
+    Current_Path = os.getcwd()
+    PATH = Current_Path + '/data/administrative_district.csv'
     administrative_data_csv = pd.read_csv(PATH)
     for index in range(len(data['prefecture'])):
         prefecture: str = data['prefecture'][index]

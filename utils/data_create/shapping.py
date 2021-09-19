@@ -1,8 +1,12 @@
+import os
+
+
 import pandas as pd
 
 
 def main():
-    csv_data = pd.read_csv('data/zenkoku.csv')
+    Current_Path = os.getcwd()
+    csv_data = pd.read_csv(Current_Path + '/data/zenkoku.csv')
     csv_data = csv_data.fillna('')
     # print(csv_data)
     data: dict = {}

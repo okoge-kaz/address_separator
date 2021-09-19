@@ -1,4 +1,5 @@
 import time
+import os
 
 import pandas as pd
 
@@ -30,12 +31,10 @@ def read_excel(PATH: str):
 
 
 def main():
-    PATH: str = "input/input.csv"  # path to csv file
+    CurrentPath = os.getcwd()
+    PATH = CurrentPath + "/input/input.csv"  # path to csv file
     global csv_data
-    try:
-        csv_data = input(PATH)
-    except Exception:
-        csv_data = read_excel('input/input.xlsx')
+    csv_data = input(PATH)
     replaced_address_data: list = []
     # addressという名前がついた列しかデータを収集しない
     for address_data in csv_data['address']:
@@ -94,7 +93,7 @@ def main():
     # dict -> dataFrame
     df = pd.DataFrame(data)
     # output
-    df.to_csv('output/output.csv', encoding='utf-8_sig')
+    df.to_csv(CurrentPath + '/output/output.csv', encoding='utf-8_sig')
 
 
 if __name__ == '__main__':

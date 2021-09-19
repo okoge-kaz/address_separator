@@ -1,4 +1,5 @@
 import re
+import os
 
 
 import pandas as pd
@@ -8,7 +9,8 @@ def shape(data: dict):
     '''出力するcsvファイルとして望ましい形に整形する'''
     res_data: dict = {}
     # 政令指定都市かどうかを判別するためのデータ
-    PATH = 'data/Ordinance_designated_city.csv'
+    Current_Path = os.getcwd()
+    PATH = Current_Path + '/data/Ordinance_designated_city.csv'
     Ordinance_designated_city_csv = pd.read_csv(PATH)
     # データをコピー
     res_data['original'] = data['original']
