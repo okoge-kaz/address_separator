@@ -101,5 +101,16 @@ def shape(data: dict):
     for index in range(len(data['invalid'])):
         if data['invalid'][index] != '':
             res_data['caution'][index] += "ERROR: データは、整形不可能な状態です。自動整形システムは正しく動作しません。この行の全ての結果を確認することを推奨します。  "
+    # address3がなく、address4がある場合 caution
+    for index in range(len(res_data['address4'])):
+        if res_data['address3'][index] == '' and res_data['address4'][index] != '':
+            res_data['caution'][index] += "CAUTION: address4の情報は本来あるべきではない場所にある可能性があります。  "
+    # address4 or address5 に ? があったら caution
+    for index in range(len(res_data['address4'])):
+        if '?' in res_data['address4'][index]:
+            res_data['caution'][index] += "CAUTION: データには?が含まれており、文字コードに関わる何かしらの表示揺れがある可能性があります。  "
+        elif '?' in res_data['address5'][index]:
+            res_data['caution'][index] += "CAUTION: データには?が含まれており、文字コードに関わる何かしらの表示揺れがある可能性があります。  "
+    # address4 が空かつ address5も空でかつ、 address3に-が3つあり、かつ最後の数字が302のような形であったらそれをaddress5に移す
     # 返値
     return res_data
