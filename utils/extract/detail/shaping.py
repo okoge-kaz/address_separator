@@ -60,7 +60,14 @@ def shaping(data: dict):
             data['town'][index] = data['town'][index][1:]
         if data['town'][index][-1] == '-':
             data['town'][index] = data['town'][index][:-1]
-
+    # district の先頭または末尾に-があったら除去
+    for index in range(len(data['district'])):
+        if data['district'][index] == '':
+            continue
+        if data['district'][index][0] == '-':
+            data['district'][index] = data['district'][index][1:]
+        if data['district'][index][-1] == '-':
+            data['district'][index] = data['district'][index][:-1]
     # 東京都 町田など、固有名詞に 市、町、区、町、村があるもの
     # 町田市
     for index in range(len(data['district'])):
