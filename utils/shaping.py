@@ -103,6 +103,7 @@ def replace_slash_with_hyphen(string: str):
     string = re.sub('\t', '-', string)
     # 日本語で数字をつなぐ際に出現しうる
     string = re.sub('−', '-', string)
+    string = re.sub('─', '-', string)
     # 正規表現で/を-に置き換える
     return re.sub("/", "-", string)
 
