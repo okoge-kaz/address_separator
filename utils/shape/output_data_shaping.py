@@ -63,6 +63,8 @@ def shape(data: dict):
         address5.append(data['building_detail_info'][index])
     res_data['address5'] = address5
     # caution
+    res_data['error1'] = data['error1']
+    res_data['error2'] = data['error2']
     res_data['caution'] = data['caution']
     # address4について
     for index in range(len(res_data['address4'])):
@@ -100,7 +102,7 @@ def shape(data: dict):
     # invalid について
     for index in range(len(data['invalid'])):
         if data['invalid'][index] != '':
-            res_data['caution'][index] += "ERROR: データは、整形不可能な状態です。自動整形システムは正しく動作しません。この行の全ての結果を確認することを推奨します。  "
+            res_data['error1'][index] += "ERROR: データは、整形不可能な状態です。自動整形システムは正しく動作しません。この行の全ての結果を確認することを推奨します。  "
     # address3がなく、address4がある場合 caution
     for index in range(len(res_data['address4'])):
         if res_data['address3'][index] == '' and res_data['address4'][index] != '':
@@ -112,5 +114,18 @@ def shape(data: dict):
         elif '?' in res_data['address5'][index]:
             res_data['caution'][index] += "CAUTION: データには?が含まれており、文字コードに関わる何かしらの表示揺れがある可能性があります。  "
     # address4 が空かつ address5も空でかつ、 address3に-が3つあり、かつ最後の数字が302のような形であったらそれをaddress5に移す
+    for index in range(len(res_data['address4'])):
+        if res_data['address4'][index] == '' and res_data['address5'][index] == '':
+            if re.search('([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)', res_data['address3'][index]):
+                start: int = re.search('-[0-9]+$', res_data['address3'][index]).start()
+                # 3-5-4-809 の809の部分をaddress5に移行する
+                res_data['address5'][index] = res_data['address3'][index][start + 1:]
+                res_data['address3'][index] = res_data['address3'][index][:start]
+            elif re.search('([0-9]+)-([0-9]+)-([1-9][0-1][0-9])', res_data['address3'][index]):
+                # 3-8-902 のような場合にcautionを出す
+                res_data['caution'][index] += "CAUTION: 番地の中に、部屋番号が含まれている可能性があります。"
+            elif re.search('([0-9]+)-([0-9]+)-([1-9][0-9][0-1][0-9])', res_data['address3'][index]):
+                # 3-8-902 のような場合にcautionを出す
+                res_data['caution'][index] += "CAUTION: 番地の中に、部屋番号が含まれている可能性があります。"
     # 返値
     return res_data
