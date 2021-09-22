@@ -31,8 +31,9 @@ def read_excel(PATH: str):
 
 
 def main():
+    # path
     CurrentPath = os.getcwd()
-    PATH = CurrentPath + "/input/input.csv"  # path to csv file
+    PATH = CurrentPath + "/input/input.csv"
     global csv_data
     csv_data = input(PATH)
     replaced_address_data: list = []
@@ -49,22 +50,19 @@ def main():
         tuple_data: tuple = utils.extract.prefecture.extract_prefecture(string)
         prefectures.append(tuple_data[0])
         non_prefecture_address_data.append(tuple_data[1])
-    # dataに県名を抽出したデータを入れる
+    # dataに都道府県、市町村、町域をいれる
     data["prefecture"] = prefectures
-    # dataに市と同等の行政区分を入れる
     city_data = utils.extract.city.extract_city(non_prefecture_address_data)
     data['city'] = city_data[0]
     non_city_address_data: list = city_data[1]
-    # dataに市より小さな区分の行政区分を入れる
     town_data = utils.extract.town.extract_town(non_city_address_data)
     data['town'] = town_data[0]
     non_town_address_data: list = town_data[1]
-    # さらに小さな行政区分をdataに入れる
     district_data = utils.extract.district.extract_district(
         non_town_address_data)
     data['district'] = district_data[0]
     others: list = district_data[1]
-    # house_numberについても考える
+    # 番地をいれる
     house_number_data = utils.extract.detail.house_number.operation(others)
     others_head: list = house_number_data[0]
     house_numbers: list = house_number_data[1]
@@ -86,7 +84,7 @@ def main():
     utils.extract.detail.shaping.shaping(data)
     # caution
     utils.extract.detail.caution.caution(data, munipulated_others_tail, caution)
-    # 最終整形
+    # 出力形式用にデータを再整形
     data = utils.shape.output_data_shaping.shape(data)
     # 実在する町域かどうかのチェック + 出力形式チェック
     utils.extract.detail.detail_data_check.detail_check(data)
