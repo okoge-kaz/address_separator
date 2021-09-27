@@ -18,6 +18,7 @@ import utils.extract.detail.shaping_building_info
 import utils.extract.detail.data_check
 import utils.shape.output_data_shaping
 import utils.extract.detail.detail_data_check
+import utils.shape.detail_shape
 
 
 def input(PATH: str):
@@ -86,6 +87,8 @@ def main():
     utils.extract.detail.caution.caution(data, munipulated_others_tail, caution)
     # 出力形式用にデータを再整形
     data = utils.shape.output_data_shaping.shape(data)
+    # 特殊な町域などの経験則的修正
+    utils.shape.detail_shape.shape(data)
     # 実在する町域かどうかのチェック + 出力形式チェック
     utils.extract.detail.detail_data_check.detail_check(data)
     # dict -> dataFrame
