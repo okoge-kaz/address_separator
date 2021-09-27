@@ -99,6 +99,9 @@ def shape(data: dict):
         if re.search('タワ$', res_data['address4'][index]):
             start: int = re.search('タワ$', res_data['address4'][index]).start()
             res_data['address4'][index] = res_data['address4'][index][:start] + 'タワー'
+        if re.search('^ー*$', res_data['address4'][index]):
+            # 空白が-に置換されたことで生じるーを消去
+            res_data['address4'][index] = ''
     # invalid について
     for index in range(len(data['invalid'])):
         if data['invalid'][index] != '':
@@ -117,15 +120,34 @@ def shape(data: dict):
     for index in range(len(res_data['address4'])):
         if res_data['address4'][index] == '' and res_data['address5'][index] == '':
             if re.search('([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)', res_data['address3'][index]):
-                start: int = re.search('-[0-9]+$', res_data['address3'][index]).start()
-                # 3-5-4-809 の809の部分をaddress5に移行する
-                res_data['address5'][index] = res_data['address3'][index][start + 1:]
-                res_data['address3'][index] = res_data['address3'][index][:start]
+                if re.search('([0-9]+)-([0-9]+)-([0-9]+)-([0-9]{3,})', res_data['address3'][index]):
+                    start: int = re.search('-[0-9]+$', res_data['address3'][index]).start()
+                    # 3-5-4-809 の809の部分をaddress5に移行する
+                    res_data['address5'][index] = res_data['address3'][index][start + 1:]
+                    res_data['address3'][index] = res_data['address3'][index][:start]
+                else:
+                    res_data['caution'][index] += "CAUTION: 番地の中に、部屋番号が含まれている可能性があります。 "
             elif re.search('([0-9]+)-([0-9]+)-([1-9][0-1][0-9])', res_data['address3'][index]):
                 # 3-8-902 のような場合にcautionを出す
-                res_data['caution'][index] += "CAUTION: 番地の中に、部屋番号が含まれている可能性があります。"
+                res_data['caution'][index] += "CAUTION: 番地の中に、部屋番号が含まれている可能性があります。 "
             elif re.search('([0-9]+)-([0-9]+)-([1-9][0-9][0-1][0-9])', res_data['address3'][index]):
                 # 3-8-902 のような場合にcautionを出す
                 res_data['caution'][index] += "CAUTION: 番地の中に、部屋番号が含まれている可能性があります。"
+    # 一宮, 三谷などの町域が不正に分割された場合にERROR
+    for index in range(len(res_data['address3'])):
+        if re.search('^[0-9]$', res_data['address3'][index]):
+            # address3が数字一つ
+            if len(res_data['address4'][index]) == 1 and res_data['address5'][index] != '':
+                res_data['error2'][index] += 'ERROR: 町域が不正に分割されている恐れがあります。 '
+            else:
+                res_data['caution'][index] = 'CAUTION: 町域名に含まれる漢数字が不正に分割されている恐れがあります。 '
+    # address5に1-6-10などのものがあったらerror
+    for index in range(len(res_data['address5'])):
+        if re.search('([0-9]+)+', res_data['address5'][index]):
+            res_data['error2'][index] += 'ERROR: address5の建物情報の箇所に番地と思しき情報が存在します'
+    # アルファベット + ーについては消去
+    for index in range(len(res_data['address4'])):
+        if re.search('[A-Z]+ー$', res_data['address4'][index]):
+            res_data['address4'][index] = res_data['address4'][index][:-1]
     # 返値
     return res_data
