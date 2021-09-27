@@ -14,9 +14,9 @@ def detail_check(data: dict):
             if address2_value in data_set[address1_value]:
                 pass
             else:
-                data['error1'][index] += "ERROR: address2'のデータは、自動チェック機構が参照する日本郵便のデータセットに合致しません。  "
+                data['error1'][index] += "ERROR: address2のデータは、自動チェック機構が参照する日本郵便のデータセットに合致しません。  "
         except KeyError:
-            data['error1'][index] += "ERROR: address2のデータは、address1のデータから推測されるデータに一致しません。（自動チェック機構が参照するデータセットに合致しないか、表記が異なります。）  "
+            data['error1'][index] += "ERROR: address2のデータは、address1のデータから推測されるデータに一致しません。（自動チェック機構が参照するデータセットに合致しないか、表記が異なります。  "
     # 番地に関するテスト
     for index in range(len(data['address3'])):
         if data['address3'][index] == '':
