@@ -163,6 +163,46 @@ def shape(data: dict):
                 continue
             data['address5'][index] = data['address4'][index]
             data['address4'][index] = ''
+        # c号室(半角)
+        elif re.search('^[a-z]号室$', data['address4'][index]):
+            if data['address5'][index] != '':
+                # address5が空ではない
+                data['caution'][index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                continue
+            data['address5'][index] = data['address4'][index]
+            data['address4'][index] = ''
+        # c号室（全角）
+        elif re.search('^[a-z]号室$', data['address4'][index]):
+            if data['address5'][index] != '':
+                # address5が空ではない
+                data['caution'][index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                continue
+            data['address5'][index] = data['address4'][index]
+            data['address4'][index] = ''
+        # 204号室
+        elif re.search('^[0-9]+号室$', data['address4'][index]):
+            if data['address5'][index] != '':
+                # address5が空ではない
+                data['caution'][index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                continue
+            data['address5'][index] = data['address4'][index]
+            data['address4'][index] = ''
+        # C号室(半角)
+        elif re.search('^[A-Z]号室$', data['address4'][index]):
+            if data['address5'][index] != '':
+                # address5が空ではない
+                data['caution'][index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                continue
+            data['address5'][index] = data['address4'][index]
+            data['address4'][index] = ''
+        # C号室(全角)
+        elif re.search('^[A-Z]号室$', data['address4'][index]):
+            if data['address5'][index] != '':
+                # address5が空ではない
+                data['caution'][index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                continue
+            data['address5'][index] = data['address4'][index]
+            data['address4'][index] = ''
     # address4の先頭に の[数字]ー があったとき
     for index in range(len(data['address4'][index])):
         if re.search('^の[0-9]+ー', data['address4'][index]):
@@ -175,5 +215,7 @@ def shape(data: dict):
             data['caution'][index] += "CAUTION: address4の'#'は意味をなさないかもしれません。  "
     # address4の先頭の ー を消去
     for index in range(len(data['address4'])):
+        if data['address4'][index] == '':
+            continue
         if data['address4'][index][0] == 'ー' and len(data['address4'][index]) >= 1:
             data['address4'][index] = data['address4'][index][1:]
