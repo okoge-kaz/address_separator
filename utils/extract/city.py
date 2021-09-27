@@ -12,30 +12,40 @@ def extract_city(non_prefecture_address_data: list):
             if len(city_address_data) > index + 1:
                 # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1:])
+            else:
+                non_city_address_data.append('')
         elif "区" in city_address_data:
             index: int = city_address_data.find("区")
             cities.append(city_address_data[0:index + 1])
             if len(city_address_data) > index + 1:
                 # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1:])
+            else:
+                non_city_address_data.append('')
         elif "郡" in city_address_data:
             index: int = city_address_data.find("郡")
             cities.append(city_address_data[0:index + 1])
             if len(city_address_data) > index + 1:
                 # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1:])
+            else:
+                non_city_address_data.append('')
         elif "町" in city_address_data:
             index: int = city_address_data.find("町")
             cities.append(city_address_data[0:index + 1])
             if len(city_address_data) > index + 1:
                 # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1:])
+            else:
+                non_city_address_data.append('')
         elif "村" in city_address_data:
             index: int = city_address_data.find("村")
             cities.append(city_address_data[0:index + 1])
             if len(city_address_data) > index + 1:
                 # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1:])
+            else:
+                non_city_address_data.append('')
         else:
             cities.append("")
             non_city_address_data.append(city_address_data)
