@@ -13,6 +13,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
     def cutting_number_from_last2(index: int):
         '''上記の関数と同時に使用する。8階のように、建物の階数情報のみを抽出する'''
         if re.search('-([0-9]+)$', data['house_number'][index]) is None:
+            print(index)  # for debug
             print(re.search('-([0-9]+)$', data['house_number'][index]))
             print(data['house_number'][index])
             print('something wrong1')  # for debug
@@ -47,6 +48,7 @@ def shaping_and_extracting_building_info(data: dict, munipulated_others_tail: li
     def cutting_number_from_last3(index: int):
         '''上記の関数と同時に使用する。8号のように、建物の階数情報のみを抽出する'''
         if re.search('-([0-9]+)$', data['house_number'][index]) is None:
+            print(index)
             print(re.search('-([0-9]+)$', data['house_number'][index]))
             print(data['house_number'][index])
             print('something wrong1')  # for debug
