@@ -61,6 +61,13 @@ def shape(data: dict):
                 data['address3'][index] = data['address5'][index]
                 data['address4'][index] = ''
                 data['address5'][index] = ''
+    # 三重城
+    for index in range(len(data['address4'])):
+        if data['address3'][index] == '':
+            continue
+        if re.search('^重城', data['address4'][index]) and data['address3'][index][-1] == '3':
+            data['address3'][index] = data['address3'][index][:-2]
+            data['address4'][index] = '三' + data['address4'][index]
     # マンション名らしくないもの
     for index in range(len(data['address4'])):
         if re.search('^.[0-9]+.$', data['address4'][index]):
@@ -68,7 +75,8 @@ def shape(data: dict):
     # address4が号のみのとき
     for index in range(len(data['address4'])):
         if data['address4'][index] == '号':
-            data['caution'][index] += "CAUTION: address4の'号'は意味をなさないかもしれません。  "
+            data['address4'][index] = ''
+            data['caution'][index] += "CAUTION: address4の'号'は意味をなさないと判断され、削除されました。  "
     # 番地らしきものがaddress4に紛れ込んでいないかどうか
     for index in range(len(data['address4'])):
         if re.search('[0-9]+ー', data['address4'][index]):
@@ -78,7 +86,7 @@ def shape(data: dict):
         if data['address3'][index] != '' and data['address4'][index] == '棟':
             if re.search('-[0-9]+$', data['address3'][index]):
                 start: int = re.search('-[0-9]+$', data['address3'][index]).start()
-                data['address5'][index] = data['address3'][index][start + 1:] + '棟'
+                data['address5'][index] = data['address3'][index][start + 1:] + '棟' + data['address5'][index]
                 data['address3'][index] = data['address3'][index][:start]
                 data['address4'][index] = ''
     # address4に単独で 号棟 とあったら
@@ -86,7 +94,7 @@ def shape(data: dict):
         if data['address3'][index] != '' and data['address4'][index] == '号棟':
             if re.search('-[0-9]+$', data['address3'][index]):
                 start: int = re.search('-[0-9]+$', data['address3'][index]).start()
-                data['address5'][index] = data['address3'][index][start + 1:] + '号棟'
+                data['address5'][index] = data['address3'][index][start + 1:] + '号棟' + data['address5'][index]
                 data['address3'][index] = data['address3'][index][:start]
                 data['address4'][index] = ''
     # address4に単独で 号室 とあったら
@@ -94,7 +102,7 @@ def shape(data: dict):
         if data['address3'][index] != '' and data['address4'][index] == '号室':
             if re.search('-[0-9]+$', data['address3'][index]):
                 start: int = re.search('-[0-9]+$', data['address3'][index]).start()
-                data['address5'][index] = data['address3'][index][start + 1:] + '号室'
+                data['address5'][index] = data['address3'][index][start + 1:] + '号室' + data['address5'][index]
                 data['address3'][index] = data['address3'][index][:start]
                 data['address4'][index] = ''
     # address4に〜号室があるとき
@@ -219,3 +227,30 @@ def shape(data: dict):
             continue
         if data['address4'][index][0] == 'ー' and len(data['address4'][index]) >= 1:
             data['address4'][index] = data['address4'][index][1:]
+    # address2に-があったらerror
+    for index in range(len(data['address2'])):
+        if re.search('-', data['address2'][index]):
+            data['error1'][index] += "ERROR: address2に存在する情報は秩序だっていません。整形エラーが発生している可能性が高いです。  "
+    # address5に~号 とあるがaddress4が空で、かつaddress3に-が2未満なとき
+    for index in range(len(data['address5'])):
+        if re.search('^[0-9]+号$', data['address5'][index]) and data['address4'][index] == '':
+            if re.search('^[0-9]+(-[0-9]+)*$', data['address3'][index]):
+                # address3が正常かどうか
+                if re.search('^[0-9]+(-[0-9]){2,}$', data['address3'][index]):
+                    # ハイフンが2回以上
+                    continue
+                else:
+                    # 2回未満
+                    # ~号というものをaddress3に追加する(号を消して)
+                    data['address3'][index] += '-' + data['address5'][index][:-1]
+                    data['address5'][index] = ''
+            else:
+                data['error1'][index] += "ERROR: address3のデータ形式が不正です。 "
+    # ()をはずした後の処理 数字
+    for index in range(len(data['address4'])):
+        if re.search('[0-9]+(ー[0-9]+)*', data['address4'][index]):
+            if data['address5'][index] != '':
+                data['caution'][index] += "CAUTION: address4にはaddress5にあるべきデータが存在するやもしれません。  "
+                continue
+            data['address5'][index] = re.sub('ー', '-', data['address4'][index])
+            data['address4'][index] = ''
