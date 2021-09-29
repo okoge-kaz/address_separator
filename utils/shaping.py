@@ -105,6 +105,8 @@ def replace_slash_with_hyphen(string: str):
     string = re.sub('−', '-', string)
     string = re.sub('─', '-', string)
     string = re.sub('—', '-', string)
+    # 改行を半角スペースで置き換える
+    string = re.sub('\n', '-', string)
     # 正規表現で/を-に置き換える
     return re.sub("/", "-", string)
 
