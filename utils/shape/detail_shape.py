@@ -66,6 +66,8 @@ def shape(data: dict):
         if data['address3'][index] == '':
             continue
         if re.search('^重城', data['address4'][index]) and data['address3'][index][-1] == '3':
+            if len(data['address3'][index]) < 2:
+                continue
             data['address3'][index] = data['address3'][index][:-2]
             data['address4'][index] = '三' + data['address4'][index]
     # マンション名らしくないもの
