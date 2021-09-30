@@ -4,6 +4,7 @@ import os
 import pandas as pd
 
 import utils.shaping
+import utils.revise
 import utils.extract.prefecture
 import utils.extract.city
 import utils.extract.town
@@ -41,6 +42,7 @@ def main():
     # addressという名前がついた列しかデータを収集しない
     for address_data in csv_data['address']:
         replaced_address_data.append(utils.shaping.operation(address_data))
+    utils.revise.revise_data(replaced_address_data)
     # 出力データのもととなるdata: dictを作成
     data: dict = {}
     # dataに整形後のデータを入れる
