@@ -256,3 +256,15 @@ def shape(data: dict):
                 continue
             data['address5'][index] = re.sub('ー', '-', data['address4'][index])
             data['address4'][index] = ''
+    # 番地がないデータの処理
+    for index in range(len(data['address4'])):
+        if data['address4'][index] != '' and data['address3'][index] == '':
+            # address4にある町域データと思しきものを移動
+            if re.search('[a-z A-Z 0-9 - ?]', data['address4'][index]):
+                # マンション名にありそうなものを除く
+                continue
+            if re.search('地|事務所|会館|パーク|ハウス|ホーム|メール|コート|団地|ハイム|コーポ|メゾン|棟|グランド|株式会社|有限会社|（株）|ビル|北口店|南口店|西口店|東口店|組合|荘|建設|プラザ|パレス|サロン|レジデンス|レジデンシャル|ハイム|NPO|NGO|NPO|NGO|㈲|メゾン|ロイヤル|テーラー|亭', data['address4'][index]):
+                continue
+            else:
+                data['address2'][index] = data['address2'][index] + data['address4'][index]
+                data['address4'][index] = ''
