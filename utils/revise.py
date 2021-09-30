@@ -95,8 +95,8 @@ def revise_data(data: list):
         data[index] = re.sub('8重瀬町', '八重瀬町', data[index])
         # 3鷹市
         data[index] = re.sub('3鷹市', '三鷹市', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
+        # 三重城
+        data[index] = re.sub('3重城', '三重城', data[index])
         #
         data[index] = re.sub('', '', data[index])
         #
