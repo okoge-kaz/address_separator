@@ -271,6 +271,7 @@ def shape(data: dict):
     # address2に - が入っているパターン
     for index in range(len(data['address2'])):
         if re.search('-', data['address2'][index]):
+            data['caution'][index] += "CAUTION: 自動整形システムが推測によって分割している箇所があります。この行の分割が正しいか確認することを強く推奨します。 "
             # 西一-一八-一六-カモミ-ル西町 のようになっているはず
             mapping: dict = {"一": "1", "二": "2", "三": "3", "四": "4", "五": "5", "六": "6", "七": "7", "八": "8", "九": "9", "十": "10", "〇": "0"}
             japanese_numbers: list = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"]
@@ -326,6 +327,75 @@ def shape(data: dict):
                         # 建物情報の可能性が高いのでaddress5に移す
                         data['address5'][index] = data['address3'][index]
                         data['address2'][index] = string[:address3_start]
+                        data['address3'][index] = string[address3_start:address3_end]
+                        data['address4'][index] = string[address3_end:]
+                        # 先頭の-を削除
+                        if data['address4'][index] != '' and data['address4'][index][0] == '-':
+                            if len(data['address4'][index]) >= 2:
+                                data['address4'][index] = data['address4'][index][1:]
+                        # address4の-をーに変更
+                        data['address4'][index] = re.sub('-', 'ー', data['address4'][index])
+            else:
+                continue
+    # address1に - が入っているパターン
+    for index in range(len(data['address1'])):
+        if re.search('-', data['address1'][index]):
+            data['caution'][index] += "CAUTION: 自動整形システムが推測によって分割している箇所があります。この行の分割が正しいか確認することを強く推奨します。 "
+            # 羽若町四九三-一-市 のようになっているはず
+            mapping: dict = {"一": "1", "二": "2", "三": "3", "四": "4", "五": "5", "六": "6", "七": "7", "八": "8", "九": "9", "十": "10", "〇": "0"}
+            japanese_numbers: list = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"]
+            string: str = ''
+            for id in range(len(data['address1'][index])):
+                if data['address1'][index][id] in japanese_numbers:
+                    string += mapping[data['address1'][index][id]]
+                else:
+                    string += data['address1'][index][id]
+            # 分割作業
+            if re.search('[0-9]+', string):
+                # 数字がある
+                address3_start: int = re.search('[0-9]+', string).start()
+                address3_end: int = re.search('[0-9]+(-[0-9]+)*', string).end()
+                # 数字で終わる
+                if len(string) == re.search('[0-9]+(-[0-9]+)*', string).end():
+                    if data['address3'][index] == '':
+                        data['address1'][index] = string[:address3_start]
+                        data['address3'][index] = string[address3_start:address3_end]
+                    else:
+                        data['address1'][index] = string[:address3_start]
+                        data['address3'][index] = string[address3_start:address3_end] + data['address3'][index]
+                else:
+                    # 建物名らしきものが存在する
+                    if data['address3'][index] == '':
+                        # 番地情報が空
+                        data['address1'][index] = string[:address3_start]
+                        data['address3'][index] = string[address3_start:address3_end]
+                        building_information_data: str = string[address3_end:]
+                        if re.search('[0-9]', building_information_data):
+                            # 建物名の情報に部屋番号が紛れ込んでいる
+                            start_index: int = re.search('[0-9]', building_information_data).start()
+                            data['address4'][index] = building_information_data[:start_index]
+                            # 先頭の-を削除
+                            if data['address4'][index] != '' and data['address4'][index][0] == '-':
+                                if len(data['address4'][index]) >= 2:
+                                    data['address4'][index] = data['address4'][index][1:]
+                            # address4の-をーに変更
+                            data['address4'][index] = re.sub('-', 'ー', data['address4'][index])
+                            # address5
+                            data['aadress5'][index] = building_information_data[start_index:]
+                        else:
+                            # 建物情報のみ
+                            data['address4'][index] = building_information_data
+                            # 先頭の-を削除
+                            if data['address4'][index] != '' and data['address4'][index][0] == '-':
+                                if len(data['address4'][index]) >= 2:
+                                    data['address4'][index] = data['address4'][index][1:]
+                            # address4の-をーに変更
+                            data['address4'][index] = re.sub('-', 'ー', data['address4'][index])
+                    else:
+                        # 番地情報に数字がある
+                        # 建物情報の可能性が高いのでaddress5に移す
+                        data['address5'][index] = data['address3'][index]
+                        data['address1'][index] = string[:address3_start]
                         data['address3'][index] = string[address3_start:address3_end]
                         data['address4'][index] = string[address3_end:]
                         # 先頭の-を削除
