@@ -95,112 +95,30 @@ def revise_data(data: list):
         data[index] = re.sub('8重瀬町', '八重瀬町', data[index])
         # 3鷹市
         data[index] = re.sub('3鷹市', '三鷹市', data[index])
+        # 3鷹
+        if re.search('[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]+3鷹', data[index]):
+            if re.search('[0-9]+3鷹', data[index]):
+                continue
+            if re.search('([0-9]+)-3鷹', data[index]):
+                continue
+            data[index] = re.sub('3鷹', '三鷹', data[index])
         # 三重城
         data[index] = re.sub('3重城', '三重城', data[index])
+        # 八町
+        if re.search('[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]+8町', data[index]):
+            if re.search('[0-9]+8町', data[index]):
+                continue
+            if re.search('([0-9]+)-8町', data[index]):
+                continue
+            data[index] = re.sub('8町', '八町', data[index])
+        # 佐賀県3養
+        data[index] = re.sub('佐賀県3養', '佐賀県三養', data[index])
+        # 佐賀市8戸
+        data[index] = re.sub('佐賀市8戸', '佐賀市八戸', data[index])
+        # 3王崎
+        data[index] = re.sub('3王崎', '三王崎', data[index])
         #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
+        data[index] = re.sub('小城市3日月', '小城市三日月', data[index])
         #
         data[index] = re.sub('', '', data[index])
 
@@ -232,7 +150,15 @@ def revise_data(data: list):
         if re.search('[0-9]+の[0-9]+', data[index]):
             data[index] = re.sub('[0-9]+の[0-9]+', data[index])
 
-    # for debug
-    df = pd.DataFrame(data)
-    df.to_csv('data.csv', encoding='utf-8_sig')
-    # for debug end
+    # # ()を排除
+    # for index in range(len(data)):
+    #     data[index] = re.sub('\\(', '-', data[index])
+    #     data[index] = re.sub('\\)', ' ', data[index])
+    #     data[index] = re.sub('（', '-', data[index])
+    #     data[index] = re.sub('）', ' ', data[index])
+    # ()を早く外してしまうと、うまく整形できないときがある
+
+    # # for debug
+    # df = pd.DataFrame(data)
+    # df.to_csv('data.csv', encoding='utf-8_sig')
+    # # for debug end
