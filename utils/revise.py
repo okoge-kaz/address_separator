@@ -120,6 +120,10 @@ def revise_data(data: list):
         #
         data[index] = re.sub('小城市3日月', '小城市三日月', data[index])
         #
+        data[index] = re.sub('白木1色', '白木一色', data[index])
+        #
+        data[index] = re.sub('', '', data[index])
+        #
         data[index] = re.sub('', '', data[index])
 
     # 文字化け関連
