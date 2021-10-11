@@ -1,6 +1,9 @@
 import re
 
 
+import pandas as pd
+
+
 def caution(data: dict, munipulated_others_tail: list, caution: list):
     '''不適切な形で分割されていると思われるデータを検知し、cautionを出す。一部データ整形機能も持つ'''
     # others_tail内部の半角-を全角に直す
@@ -105,3 +108,7 @@ def caution(data: dict, munipulated_others_tail: list, caution: list):
     for index in range(len(data['prefecture'])):
         if data['prefecture'][index] == '':
             data['error2'][index] += "ERROR: prefectureの列の情報がありません。元データに都道府県情報が欠落している可能性があります。入力されたデータ形式は、自動チェック機構が推奨する形式ではありません。  "
+    # # for debug
+    # df = pd.DataFrame(data)
+    # df.to_csv('debug.csv', encoding='utf-8_sig')
+    # # for debug end
