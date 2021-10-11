@@ -226,3 +226,11 @@ def shaping(data: dict):
             if data['town'][index] == '川3郷町':
                 data['town'][index] = '市川三郷町'
                 data['city'][index] = data['city'][index][:start]
+            elif data['town'][index] == '川三郷町':
+                data['town'][index] = '市川三郷町'
+                data['city'][index] = data['city'][index][:start]
+    # 市ケ坂町
+    for index in range(len(data['city'])):
+        if data['city'][index] == '市' and data['town'][index] == 'ケ坂町':
+            data['city'][index] = '市ケ坂町'
+            data['town'][index] = ''
