@@ -1,9 +1,6 @@
 import re
 
 
-import pandas as pd
-
-
 def revise_data(data: list):
     # ‐ -> - 変換
     for index in range(len(data)):
@@ -122,7 +119,7 @@ def revise_data(data: list):
         #
         data[index] = re.sub('白木1色', '白木一色', data[index])
         #
-        data[index] = re.sub('', '', data[index])
+        data[index] = re.sub('3重県', '三重県', data[index])
         #
         data[index] = re.sub('', '', data[index])
 
