@@ -27,16 +27,10 @@ def input(PATH: str):
     return csv_data
 
 
-def read_excel(PATH: str):
-    excel_data = pd.read_excel(PATH)
-    return excel_data
-
-
 def main():
     # path
     CurrentPath = os.getcwd()
     PATH = CurrentPath + "/input/input.csv"
-    global csv_data
     csv_data = input(PATH)
     replaced_address_data: list = []
     # addressという名前がついた列しかデータを収集しない
