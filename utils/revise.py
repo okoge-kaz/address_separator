@@ -152,7 +152,8 @@ def revise_data(data: list):
         if re.search('-の[0-9]+', data[index]):
             data[index] = re.sub('-の', '-', data[index])
         if re.search('[0-9]+の[0-9]+', data[index]):
-            data[index] = re.sub('[0-9]+の[0-9]+', data[index])
+            pass
+            # data[index] = re.sub('[0-9]+の[0-9]+', data[index])
 
     # # ()を排除
     # for index in range(len(data)):
