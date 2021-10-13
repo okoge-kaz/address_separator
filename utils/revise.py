@@ -149,17 +149,14 @@ def revise_data(data: list):
         if re.search('-の[0-9]+', data[index]):
             data[index] = re.sub('-の', '-', data[index])
         if re.search('[0-9]+の[0-9]+', data[index]):
-            pass
-            # data[index] = re.sub('の', '-', data[index])
-    # # ()を排除
-    # for index in range(len(data)):
-    #     data[index] = re.sub('\\(', '-', data[index])
-    #     data[index] = re.sub('\\)', ' ', data[index])
-    #     data[index] = re.sub('（', '-', data[index])
-    #     data[index] = re.sub('）', ' ', data[index])
-    # ()を早く外してしまうと、うまく整形できないときがある
-
-    # # for debug
-    # df = pd.DataFrame(data)
-    # df.to_csv('data.csv', encoding='utf-8_sig')
-    # # for debug end
+            shaped_string: str = ''
+            for id in range(len(data[index])):
+                if data[index][id] == 'の' and id > 0 and id + 1 < len(data[index]):
+                    if '0' <= data[index][id - 1] and data[index][id - 1] <= '9' and data[index][id + 1] >= '0' and data[index][id + 1] <= '9':
+                        # 〜の〜　前後が数字であるとき
+                        shaped_string += '-'
+                    else:
+                        shaped_string += data[index][id]
+                else:
+                    shaped_string += data[index][id]
+            data[index] = shaped_string
