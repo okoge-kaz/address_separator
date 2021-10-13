@@ -70,14 +70,11 @@ def shape(csv_data):
     # check 不正なデータが存在しないかどうかを確認
     caution: list = utils.extract.detail.check.check.check(data)
     # データ整形＋分裂してしまったデータを統合整理
-    munipulated_others_tail = utils.extract.detail.munipulate.munipulate(
-        data, others_tail)
+    munipulated_others_tail = utils.extract.detail.munipulate.munipulate(data, others_tail)
     # ビルや建物情報の詳細を取得
-    data['building_detail_info'] = utils.extract.detail.building_detail.extract_building_detail(
-        data)
+    data['building_detail_info'] = utils.extract.detail.building_detail.extract_building_detail(data)
     # ビル情報のうちデータ散逸しているものを適切に統合
-    utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(
-        data, munipulated_others_tail)
+    utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(data, munipulated_others_tail)
     # others_tail内のデータを整形
     utils.extract.detail.shaping.shaping(data)
     # caution
