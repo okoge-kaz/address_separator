@@ -22,7 +22,7 @@ import utils.extract.detail.check.detail_data_check
 import utils.shape.detail_shape
 
 
-def input(PATH: str):
+def input_data(PATH: str):
     csv_data = pd.read_csv(PATH)
     return csv_data
 
@@ -89,7 +89,7 @@ def main():
     # path
     CurrentPath = os.getcwd()
     PATH = CurrentPath + "/input/input.csv"
-    csv_data = input(PATH)
+    csv_data = input_data(PATH)
     # operation
     data = shape(csv_data)
     # 出力形式用にデータを再整形
