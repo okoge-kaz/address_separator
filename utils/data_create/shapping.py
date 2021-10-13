@@ -9,7 +9,6 @@ def main():
     Current_Path = os.getcwd()
     csv_data = pd.read_csv(Current_Path + '/data/zenkoku.csv')
     csv_data = csv_data.fillna('')
-    # print(csv_data)
     data: dict = {}
     city_name: list = list(csv_data['市区町村'])
     temporaly_list: list = []
