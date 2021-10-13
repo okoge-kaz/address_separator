@@ -4,8 +4,9 @@
 
 ## Tech
 
-- Formater:
-- Lintter: 
+- Formater: [autopep8](https://github.com/hhatto/autopep8)
+- Code Check Tool: [flake8](https://pypi.org/project/flake8/)
+
 - Language: Python 3.9.7 64-bit
 
 - 開発環境: Mac OS Big Sur 11
