@@ -1,9 +1,6 @@
 import re
 
 
-import pandas as pd
-
-
 def revise_data(data: list):
     # ‐ -> - 変換
     for index in range(len(data)):
@@ -117,12 +114,12 @@ def revise_data(data: list):
         data[index] = re.sub('佐賀市8戸', '佐賀市八戸', data[index])
         # 3王崎
         data[index] = re.sub('3王崎', '三王崎', data[index])
-        #
+        # 小城市3日月
         data[index] = re.sub('小城市3日月', '小城市三日月', data[index])
-        #
+        # 白木1色
         data[index] = re.sub('白木1色', '白木一色', data[index])
-        #
-        data[index] = re.sub('', '', data[index])
+        # 3重県
+        data[index] = re.sub('3重県', '三重県', data[index])
         #
         data[index] = re.sub('', '', data[index])
 
@@ -152,18 +149,14 @@ def revise_data(data: list):
         if re.search('-の[0-9]+', data[index]):
             data[index] = re.sub('-の', '-', data[index])
         if re.search('[0-9]+の[0-9]+', data[index]):
-            pass
-            # data[index] = re.sub('[0-9]+の[0-9]+', data[index])
-
-    # # ()を排除
-    # for index in range(len(data)):
-    #     data[index] = re.sub('\\(', '-', data[index])
-    #     data[index] = re.sub('\\)', ' ', data[index])
-    #     data[index] = re.sub('（', '-', data[index])
-    #     data[index] = re.sub('）', ' ', data[index])
-    # ()を早く外してしまうと、うまく整形できないときがある
-
-    # # for debug
-    # df = pd.DataFrame(data)
-    # df.to_csv('data.csv', encoding='utf-8_sig')
-    # # for debug end
+            shaped_string: str = ''
+            for id in range(len(data[index])):
+                if data[index][id] == 'の' and id > 0 and id + 1 < len(data[index]):
+                    if '0' <= data[index][id - 1] and data[index][id - 1] <= '9' and data[index][id + 1] >= '0' and data[index][id + 1] <= '9':
+                        # 〜の〜　前後が数字であるとき
+                        shaped_string += '-'
+                    else:
+                        shaped_string += data[index][id]
+                else:
+                    shaped_string += data[index][id]
+            data[index] = shaped_string

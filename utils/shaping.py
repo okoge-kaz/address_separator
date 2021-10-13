@@ -2,9 +2,14 @@ import re
 
 
 def erase_special_address_expression(string: str, index: int):
+    '''string: 住所データ１つ, index: 処理番号
+       処理番号によって処理する内容が変化する。
+    '''
     size: int = len(string)
+
     # 丁目を置換することのみ行う
     if index == 1:
+        # 正規表現で書くのが困難なため文字列を直接処理
         res: str = ""
         i: int = 0
         while i < (size):
@@ -26,29 +31,10 @@ def erase_special_address_expression(string: str, index: int):
         return res
     # 番地を置換することのみ行う
     elif index == 2:
-        res: str = ""
-        i: int = 0
-        while i < size:
-            if i == size - 1:
-                res = res + string[i]
-                i += 1
-            else:
-                if(string[i] == "番" and string[i + 1] == "地"):
-                    res = res + ("-")
-                    i += 2
-                else:
-                    res = res + (string[i])
-                    i += 1
-        return res
+        return re.sub('番地', '-', string)
     # 番を置換することのみ行う
     elif index == 3:
-        res: str = ""
-        for i in range(size):
-            if string[i] == "番":
-                res = res + ("-")
-            else:
-                res = res + (string[i])
-        return res
+        return re.sub('番', '-', string)
     # 1の4 -> 1-4に置換する && 全角数字の置き換え
     elif index == 4:
         while re.search('[0-9 ０-９]+の[0-9 ０-９]', string) is not None:
@@ -97,7 +83,7 @@ def erase_last_hyphen(string: str):
 
 
 def replace_slash_with_hyphen(string: str):
-    # 空白を取り除く
+    '''半角ハイフンに置き換える'''
     string = re.sub(' ', '-', string)
     string = re.sub('　', '-', string)
     string = re.sub('\t', '-', string)
@@ -142,15 +128,14 @@ def japanese_style_number_to_number(string: str):
 
 
 def full_width_hyphen_to_half_width_hyphen(string: str):
-    res: str = ""
-    for char in string:
-        if char == "ー":
-            res = res + "-"
-        else:
-            res = res + char
-    return res
+    return re.sub('ー', '-', string)
 
 
 def operation(string: str):
-    return full_width_hyphen_to_half_width_hyphen(japanese_style_number_to_number(
-        replace_slash_with_hyphen(erase_last_hyphen(replace_japanese_address_expression(string)))))
+    '''すべての処理をまとめた関数'''
+    res: str = replace_japanese_address_expression(string)
+    res = erase_last_hyphen(res)
+    res = replace_slash_with_hyphen(res)
+    res = japanese_style_number_to_number(res)
+    res = full_width_hyphen_to_half_width_hyphen(res)
+    return res

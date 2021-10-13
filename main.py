@@ -10,34 +10,29 @@ import utils.extract.city
 import utils.extract.town
 import utils.extract.district
 import utils.extract.detail.house_number
-import utils.extract.detail.check
+import utils.extract.detail.check.check
 import utils.extract.detail.munipulate
 import utils.extract.detail.building_detail
 import utils.extract.detail.shaping
-import utils.extract.detail.caution
+import utils.extract.detail.check.caution
 import utils.extract.detail.shaping_building_info
-import utils.extract.detail.data_check
+import utils.extract.detail.check.data_check
 import utils.shape.output_data_shaping
-import utils.extract.detail.detail_data_check
+import utils.extract.detail.check.detail_data_check
 import utils.shape.detail_shape
 
 
-def input(PATH: str):
+def input_data(PATH: str):
     csv_data = pd.read_csv(PATH)
     return csv_data
 
 
-def read_excel(PATH: str):
-    excel_data = pd.read_excel(PATH)
-    return excel_data
-
-
-def main():
-    # path
-    CurrentPath = os.getcwd()
-    PATH = CurrentPath + "/input/input.csv"
-    global csv_data
-    csv_data = input(PATH)
+def shape(csv_data):
+    '''
+    整形作業を行う。ここでは、出力形式とは異なり独自の形での分割となっている。
+    分割の形は以下の通り
+    original,prefecture,city,town,district,invalid,house_number,special_characters,building_detail_info,building_info,error1,error2,caution
+    '''
     replaced_address_data: list = []
     # addressという名前がついた列しかデータを収集しない
     for address_data in csv_data['address']:
@@ -73,26 +68,33 @@ def main():
     data["invalid"] = others_head
     data["house_number"] = house_numbers
     # check 不正なデータが存在しないかどうかを確認
-    caution: list = utils.extract.detail.check.check(data)
+    caution: list = utils.extract.detail.check.check.check(data)
     # データ整形＋分裂してしまったデータを統合整理
-    munipulated_others_tail = utils.extract.detail.munipulate.munipulate(
-        data, others_tail)
+    munipulated_others_tail = utils.extract.detail.munipulate.munipulate(data, others_tail)
     # ビルや建物情報の詳細を取得
-    data['building_detail_info'] = utils.extract.detail.building_detail.extract_building_detail(
-        data)
+    data['building_detail_info'] = utils.extract.detail.building_detail.extract_building_detail(data)
     # ビル情報のうちデータ散逸しているものを適切に統合
-    utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(
-        data, munipulated_others_tail)
+    utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(data, munipulated_others_tail)
     # others_tail内のデータを整形
     utils.extract.detail.shaping.shaping(data)
     # caution
-    utils.extract.detail.caution.caution(data, munipulated_others_tail, caution)
+    utils.extract.detail.check.caution.caution(data, munipulated_others_tail, caution)
+    return data
+
+
+def main():
+    # path
+    CurrentPath = os.getcwd()
+    PATH = CurrentPath + "/input/input.csv"
+    csv_data = input_data(PATH)
+    # operation
+    data = shape(csv_data)
     # 出力形式用にデータを再整形
     data = utils.shape.output_data_shaping.shape(data)
     # 特殊な町域などの経験則的修正
     utils.shape.detail_shape.shape(data)
     # 実在する町域かどうかのチェック + 出力形式チェック
-    utils.extract.detail.detail_data_check.detail_check(data)
+    utils.extract.detail.check.detail_data_check.detail_check(data)
     # dict -> dataFrame
     df = pd.DataFrame(data)
     # output

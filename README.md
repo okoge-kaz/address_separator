@@ -1,14 +1,25 @@
-# senkyo
-株式会社センキョ名簿整形自動化用リポジトリ
+## About 
 
-input/ouputディレクトリはgitignoreに追加しています。
+株式会社センキョ 住所名簿自動整形プログラム Repository
 
-# 今後の予定
+## Tech
 
-- 第一段階
-JupyterNoteBook上である程度の自動化を実現する。
-（実行環境を整備を相手側で整備する必要あり）
+- Formater: [autopep8](https://github.com/hhatto/autopep8)
+- Code Check Tool: [flake8](https://pypi.org/project/flake8/)
 
-- 第二段階
-処理をローカル環境ではなく、サーバー上で行う。クライアントはcsvファイルをアップロードするだけでよい
+- Language: Python 3.9.7 64-bit
 
+- 開発環境: Mac OS Big Sur 11
+
+- Editor: Visual Studio Code 
+  - スペース: 4 (.py), 2 (.md)
+  - 改行: LF
+  - 文字コード: UTF-8
+
+## Reference
+
+使用したライブラリや機能についてのリンク
+
+- Python 3.9 regular expression [link](https://docs.python.org/ja/3.9/library/re.html)
+
+- Pandas [link](https://pandas.pydata.org/docs/user_guide/index.html#user-guide)
