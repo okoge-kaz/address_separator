@@ -24,7 +24,7 @@
 
 - Pandas [link](https://pandas.pydata.org/docs/user_guide/index.html#user-guide)
 
-## GitHb
+## GitHub
 
 [GitHub conflict](https://docs.github.com/ja/github/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github)
 
