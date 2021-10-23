@@ -22,3 +22,8 @@ utils/extract/__pycache__/city.cpython-39.pyc
 utils/extract/__pycache__/town.cpython-39.pyc
 utils/__pycache__/shaping.cpython-39.pyc
 utils/extract/__pycache__/district.cpython-39.pyc
+utils/extract/detail/__pycache__/caution.cpython-39.pyc
+.gitignore
+utils/extract/detail/__pycache__/data_check.cpython-39.pyc
+utils/extract/detail/__pycache__/detail_data_check.cpython-39.pyc
+utils/extract/detail/__pycache__/check.cpython-39.pyc
