@@ -73,7 +73,7 @@ def revise_data(data: list):
         # 8反町
         data[index] = re.sub('8反町', '八反町', data[index])
         # 2葉町
-        data[index] = re.sub('2葉町', '2葉町', data[index])
+        data[index] = re.sub('2葉町', '二葉町', data[index])
         # 豊4季
         data[index] = re.sub('豊4季', '豊四季', data[index])
         # 船橋市3山
