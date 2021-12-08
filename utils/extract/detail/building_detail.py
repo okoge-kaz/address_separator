@@ -18,6 +18,8 @@ def extract_building_detail(data: dict):
             '-([0-9]+)$', data['house_number'][index]).start()
         end: int = re.search(
             '-([0-9]+)$', data['house_number'][index]).end()
+        if end != len(data['house_number'][index]):
+            print('somethin wrong2')  # for debug
         # start+1 にしているのは-{数字}Fとなっているので - を除いている
         building_detail_info.append(
             data['house_number'][index][start + 1:end] + 'F')
