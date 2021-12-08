@@ -96,8 +96,6 @@ def shaping(data: dict):
         if data['city'][index] == '市' and re.search('^川市', data['district'][index]):
             start: int = re.search('^川市', data['district'][index]).start()
             end: int = re.search('^川市', data['district'][index]).end()
-            if start != 0:
-                print('something wrong')  # for debug
             data['city'][index] = '市川市'
             data['district'][index] = data['district'][index][end:]
 
@@ -106,8 +104,6 @@ def shaping(data: dict):
             if data['city'][index] == '市' and re.search('^川市', data['town'][index]):
                 start: int = re.search('^川市', data['town'][index]).start()
                 end: int = re.search('^川市', data['town'][index]).end()
-                if start != 0:
-                    print('something wrong')  # for debug
                 data['city'][index] = '市川市'
                 data['town'][index] = data['town'][index][end:]
     # 市原市
@@ -115,8 +111,6 @@ def shaping(data: dict):
         if data['city'][index] == '市' and re.search('^原市', data['district'][index]):
             start: int = re.search('^原市', data['district'][index]).start()
             end: int = re.search('^原市', data['district'][index]).end()
-            if start != 0:
-                print('something wrong')  # for debug
             data['city'][index] = '市原市'
             data['district'][index] = data['district'][index][end:]
 
@@ -125,8 +119,6 @@ def shaping(data: dict):
             if data['city'][index] == '市' and re.search('^原市', data['town'][index]):
                 start: int = re.search('^原市', data['town'][index]).start()
                 end: int = re.search('^原市', data['town'][index]).end()
-                if start != 0:
-                    print('something wrong')  # for debug
                 data['city'][index] = '市原市'
                 data['town'][index] = data['town'][index][end:]
     # 野々市市
@@ -134,8 +126,6 @@ def shaping(data: dict):
         if data['city'][index] == '野々市' and re.search('^市', data['district'][index]):
             start: int = re.search('^市', data['district'][index]).start()
             end: int = re.search('^市', data['district'][index]).end()
-            if start != 0:
-                print('something wrong')  # for debug
             data['city'][index] = '野々市市'
             data['district'][index] = data['district'][index][end:]
 
@@ -144,8 +134,6 @@ def shaping(data: dict):
             if data['city'][index] == '野々市' and re.search('^市', data['town'][index]):
                 start: int = re.search('^市', data['town'][index]).start()
                 end: int = re.search('^市', data['town'][index]).end()
-                if start != 0:
-                    print('something wrong')  # for debug
                 data['city'][index] = '野々市市'
                 data['town'][index] = data['town'][index][end:]
     # 四日市市
@@ -153,8 +141,6 @@ def shaping(data: dict):
         if data['city'][index] == '四日市' and re.search('^市', data['district'][index]):
             start: int = re.search('^市', data['district'][index]).start()
             end: int = re.search('^市', data['district'][index]).end()
-            if start != 0:
-                print('something wrong')  # for debug
             data['city'][index] = '四日市市'
             data['district'][index] = data['district'][index][end:]
 
@@ -163,8 +149,6 @@ def shaping(data: dict):
             if data['city'][index] == '四日市' and re.search('^市', data['town'][index]):
                 start: int = re.search('^市', data['town'][index]).start()
                 end: int = re.search('^市', data['town'][index]).end()
-                if start != 0:
-                    print('something wrong')  # for debug
                 data['city'][index] = '四日市市'
                 data['town'][index] = data['town'][index][end:]
     # 廿日市市
@@ -172,8 +156,6 @@ def shaping(data: dict):
         if data['city'][index] == '廿日市' and re.search('^市', data['district'][index]):
             start: int = re.search('^市', data['district'][index]).start()
             end: int = re.search('^市', data['district'][index]).end()
-            if start != 0:
-                print('something wrong')  # for debug
             data['city'][index] = '廿日市市'
             data['district'][index] = data['district'][index][end:]
 
@@ -182,8 +164,6 @@ def shaping(data: dict):
             if data['city'][index] == '廿日市' and re.search('^市', data['town'][index]):
                 start: int = re.search('^市', data['town'][index]).start()
                 end: int = re.search('^市', data['town'][index]).end()
-                if start != 0:
-                    print('something wrong')  # for debug
                 data['city'][index] = '廿日市市'
                 data['town'][index] = data['town'][index][end:]
     # 余市軍
@@ -191,8 +171,6 @@ def shaping(data: dict):
         if data['city'][index] == '余市' and re.search('^郡', data['district'][index]):
             start: int = re.search('^郡', data['district'][index]).start()
             end: int = re.search('^郡', data['district'][index]).end()
-            if start != 0:
-                print('something wrong')  # for debug
             data['city'][index] = '余市郡'
             data['district'][index] = data['district'][index][end:]
 
@@ -201,8 +179,6 @@ def shaping(data: dict):
             if data['city'][index] == '余市' and re.search('^郡', data['town'][index]):
                 start: int = re.search('^郡', data['town'][index]).start()
                 end: int = re.search('^郡', data['town'][index]).end()
-                if start != 0:
-                    print('something wrong')  # for debug
                 data['city'][index] = '余市郡'
                 data['town'][index] = data['town'][index][end:]
         elif re.search('^[- 0-9 町 市]', data['district'][index]) is None:
@@ -210,8 +186,6 @@ def shaping(data: dict):
             if data['city'][index] == '余市' and re.search('^郡', data['town'][index]):
                 start: int = re.search('^郡', data['town'][index]).start()
                 end: int = re.search('^郡', data['town'][index]).end()
-                if start != 0:
-                    print('something wrong')  # for debug
                 data['city'][index] = '余市郡'
                 data['town'][index] = data['town'][index][end:]
                 if data['town'][index] == '' and re.search('[町]$', data['district'][index]):
