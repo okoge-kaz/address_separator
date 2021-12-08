@@ -47,6 +47,8 @@ def munipulate(data: dict, others_tail: list):
         if extract_number_from_others_tail(munipulated_others_tail[i]):
             start: int = extract_number_from_others_tail(munipulated_others_tail[i]).start()
             end: int = extract_number_from_others_tail(munipulated_others_tail[i]).end()
+            if start != 0:
+                print('something wrong')  # for debug
             data['house_number'][i] = data['house_number'][i] + munipulated_others_tail[i][start:end]
             munipulated_others_tail[i] = munipulated_others_tail[i][end:]
         else:
