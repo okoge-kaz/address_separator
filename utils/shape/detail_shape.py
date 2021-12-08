@@ -22,25 +22,6 @@ def shape(data: dict):
                 data['address3'][index] = data['address5'][index]
                 data['address4'][index] = ''
                 data['address5'][index] = ''
-    # 五台山
-    for index in range(len(data['address3'])):
-        if data['address3'][index] == '5' and data['address4'][index] == '台山':
-            if data['address2'][index] != '':
-                data['error1'][index] += 'ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  '
-            else:
-                data['address2'][index] = '五台山'
-                data['address3'][index] = data['address5'][index]
-                data['address4'][index] = ''
-                data['address5'][index] = ''
-    # 五台山〜
-    for index in range(len(data['address3'])):
-        if data['address3'][index] == '5' and re.search('^台山.+', data['address4'][index]):
-            if data['address2'][index] != '':
-                data['error1'][index] += 'ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  '
-            else:
-                data['address2'][index] = ''
-                data['address3'][index] = ''
-                data['address4'][index] = '五' + data['address4'][index]
     # 三谷
     for index in range(len(data['address3'])):
         if data['address3'][index] == '3' and data['address4'][index] == '谷':
@@ -61,15 +42,6 @@ def shape(data: dict):
                 data['address3'][index] = data['address5'][index]
                 data['address4'][index] = ''
                 data['address5'][index] = ''
-    # 三重城
-    for index in range(len(data['address4'])):
-        if data['address3'][index] == '':
-            continue
-        if re.search('^重城', data['address4'][index]) and data['address3'][index][-1] == '3':
-            if len(data['address3'][index]) < 2:
-                continue
-            data['address3'][index] = data['address3'][index][:-2]
-            data['address4'][index] = '三' + data['address4'][index]
     # マンション名らしくないもの
     for index in range(len(data['address4'])):
         if re.search('^.[0-9]+.$', data['address4'][index]):
