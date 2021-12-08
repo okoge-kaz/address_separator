@@ -3,7 +3,7 @@ import re
 
 def erase_special_address_expression(string: str, index: int):
     '''string: 住所データ１つ, index: 処理番号
-       処理番号によって処理する内容が変化する。
+        処理番号によって処理する内容が変化する。
     '''
     size: int = len(string)
 
@@ -48,8 +48,7 @@ def erase_special_address_expression(string: str, index: int):
                 else:
                     if re.search('[０-９]', string[index]) is not None:
                         mapping_dictionary: dict = \
-                            {"１": "1", "２": "2", "３": "3", "４": "4", "５": "5",
-                             "６": "6", "７": "7", "８": "8", "９": "9", "０": "10"}
+                            {"１": "1", "２": "2", "３": "3", "４": "4", "５": "5", "６": "6", "７": "7", "８": "8", "９": "9", "０": "10"}
                         res += mapping_dictionary[string[index]]
                     else:
                         res += string[index]
