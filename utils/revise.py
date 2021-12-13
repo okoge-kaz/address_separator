@@ -144,3 +144,7 @@ def revise_data(data: list):
     for index in range(len(data)):
         data[index] = re.sub('-{1,}', '-', data[index])
 
+    # -の を -に置換する
+    for index in range(len(data)):
+        if re.search('-の[0-9]+', data[index]):
+            data[index] = re.sub('-の', '-', data[index])
