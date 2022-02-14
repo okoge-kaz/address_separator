@@ -39,8 +39,8 @@ def erase_special_address_expression(string: str, index: int):
     elif index == 4:
         while re.search("[0-9 ０-９]+の[0-9 ０-９]", string) is not None:
 
-            start: int
-            end: int
+            start: int = 0
+            end: int = 0
 
             regular_expression_start = re.search("[0-9 ０-９]+の[0-9 ０-９]", string)
             if regular_expression_start is not None:
