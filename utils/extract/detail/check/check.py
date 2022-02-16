@@ -1,7 +1,7 @@
 import re
 
 
-def check(data: dict):
+def check(data: dict) -> list[str]:
     """cautionの配列を生成する"""
 
     def check_vaild_word_or_not(index: int):
