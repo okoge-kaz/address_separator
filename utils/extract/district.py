@@ -1,5 +1,7 @@
 def extract_district(non_town_address_data: list):
-    """prefecture, city, townによって除かれたデータのうち数字が出現するまでのデータをとる"""
+    """
+    prefecture, city, townによって除かれたデータのうち数字が出現するまでのデータをとる
+    """
     districts: list = []
     others: list = []
 

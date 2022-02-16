@@ -1,5 +1,7 @@
 def extract_prefecture(string: str):
-    """都道府県を抽出するための関数"""
+    """
+    都道府県を抽出するための関数
+    """
     prefectures: list = [
         "北海道",
         "青森県",
