@@ -5,7 +5,9 @@ import pandas as pd
 
 
 def data_check(data: dict):
-    """総務省のデータから実在する市町村であるかどうか調べる"""
+    """
+    総務省のデータから実在する市町村であるかどうか調べる
+    """
     Current_Path = os.getcwd()
     PATH = Current_Path + "/data/administrative_district.csv"
     administrative_data_csv: pd.DataFrame = pd.read_csv(PATH)

@@ -2,7 +2,9 @@ import re
 
 
 def check(data: dict) -> list[str]:
-    """cautionの配列を生成する"""
+    """
+    cautionの配列を生成する
+    """
 
     def check_vaild_word_or_not(index: int):
         if re.search("^([0-9ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠])+$", data["invalid"][index]) is not None:
