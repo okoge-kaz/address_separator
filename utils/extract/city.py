@@ -10,7 +10,7 @@ def extract_city(non_prefecture_address_data: list):
             index: int = city_address_data.find("市")
             cities.append(city_address_data[0 : index + 1])
             if len(city_address_data) > index + 1:
-                # index out of rangeを避けるため
+                # avoid index out of range error
                 non_city_address_data.append(city_address_data[index + 1 :])
             else:
                 non_city_address_data.append("")
@@ -18,7 +18,6 @@ def extract_city(non_prefecture_address_data: list):
             index: int = city_address_data.find("区")
             cities.append(city_address_data[0 : index + 1])
             if len(city_address_data) > index + 1:
-                # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1 :])
             else:
                 non_city_address_data.append("")
@@ -26,7 +25,6 @@ def extract_city(non_prefecture_address_data: list):
             index: int = city_address_data.find("郡")
             cities.append(city_address_data[0 : index + 1])
             if len(city_address_data) > index + 1:
-                # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1 :])
             else:
                 non_city_address_data.append("")
@@ -34,7 +32,6 @@ def extract_city(non_prefecture_address_data: list):
             index: int = city_address_data.find("町")
             cities.append(city_address_data[0 : index + 1])
             if len(city_address_data) > index + 1:
-                # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1 :])
             else:
                 non_city_address_data.append("")
@@ -42,7 +39,6 @@ def extract_city(non_prefecture_address_data: list):
             index: int = city_address_data.find("村")
             cities.append(city_address_data[0 : index + 1])
             if len(city_address_data) > index + 1:
-                # index out of rangeを避けるため
                 non_city_address_data.append(city_address_data[index + 1 :])
             else:
                 non_city_address_data.append("")

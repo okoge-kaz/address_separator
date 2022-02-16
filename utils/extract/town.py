@@ -1,5 +1,7 @@
 def extract_town(non_city_address_data: list):
-    """市町村よりさらに細かな地区行政区分を文字列から取得する"""
+    """
+    市町村よりさらに細かな地区行政区分を文字列から取得する
+    """
     towns: list = []
     non_town_address_data: list = []
 
@@ -8,7 +10,7 @@ def extract_town(non_city_address_data: list):
             index: int = town_address_data.find("区")
             towns.append(town_address_data[0 : index + 1])
             if len(town_address_data) > index + 1:
-                # index out of rangeを避けるため
+                # avoid index out of range error
                 non_town_address_data.append(town_address_data[index + 1 :])
             else:
                 non_town_address_data.append("")
@@ -16,7 +18,6 @@ def extract_town(non_city_address_data: list):
             index: int = town_address_data.find("郡")
             towns.append(town_address_data[0 : index + 1])
             if len(town_address_data) > index + 1:
-                # index out of rangeを避けるため
                 non_town_address_data.append(town_address_data[index + 1 :])
             else:
                 non_town_address_data.append("")
@@ -24,7 +25,6 @@ def extract_town(non_city_address_data: list):
             index: int = town_address_data.find("町")
             towns.append(town_address_data[0 : index + 1])
             if len(town_address_data) > index + 1:
-                # index out of rangeを避けるため
                 non_town_address_data.append(town_address_data[index + 1 :])
             else:
                 non_town_address_data.append("")
@@ -32,7 +32,6 @@ def extract_town(non_city_address_data: list):
             index: int = town_address_data.find("村")
             towns.append(town_address_data[0 : index + 1])
             if len(town_address_data) > index + 1:
-                # index out of rangeを避けるため
                 non_town_address_data.append(town_address_data[index + 1 :])
             else:
                 non_town_address_data.append("")
