@@ -1,7 +1,7 @@
 import re
 
 
-def erase_special_address_expression(string: str, index: int):
+def erase_special_address_expression(string: str, index: int) -> str:
     """string: 住所データ１つ, index: 処理番号
     処理番号によって処理する内容が変化する。
     """

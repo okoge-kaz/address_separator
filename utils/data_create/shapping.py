@@ -4,9 +4,11 @@ import pandas as pd
 
 
 def main():
-    """data/zenkoku.csvから町域チェック機能に必要な情報を取得後、取得したデータを参照しやすい形に整形し、dict(辞書）型として返す。"""
+    """
+    data/zenkoku.csvから町域チェック機能に必要な情報を取得後、取得したデータを参照しやすい形に整形し、dict(辞書）型として返す。
+    """
     Current_Path = os.getcwd()
-    csv_data = pd.read_csv(Current_Path + "/data/zenkoku.csv")
+    csv_data: pd.DataFrame = pd.read_csv(Current_Path + "/data/zenkoku.csv")
     csv_data = csv_data.fillna("")
     data: dict = {}
     city_name: list = list(csv_data["市区町村"])

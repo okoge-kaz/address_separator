@@ -17,10 +17,20 @@ def extract_building_detail(data: dict):
         if re.search("-([0-9]+)$", data["house_number"][index]) is None:
             print("something wrong1")  # for debug
         else:
-            start: int = re.search("-([0-9]+)$", data["house_number"][index]).start()
-            end: int = re.search("-([0-9]+)$", data["house_number"][index]).end()
+
+            start: int = 0
+            end: int = 0
+
+            regular_expression_start = re.search("-([0-9]+)$", data["house_number"][index])
+            if regular_expression_start is not None:
+                start = regular_expression_start.start()
+
+            regular_expression_end = re.search("-([0-9]+)$", data["house_number"][index])
+            if regular_expression_end is not None:
+                end = regular_expression_end.end()
+
             if end != len(data["house_number"][index]):
-                print("somethin wrong2")  # for debug
+                print("index which driven by regular expression is something wrong.")  # for debug
             # start+1 にしているのは-{数字}Fとなっているので - を除いている
             building_detail_info.append(data["house_number"][index][start + 1 : end] + "F")
             data["house_number"][index] = data["house_number"][index][:start]
