@@ -70,6 +70,11 @@ def shape(data: dict):
                 continue
             data["address3"][index] = data["address3"][index][:-2]
             data["address4"][index] = "三" + data["address4"][index]
+    # 町屋
+    for index in range(len(data["address1"])):
+        if data["address1"][index] == "町" and data["address2"][index] == "屋":
+            data["address2"][index] = "町屋"
+            data["address1"][index] = ""
     # マンション名らしくないもの
     for index in range(len(data["address4"])):
         if re.search("^.[0-9]+.$", data["address4"][index]):
