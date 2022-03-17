@@ -120,6 +120,8 @@ def revise_data(data: list):
         data[index] = re.sub("白木1色", "白木一色", data[index])
         # 3重県
         data[index] = re.sub("3重県", "三重県", data[index])
+        # 3園平
+        data[index] = re.sub("3園平", "三園平", data[index])
         #
         data[index] = re.sub("", "", data[index])
 
