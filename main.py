@@ -1,7 +1,7 @@
 import time
 
 import utils.extract.detail.check.detail_data_check
-import utils.shape.detail_shape
+from utils.modify.operation import post_process
 import utils.shape.output_data_shaping
 from utils.os.input import get_input_csv_data
 from utils.os.output import create_output_data
@@ -21,7 +21,7 @@ def main():
     splitedAddressDataDictionarys = utils.shape.output_data_shaping.shape(splitedAddressDataDictionarys)
 
     # 特殊な町域などの経験則的修正
-    utils.shape.detail_shape.shape(splitedAddressDataDictionarys)
+    post_process(splitedAddressDataDictionarys)
 
     # 実在する町域かどうかのチェック + 出力形式チェック
     utils.extract.detail.check.detail_data_check.detail_check(splitedAddressDataDictionarys)
