@@ -17,15 +17,18 @@ def main():
 
     formatted_address_data_array: list[str] = pretreatment(CSV_DATA)
 
-    data = split_by_address_field(formatted_address_data_array, CSV_DATA)
+    splitedAddressDataDictionarys = split_by_address_field(formatted_address_data_array, CSV_DATA)
+
     # 出力形式用にデータを再整形
-    data = utils.shape.output_data_shaping.shape(data)
+    splitedAddressDataDictionarys = utils.shape.output_data_shaping.shape(splitedAddressDataDictionarys)
+
     # 特殊な町域などの経験則的修正
-    utils.shape.detail_shape.shape(data)
+    utils.shape.detail_shape.shape(splitedAddressDataDictionarys)
+
     # 実在する町域かどうかのチェック + 出力形式チェック
-    utils.extract.detail.check.detail_data_check.detail_check(data)
-    # dict -> dataFrame
-    create_output_data(data)
+    utils.extract.detail.check.detail_data_check.detail_check(splitedAddressDataDictionarys)
+
+    create_output_data(splitedAddressDataDictionarys)
 
 
 if __name__ == "__main__":
