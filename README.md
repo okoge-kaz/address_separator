@@ -54,3 +54,4 @@
 3. `senkyo/senkyo/utils/shape/output_data_shaping.py`があまりにも多くの処理をまとめてしまっているので分割処理を行う
 4. testコードをロジック周りをちゃんと書く
 5. `re.search`の結果を使って、`.start(), .end()`のように安易に int 型に代入しているが、`None`となる可能性があるので修正する(`senkyo/senkyo/utils/modify/reSplitByEveryFieldAfterSplit.py`など)
+6. Excel対応
