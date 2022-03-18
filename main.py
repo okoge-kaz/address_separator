@@ -1,8 +1,8 @@
 import time
 
 import utils.extract.detail.check.detail_data_check
-from utils.modify.operation import post_process
 import utils.shape.output_data_shaping
+from utils.modify.operation import post_process
 from utils.os.input import get_input_csv_data
 from utils.os.output import create_output_data
 from utils.preprocess.operation import pretreatment
