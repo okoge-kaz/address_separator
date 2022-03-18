@@ -1,7 +1,5 @@
 import time
 
-import pandas as pd
-
 import utils.extract.detail.check.detail_data_check
 import utils.shape.detail_shape
 import utils.shape.output_data_shaping
