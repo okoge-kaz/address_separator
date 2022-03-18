@@ -47,3 +47,8 @@
 参考記事 : [URL](https://maku77.github.io/python/env/venv.html)
 パッケージ関連 : [URL](https://rinoguchi.net/2020/08/python-scraping-library.html)
 
+## To Do
+
+1. `senkyo/senkyo/utils/modify/handleMiscellaneousBug.py` のコードがあまりにも多くの処理をまとめてしまっているので分割処理を行う
+2. `senkyo/senkyo/utils/extract/detail/check/*` チェックコードは、それだけで分離するべき
+3. testコードをロジック周りをちゃんと書く
