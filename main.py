@@ -1,4 +1,3 @@
-
 import time
 
 import pandas as pd
@@ -22,25 +21,29 @@ import utils.shape.output_data_shaping
 import utils.shaping
 from utils.os.input import get_input_csv_data
 from utils.os.output import create_output_data
+from utils.preprocess.operation import pretreatment
 
-def shape(csv_data):
+
+def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame) -> dict:
     """
+    args: CSV_DATA: pd.DataFrame
+    return: data: dict
+
     整形作業を行う。ここでは、出力形式とは異なり独自の形での分割となっている。
     分割の形は以下の通り
-    original,prefecture,city,town,district,invalid,house_number,special_characters,building_detail_info,building_info,error1,error2,caution
+
+        original,prefecture,city,town,district,invalid,house_number,
+        special_characters,building_detail_info,building_info,
+        error1,error2,caution
+
     """
-    replaced_address_data: list = []
-    # addressという名前がついた列しかデータを収集しない
-    for address_data in csv_data["address"]:
-        replaced_address_data.append(utils.shaping.operation(address_data))
-    utils.revise.revise_data(replaced_address_data)
     # 出力データのもととなるdata: dictを作成
     data: dict = {}
     # dataに整形後のデータを入れる
-    data["original"] = csv_data["address"]
+    data["original"] = CSV_DATA["address"]
     prefectures: list = []
     non_prefecture_address_data: list = []
-    for string in replaced_address_data:
+    for string in formatted_address_data_array:
         tuple_data: tuple = utils.extract.prefecture.extract_prefecture(string)
         prefectures.append(tuple_data[0])
         non_prefecture_address_data.append(tuple_data[1])
@@ -78,8 +81,11 @@ def shape(csv_data):
 
 
 def main():
+
     CSV_DATA = get_input_csv_data()
-    # operation
+
+    formatted_address_data_array: list[str] = pretreatment(CSV_DATA)
+
     data = shape(CSV_DATA)
     # 出力形式用にデータを再整形
     data = utils.shape.output_data_shaping.shape(data)
