@@ -1,5 +1,4 @@
 import pandas as pd
-import utils.extract.city
 import utils.extract.detail.building_detail
 import utils.extract.detail.check.caution
 import utils.extract.detail.check.check
@@ -9,8 +8,9 @@ import utils.extract.detail.munipulate
 import utils.extract.detail.shaping
 import utils.extract.detail.shaping_building_info
 import utils.extract.district
-import utils.extract.town
+from utils.split.pullOutCityField import pull_out_city_field
 from utils.split.pullOutPrefectureField import pull_out_prefecture_field
+from utils.split.pullOutTownField import pull_out_town_field
 
 
 def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame) -> dict:
@@ -29,19 +29,18 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
 
     splitedAddressDataDictionarys: dict[str, list[str]] = {}
 
-    # dataに整形後のデータを入れる
+    # 分割処理を施す前のデータも事前に格納しておく
     splitedAddressDataDictionarys["original"] = CSV_DATA["address"].to_list()
 
-    prefectures_data_array, non_prefecture_address_data_array = pull_out_prefecture_field(formatted_address_data_array)
-    splitedAddressDataDictionarys["prefecture"] = prefectures_data_array
+    non_prefecture_address_data_array = pull_out_prefecture_field(
+        formatted_address_data_array, splitedAddressDataDictionarys
+    )
 
-    city_data = utils.extract.city.extract_city(non_prefecture_address_data_array)
-    splitedAddressDataDictionarys["city"] = city_data[0]
-    non_city_address_data: list = city_data[1]
+    non_city_address_data_array: list[str] = pull_out_city_field(
+        non_prefecture_address_data_array, splitedAddressDataDictionarys
+    )
 
-    town_data = utils.extract.town.extract_town(non_city_address_data)
-    splitedAddressDataDictionarys["town"] = town_data[0]
-    non_town_address_data: list = town_data[1]
+    non_town_address_data: list[str] = pull_out_town_field(non_city_address_data_array, splitedAddressDataDictionarys)
 
     district_data = utils.extract.district.extract_district(non_town_address_data)
     splitedAddressDataDictionarys["district"] = district_data[0]
