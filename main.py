@@ -20,11 +20,7 @@ import utils.revise
 import utils.shape.detail_shape
 import utils.shape.output_data_shaping
 import utils.shaping
-
-
-def input_data(PATH: str):
-    csv_data = pd.read_csv(PATH)
-    return csv_data
+from utils.os.input import get_input_csv_data
 
 
 def shape(csv_data):
@@ -82,12 +78,9 @@ def shape(csv_data):
 
 
 def main():
-    # path
-    CurrentPath = os.getcwd()
-    PATH = CurrentPath + "/input/input.csv"
-    csv_data = input_data(PATH)
+    CSV_DATA = get_input_csv_data()
     # operation
-    data = shape(csv_data)
+    data = shape(CSV_DATA)
     # 出力形式用にデータを再整形
     data = utils.shape.output_data_shaping.shape(data)
     # 特殊な町域などの経験則的修正
