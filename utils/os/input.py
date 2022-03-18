@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 
-def input_data(Relative_PATH: str) -> pd.DataFrame:
+def get_input_csv_data(Relative_PATH: str = "/input/input.csv") -> pd.DataFrame:
     """
     args: relative_path: str
     return: csv_data: pd.DataFrame
