@@ -51,4 +51,5 @@
 
 1. `senkyo/senkyo/utils/modify/handleMiscellaneousBug.py` のコードがあまりにも多くの処理をまとめてしまっているので分割処理を行う
 2. `senkyo/senkyo/utils/extract/detail/check/*` チェックコードは、それだけで分離するべき
-3. testコードをロジック周りをちゃんと書く
+3. `senkyo/senkyo/utils/shape/output_data_shaping.py`があまりにも多くの処理をまとめてしまっているので分割処理を行う
+4. testコードをロジック周りをちゃんと書く
