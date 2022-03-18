@@ -3,7 +3,7 @@ import re
 
 def modify_special_place_name(splitedAddressDataDictionarys: dict[str, list[str]]):
     """
-    args: splitedAddressDataDictionarys (すでに分割された住所データの辞書型, 出力用には整形していない)
+    args: splitedAddressDataDictionarys (すでに分割された住所データの辞書型, 出力用には整形済み)
     return: void
 
     各ケースごとに処理を行う

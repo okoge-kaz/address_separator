@@ -3,7 +3,7 @@ import re
 
 def modify_building_dat_field(splitedAddressDataDictionarys: dict[str, list[str]]):
     """
-    args: splitedAddresssplitedAddressDataDictionarysDictionarys (すでに分割された住所データの辞書型, 出力用には整形していない)
+    args: splitedAddresssplitedAddressDataDictionarysDictionarys (すでに分割された住所データの辞書型, 出力用には整形済み)
     return: void
 
     各ケースごとに処理を行う
@@ -251,7 +251,9 @@ def modify_building_dat_field(splitedAddressDataDictionarys: dict[str, list[str]
                 splitedAddressDataDictionarys["address3"][index] += splitedAddressDataDictionarys["address4"][index][
                     1 : end - 1
                 ]
-                splitedAddressDataDictionarys["address4"][index] = splitedAddressDataDictionarys["address4"][index][end:]
+                splitedAddressDataDictionarys["address4"][index] = splitedAddressDataDictionarys["address4"][index][
+                    end:
+                ]
 
     # address4に # が単独であったら
     for index in range(DATA_SIZE):
