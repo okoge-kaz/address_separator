@@ -21,7 +21,7 @@ import utils.shape.detail_shape
 import utils.shape.output_data_shaping
 import utils.shaping
 from utils.os.input import get_input_csv_data
-
+from utils.os.output import create_output_data
 
 def shape(csv_data):
     """
@@ -88,9 +88,7 @@ def main():
     # 実在する町域かどうかのチェック + 出力形式チェック
     utils.extract.detail.check.detail_data_check.detail_check(data)
     # dict -> dataFrame
-    df = pd.DataFrame(data)
-    # output
-    df.to_csv(CurrentPath + "/output/output.csv", encoding="utf-8_sig")
+    create_output_data(data)
 
 
 if __name__ == "__main__":
