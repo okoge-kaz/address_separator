@@ -55,3 +55,8 @@
 4. testコードをロジック周りをちゃんと書く
 5. `re.search`の結果を使って、`.start(), .end()`のように安易に int 型に代入しているが、`None`となる可能性があるので修正する(`senkyo/senkyo/utils/modify/reSplitByEveryFieldAfterSplit.py`など)
 6. Excel対応
+
+
+## Git-flow
+
+[参考記事](http://keijinsonyaban.blogspot.com/2010/10/a-successful-git-branching-model.html)
