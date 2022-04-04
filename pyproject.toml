@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "senkyo"
+name = "address-separator"
 version = "0.1.0"
 description = ""
 authors = ["kazuki <kaz.tokyo.tech20@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pandas = "^1.4.1"
+pandas = "^1.4.2"
 openpyxl = "^3.0.9"
 xlrd = "^2.0.1"
 
