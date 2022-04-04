@@ -1,16 +1,16 @@
 import re
 
 
-def munipulate(data: dict, others_tail: list):
+def manipulate(data: dict, others_tail: list):
     """番地を取り除いた後のデータに関して、処理を行い後の操作で処理を行いやすくする。"""
-    munipulated_others_tail: list = []
+    manipulated_others_tail: list = []
 
     for id in range(len(others_tail)):
         if re.match("[0-9]+$", others_tail[id]):
             data["house_number"][id] = data["house_number"][id] + others_tail[id]
-            munipulated_others_tail.append("")
+            manipulated_others_tail.append("")
         else:
-            munipulated_others_tail.append(others_tail[id])
+            manipulated_others_tail.append(others_tail[id])
 
     def extract_number_and_alphabet1(string: str):
         if string == "":
@@ -23,15 +23,15 @@ def munipulate(data: dict, others_tail: list):
         return re.match("^([A-Z 0-9]+)*(-[A-Z 0-9]+)*$", string)
 
     special_characters: list = []
-    for i in range(len(munipulated_others_tail)):
-        if extract_number_and_alphabet1(munipulated_others_tail[i]):
-            special_characters.append(munipulated_others_tail[i])
-            munipulated_others_tail[i] = ""
+    for i in range(len(manipulated_others_tail)):
+        if extract_number_and_alphabet1(manipulated_others_tail[i]):
+            special_characters.append(manipulated_others_tail[i])
+            manipulated_others_tail[i] = ""
         else:
             special_characters.append("")
-        if extract_number_and_alphabet2(munipulated_others_tail[i]):
-            special_characters[i] = munipulated_others_tail[i]
-            munipulated_others_tail[i] = ""
+        if extract_number_and_alphabet2(manipulated_others_tail[i]):
+            special_characters[i] = manipulated_others_tail[i]
+            manipulated_others_tail[i] = ""
         else:
             pass
 
@@ -43,19 +43,19 @@ def munipulate(data: dict, others_tail: list):
         else:
             return re.match("^([0-9]+)", string)
 
-    for i in range(len(munipulated_others_tail)):
-        if extract_number_from_others_tail(munipulated_others_tail[i]):
-            start: int = extract_number_from_others_tail(munipulated_others_tail[i]).start()
-            end: int = extract_number_from_others_tail(munipulated_others_tail[i]).end()
+    for i in range(len(manipulated_others_tail)):
+        if extract_number_from_others_tail(manipulated_others_tail[i]):
+            start: int = extract_number_from_others_tail(manipulated_others_tail[i]).start()
+            end: int = extract_number_from_others_tail(manipulated_others_tail[i]).end()
             if start != 0:
                 print("something wrong")  # for debug
-            data["house_number"][i] = data["house_number"][i] + munipulated_others_tail[i][start:end]
-            munipulated_others_tail[i] = munipulated_others_tail[i][end:]
+            data["house_number"][i] = data["house_number"][i] + manipulated_others_tail[i][start:end]
+            manipulated_others_tail[i] = manipulated_others_tail[i][end:]
         else:
             pass
 
     # others_tailの整形
-    def eliminate_hypen(string: str):
+    def eliminate_hyphen(string: str):
         if string == "":
             return string
         else:
@@ -64,6 +64,6 @@ def munipulate(data: dict, others_tail: list):
             else:
                 return string
 
-    for i in range(len(munipulated_others_tail)):
-        munipulated_others_tail[i] = eliminate_hypen(munipulated_others_tail[i])
-    return munipulated_others_tail
+    for i in range(len(manipulated_others_tail)):
+        manipulated_others_tail[i] = eliminate_hyphen(manipulated_others_tail[i])
+    return manipulated_others_tail
