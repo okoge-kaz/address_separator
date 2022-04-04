@@ -4,7 +4,7 @@ import utils.extract.detail.check.caution
 import utils.extract.detail.check.check
 import utils.extract.detail.check.data_check
 import utils.extract.detail.house_number
-import utils.extract.detail.munipulate
+import utils.extract.detail.manipulate
 import utils.extract.detail.shaping
 import utils.extract.detail.shaping_building_info
 import utils.extract.district
@@ -27,23 +27,23 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
 
     """
 
-    splitedAddressDataDictionarys: dict[str, list[str]] = {}
+    splittedAddressDataDictionaries: dict[str, list[str]] = {}
 
     # 分割処理を施す前のデータも事前に格納しておく
-    splitedAddressDataDictionarys["original"] = CSV_DATA["address"].to_list()
+    splittedAddressDataDictionaries["original"] = CSV_DATA["address"].to_list()
 
     non_prefecture_address_data_array = pull_out_prefecture_field(
-        formatted_address_data_array, splitedAddressDataDictionarys
+        formatted_address_data_array, splittedAddressDataDictionaries
     )
 
     non_city_address_data_array: list[str] = pull_out_city_field(
-        non_prefecture_address_data_array, splitedAddressDataDictionarys
+        non_prefecture_address_data_array, splittedAddressDataDictionaries
     )
 
-    non_town_address_data: list[str] = pull_out_town_field(non_city_address_data_array, splitedAddressDataDictionarys)
+    non_town_address_data: list[str] = pull_out_town_field(non_city_address_data_array, splittedAddressDataDictionaries)
 
     district_data = utils.extract.district.extract_district(non_town_address_data)
-    splitedAddressDataDictionarys["district"] = district_data[0]
+    splittedAddressDataDictionaries["district"] = district_data[0]
     others: list = district_data[1]
 
     # 番地をいれる
@@ -51,29 +51,29 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
     others_head: list = house_number_data[0]
     house_numbers: list = house_number_data[1]
     others_tail: list = house_number_data[2]
-    splitedAddressDataDictionarys["invalid"] = others_head
-    splitedAddressDataDictionarys["house_number"] = house_numbers
+    splittedAddressDataDictionaries["invalid"] = others_head
+    splittedAddressDataDictionaries["house_number"] = house_numbers
 
     # check 不正なデータが存在しないかどうかを確認
-    caution: list = utils.extract.detail.check.check.check(splitedAddressDataDictionarys)
+    caution: list = utils.extract.detail.check.check.check(splittedAddressDataDictionaries)
 
     # データ整形＋分裂してしまったデータを統合整理
-    munipulated_others_tail = utils.extract.detail.munipulate.munipulate(splitedAddressDataDictionarys, others_tail)
+    manipulated_others_tail = utils.extract.detail.manipulate.manipulate(splittedAddressDataDictionaries, others_tail)
 
     # ビルや建物情報の詳細を取得
-    splitedAddressDataDictionarys[
+    splittedAddressDataDictionaries[
         "building_detail_info"
-    ] = utils.extract.detail.building_detail.extract_building_detail(splitedAddressDataDictionarys)
+    ] = utils.extract.detail.building_detail.extract_building_detail(splittedAddressDataDictionaries)
 
     # ビル情報のうちデータ散逸しているものを適切に統合
     utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(
-        splitedAddressDataDictionarys, munipulated_others_tail
+        splittedAddressDataDictionaries, manipulated_others_tail
     )
 
     # others_tail内のデータを整形
-    utils.extract.detail.shaping.shaping(splitedAddressDataDictionarys)
+    utils.extract.detail.shaping.shaping(splittedAddressDataDictionaries)
 
     # caution
-    utils.extract.detail.check.caution.caution(splitedAddressDataDictionarys, munipulated_others_tail, caution)
+    utils.extract.detail.check.caution.caution(splittedAddressDataDictionaries, manipulated_others_tail, caution)
 
-    return splitedAddressDataDictionarys
+    return splittedAddressDataDictionaries

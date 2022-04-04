@@ -15,18 +15,18 @@ def main():
 
     formatted_address_data_array: list[str] = pretreatment(CSV_DATA)
 
-    splitedAddressDataDictionarys = split_by_address_field(formatted_address_data_array, CSV_DATA)
+    splittedAddressDataDictionaries = split_by_address_field(formatted_address_data_array, CSV_DATA)
 
     # 出力形式用にデータを再整形
-    splitedAddressDataDictionarys = utils.shape.output_data_shaping.shape(splitedAddressDataDictionarys)
+    splittedAddressDataDictionaries = utils.shape.output_data_shaping.shape(splittedAddressDataDictionaries)
 
     # 特殊な町域などの経験則的修正
-    post_process(splitedAddressDataDictionarys)
+    post_process(splittedAddressDataDictionaries)
 
     # 実在する町域かどうかのチェック + 出力形式チェック
-    utils.extract.detail.check.detail_data_check.detail_check(splitedAddressDataDictionarys)
+    utils.extract.detail.check.detail_data_check.detail_check(splittedAddressDataDictionaries)
 
-    create_output_data(splitedAddressDataDictionarys)
+    create_output_data(splittedAddressDataDictionaries)
 
 
 if __name__ == "__main__":
