@@ -6,7 +6,7 @@ def check(data: dict) -> list[str]:
     cautionの配列を生成する
     """
 
-    def check_vaild_word_or_not(index: int):
+    def check_vaild_word_or_not(index: int) -> str:
         if re.search("^([0-9ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠])+$", data["invalid"][index]) is not None:
             mapping_arithmetic_number_to_japanese_number: dict = {
                 "1": "一",

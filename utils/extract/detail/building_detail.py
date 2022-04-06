@@ -1,11 +1,11 @@
 import re
 
 
-def extract_building_detail(data: dict):
+def extract_building_detail(data: dict) -> list:
     # special_chractersのなかの F のみ抽出
     building_detail_info: list = []
 
-    def find_F(string: str):
+    def find_F(string: str) -> bool:
         """special_charactersに存在するFという文字単体を検知する"""
         if string == "F":
             return True
