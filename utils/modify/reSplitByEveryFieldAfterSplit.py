@@ -3,7 +3,7 @@ import re
 from utils.modify.modifyExceptionAddressExpression import modify_exception_case_address2
 
 
-def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str]]):
+def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str]]) -> None:
     """
     args: splittedAddressDataDictionaries (すでに分割された住所データの辞書型, 出力用には整形済み)
     return: void

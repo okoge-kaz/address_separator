@@ -1,7 +1,7 @@
 import re
 
 
-def caution(data: dict, munipulated_others_tail: list, caution: list):
+def caution(data: dict, munipulated_others_tail: list, caution: list) -> None:
     """
     不適切な形で分割されていると思われるデータを検知し、cautionを出す。一部データ整形機能も持つ
     エラー文は、文字列を結合させていく方式で連結していく。

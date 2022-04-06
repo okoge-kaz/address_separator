@@ -1,7 +1,7 @@
 import re
 
 
-def modify_special_place_name(splittedAddressDataDictionaries: dict[str, list[str]]):
+def modify_special_place_name(splittedAddressDataDictionaries: dict[str, list[str]]) -> None:
     """
     args: splittedAddressDataDictionaries (すでに分割された住所データの辞書型, 出力用には整形済み)
     return: void

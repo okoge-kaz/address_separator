@@ -1,7 +1,7 @@
 import re
 
 
-def modify_building_dat_field(splittedAddressDataDictionaries: dict[str, list[str]]):
+def modify_building_dat_field(splittedAddressDataDictionaries: dict[str, list[str]]) -> None:
     """
     args: splittedAddresssplittedAddressDataDictionariesDictionaries (すでに分割された住所データの辞書型, 出力用には整形済み)
     return: void

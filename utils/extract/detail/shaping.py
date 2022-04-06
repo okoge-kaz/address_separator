@@ -1,7 +1,7 @@
 import re
 
 
-def shaping(data: dict):
+def shaping(data: dict) -> None:
     """分割等が終了したデータに対して、これらを出力用に整形する。
     特殊な名前の市町村等のデータについても、ここで整形作業を行う.
     """

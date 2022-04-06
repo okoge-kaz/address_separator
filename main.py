@@ -9,7 +9,7 @@ from utils.preprocess.operation import pretreatment
 from utils.split.splitByAddressField import split_by_address_field
 
 
-def main():
+def main() -> None:
 
     CSV_DATA: pd.DataFrame = get_input_csv_data()
 
