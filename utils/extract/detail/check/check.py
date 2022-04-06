@@ -3,6 +3,8 @@ import re
 
 def check(data: dict) -> list[str]:
     """
+    args: data: dict
+    return: void
     cautionの配列を生成する
     """
 

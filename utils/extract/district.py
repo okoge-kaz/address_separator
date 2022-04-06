@@ -1,11 +1,18 @@
 def extract_district(non_town_address_data: list):
     """
+    args: non_town_address_data: list
+    return; 
     prefecture, city, townによって除かれたデータのうち数字が出現するまでのデータをとる
     """
     districts: list = []
     others: list = []
 
     def extract_district(string: str):
+        """
+        args: string: str
+        return: (districts(数字が現れるまでの文字列): str, others(現れた後の文字列): str)
+        ただし、数字がない場合はdistrict = "", others = stringになる
+        """
         district_numbers: list = []
         for i in range(0, 10):
             district_numbers.append(str(i))

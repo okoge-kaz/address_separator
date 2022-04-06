@@ -2,18 +2,30 @@ import re
 
 
 def extract_building_detail(data: dict) -> list:
-    # special_chractersのなかの F のみ抽出
+    """
+    args: data: dict
+    return: building_detail_info: list
+    special_chractersのなかの F のみ抽出
+    """
     building_detail_info: list = []
 
     def find_F(string: str) -> bool:
-        """special_charactersに存在するFという文字単体を検知する"""
+        """
+        args: string: str
+        return: bool
+        special_charactersに存在するFという文字単体を検知する
+        """
         if string == "F":
             return True
         else:
             return False
 
-    def cutting_number_from_last(index: int):
-        """上記の関数と同時に使用する。8Fのように、建物の階数情報のみを抽出する"""
+    def cutting_number_from_last(index: int) -> None:
+        """
+        args: index: int
+        rturn: void
+        上記の関数と同時に使用する。8Fのように、建物の階数情報のみを抽出する
+        """
         if re.search("-([0-9]+)$", data["house_number"][index]) is None:
             print("something wrong1")  # for debug
         else:

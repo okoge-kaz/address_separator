@@ -6,6 +6,8 @@ import pandas as pd
 
 def data_check(data: dict) -> None:
     """
+    args: data: dict
+    return: void
     総務省のデータから実在する市町村であるかどうか調べる
     """
     Current_Path = os.getcwd()

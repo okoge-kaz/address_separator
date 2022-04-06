@@ -2,7 +2,11 @@ import re
 
 
 def manipulate(data: dict, others_tail: list) -> list:
-    """番地を取り除いた後のデータに関して、処理を行い後の操作で処理を行いやすくする。"""
+    """
+    args: (data: dict, others_tail: list) 
+    return: manipulated_others_tail: list
+    番地を取り除いた後のデータに関して、処理を行い後の操作で処理を行いやすくする。
+    """
     manipulated_others_tail: list = []
 
     for id in range(len(others_tail)):

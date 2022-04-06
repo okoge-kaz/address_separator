@@ -3,7 +3,7 @@ import re
 
 def reshape_exceptional_address_address_data_array(address_data_array: list[str]) -> None:
     """
-    args: 住所データ
+    args: address_data_array: list[str], 住所データ
     return: void, 配列データ自体を修正する
     """
 

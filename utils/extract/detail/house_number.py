@@ -2,12 +2,20 @@ import re
 
 
 def operation(others: list):
-    """1-7-6 のような番地を抽出する。"""
+    """
+    args: others: list
+    return: (others_head: list, house_numbers: list, others_tail: list)
+    1-7-6 のような番地を抽出する。
+    """
     house_numbers: list = []
     others_head: list = []
     others_tail: list = []
 
-    def extract_house_number(string: str):
+    def extract_house_number(string: str) -> None:
+        """
+        args: string: str
+        return: void
+        """
         index = re.search("(([0-9]+)-)+([0-9]+)", string)
         if index is None:
             house_numbers.append("")

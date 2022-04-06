@@ -5,7 +5,12 @@ import pandas as pd
 
 
 def shape(data: dict) -> dict:
-    """出力するcsvファイルとして望ましい形に整形する"""
+    """
+    args: data: dict
+    return: res_data: dict
+
+    出力するcsvファイルとして望ましい形に整形する
+    """
     res_data: dict = {}
     # 政令指定都市かどうかを判別するためのデータ
     Current_Path = os.getcwd()

@@ -5,6 +5,8 @@ import utils.preprocess.pre.processJapaneseAddressExpression as pre
 
 def pretreatment(CSV_DATA: pd.DataFrame) -> list[str]:
     """
+    args: CSV_DATA: pd.DataFrame
+    return: formatted_address_data_array: list[str]
     分割処理を行う前の前処理を行う。
     """
     address_data_array = CSV_DATA["address"]

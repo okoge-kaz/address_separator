@@ -2,10 +2,18 @@ import re
 
 
 def shaping_and_extracting_building_info(data: dict, manipulated_others_tail: list) -> None:
-    """ビル名、建物名など、building_infoに含まれる。または、building_detail_infoに含まれるデータを抽出、整形する"""
+    """
+    args: (data: dict, manipulated_others_tail: list)
+    return: void
+    ビル名、建物名など、building_infoに含まれる。または、building_detail_infoに含まれるデータを抽出、整形する
+    """
 
     def find_kai(string: str) -> bool:
-        """階という文字単体が配列manipulated_others_tailに存在する場合検知する"""
+        """
+        args: string: str
+        return: bool
+        階という文字単体が配列manipulated_others_tailに存在する場合検知する
+        """
         if string == "階":
             return True
         else:

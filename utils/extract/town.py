@@ -1,5 +1,8 @@
 def extract_town(non_city_address_data: list):
     """
+    args: non_city_address_data: list
+    return: (towns: list, non_town_address_data: list)
+    
     市町村よりさらに細かな地区行政区分を文字列から取得する
     """
     towns: list = []

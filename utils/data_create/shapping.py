@@ -5,6 +5,8 @@ import pandas as pd
 
 def main() -> dict:
     """
+    args: void
+    return: data: dict
     data/zenkoku.csvから町域チェック機能に必要な情報を取得後、取得したデータを参照しやすい形に整形し、dict(辞書）型として返す。
     """
     Current_Path = os.getcwd()
