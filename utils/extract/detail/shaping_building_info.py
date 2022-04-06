@@ -4,7 +4,7 @@ import re
 def shaping_and_extracting_building_info(data: dict, manipulated_others_tail: list):
     """ビル名、建物名など、building_infoに含まれる。または、building_detail_infoに含まれるデータを抽出、整形する"""
 
-    def find_kai(string: str):
+    def find_kai(string: str) -> bool:
         """階という文字単体が配列manipulated_others_tailに存在する場合検知する"""
         if string == "階":
             return True
@@ -36,7 +36,7 @@ def shaping_and_extracting_building_info(data: dict, manipulated_others_tail: li
         else:
             pass
 
-    def find_gou(string: str):
+    def find_gou(string: str) -> bool:
         """号という文字単体が配列manipulated_others_tailに存在する場合検知する"""
         if string == "号":
             return True

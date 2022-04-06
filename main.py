@@ -11,11 +11,11 @@ from utils.split.splitByAddressField import split_by_address_field
 
 def main():
 
-    CSV_DATA = get_input_csv_data()
+    CSV_DATA: pd.DataFrame = get_input_csv_data()
 
     formatted_address_data_array: list[str] = pretreatment(CSV_DATA)
 
-    splittedAddressDataDictionaries = split_by_address_field(formatted_address_data_array, CSV_DATA)
+    splittedAddressDataDictionaries: pd.DataFrame = split_by_address_field(formatted_address_data_array, CSV_DATA)
 
     # 出力形式用にデータを再整形
     splittedAddressDataDictionaries = utils.shape.output_data_shaping.shape(splittedAddressDataDictionaries)

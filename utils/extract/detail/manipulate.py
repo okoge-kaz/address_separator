@@ -1,7 +1,7 @@
 import re
 
 
-def manipulate(data: dict, others_tail: list):
+def manipulate(data: dict, others_tail: list) -> list:
     """番地を取り除いた後のデータに関して、処理を行い後の操作で処理を行いやすくする。"""
     manipulated_others_tail: list = []
 
