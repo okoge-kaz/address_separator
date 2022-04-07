@@ -16,7 +16,7 @@ from utils.split.pullOutTownField import pull_out_town_field
 def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame) -> dict:
     """
     args: CSV_DATA: pd.DataFrame
-    return: data: dict
+    return: splittedAddressDataDictionaries: dict
 
     整形作業を行う。ここでは、出力形式とは異なり独自の形での分割となっている。
     分割の形は以下の通り
