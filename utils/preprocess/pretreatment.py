@@ -11,7 +11,6 @@ def pretreatment(CSV_DATA: pd.DataFrame) -> list[str]:
     """
     address_data_array = CSV_DATA["address"]
 
-    formatted_address_data_array = list(map(pre.process_japanese_style_address_expression, address_data_array))
+    formatted_address_data_array: list[str] = list(map(pre.process_japanese_style_address_expression, address_data_array))
     post.reshape_exceptional_address_address_data_array(formatted_address_data_array)
-
     return formatted_address_data_array
