@@ -1,15 +1,15 @@
 import re
 
 
-def check(data) -> list[str]:
+def check(AddressDataForFormatting) -> list[str]:
     """
-    args: data
+    args: AddressDataForFormatting
     return: void
     cautionの配列を生成する
     """
 
     def check_vaild_word_or_not(index: int) -> str:
-        if re.search("^([0-9ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠])+$", data.invalid[index]) is not None:
+        if re.search("^([0-9ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠])+$", AddressDataForFormatting.invalid[index]) is not None:
             mapping_arithmetic_number_to_japanese_number: dict = {
                 "1": "一",
                 "2": "二",
@@ -23,7 +23,7 @@ def check(data) -> list[str]:
             }
             numbers: list = [str(i) for i in range(1, 10)]
             res: str = ""
-            for char in data.invalid[index]:
+            for char in AddressDataForFormatting.invalid[index]:
                 if char in numbers:
                     res = res + mapping_arithmetic_number_to_japanese_number[char]
                 else:
@@ -33,15 +33,15 @@ def check(data) -> list[str]:
             return ""
 
     caution: list = []
-    for index in range(len(data.invalid)):
+    for index in range(len(AddressDataForFormatting.invalid)):
         response: str = check_vaild_word_or_not(index)
-        if data.invalid[index] == "":
+        if AddressDataForFormatting.invalid[index] == "":
             caution.append("")
         elif response == "":
             # 不正な文字列
             caution.append("ERROR: データは、整形不可能な状態です。自動整形システムは正しく動作しません。この行の全ての結果を確認することを推奨します。  ")
         else:
             caution.append("")
-            data.invalid[index] = ""
-            data.district[index] += response
+            AddressDataForFormatting.invalid[index] = ""
+            AddressDataForFormatting.district[index] += response
     return caution

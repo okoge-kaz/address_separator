@@ -2,9 +2,9 @@ from utils.extract.prefecture import extract_prefecture
 
 
 def pull_out_prefecture_field(
-    formatted_address_data_array: list[str], splittedAddressDataDictionaries) -> list[str]:
+    formatted_address_data_array: list[str], AddressDataForFormatting) -> list[str]:
     """
-    args: formatted_address_data_array: list[str], splittedAddressDataDictionaries: dict[str, list[str]]
+    args: formatted_address_data_array: list[str], AddressDataForFormatting: dict[str, list[str]]
     return: non_prefecture_address_data: list[str]
     """
 
@@ -17,6 +17,6 @@ def pull_out_prefecture_field(
         prefecture_data_array.append(tuple_data[0])
         non_prefecture_address_data_array.append(tuple_data[1])
 
-    splittedAddressDataDictionaries.prefecture = prefecture_data_array
+    AddressDataForFormatting.prefecture = prefecture_data_array
 
     return non_prefecture_address_data_array

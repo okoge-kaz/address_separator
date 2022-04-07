@@ -1,9 +1,9 @@
 import re
 
 
-def manipulate(data, others_tail: list) -> list:
+def manipulate(AddressDataForFormatting, others_tail: list) -> list:
     """
-    args: (data, others_tail: list) 
+    args: (AddressDataForFormatting, others_tail: list) 
     return: manipulated_others_tail: list
     番地を取り除いた後のデータに関して、処理を行い後の操作で処理を行いやすくする。
     """
@@ -11,7 +11,7 @@ def manipulate(data, others_tail: list) -> list:
 
     for id in range(len(others_tail)):
         if re.match("[0-9]+$", others_tail[id]):
-            data.house_number[id] = data.house_number[id] + others_tail[id]
+            AddressDataForFormatting.house_number[id] = AddressDataForFormatting.house_number[id] + others_tail[id]
             manipulated_others_tail.append("")
         else:
             manipulated_others_tail.append(others_tail[id])
@@ -39,7 +39,7 @@ def manipulate(data, others_tail: list) -> list:
         else:
             pass
 
-    data.special_characters = special_characters
+    AddressDataForFormatting.special_characters = special_characters
 
     def extract_number_from_others_tail(string: str):
         if string == "":
@@ -53,7 +53,7 @@ def manipulate(data, others_tail: list) -> list:
             end: int = extract_number_from_others_tail(manipulated_others_tail[i]).end()
             if start != 0:
                 print("something wrong")  # for debug
-            data.house_number[i] = data.house_number[i] + manipulated_others_tail[i][start:end]
+            AddressDataForFormatting.house_number[i] = AddressDataForFormatting.house_number[i] + manipulated_others_tail[i][start:end]
             manipulated_others_tail[i] = manipulated_others_tail[i][end:]
         else:
             pass

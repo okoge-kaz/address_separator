@@ -16,7 +16,7 @@ from utils.split.pullOutTownField import pull_out_town_field
 def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame):
     """
     args: CSV_DATA: pd.DataFrame
-    return: splittedAddressDataDictionaries
+    return: AddressDataForFormatting
 
     整形作業を行う。ここでは、出力形式とは異なり独自の形での分割となっている。
     分割の形は以下の通り
@@ -27,25 +27,25 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
 
     """
 
-    splittedAddressDataDictionaries = make_DataclassForFormatting()
+    AddressDataForFormatting = make_DataclassForFormatting()
 
     # 分割処理を施す前のデータも事前に格納しておく
-    splittedAddressDataDictionaries.original = CSV_DATA["address"].to_list()
+    AddressDataForFormatting.original = CSV_DATA["address"].to_list()
 
     non_prefecture_address_data_array: list[str] = pull_out_prefecture_field(
-        formatted_address_data_array, splittedAddressDataDictionaries
+        formatted_address_data_array, AddressDataForFormatting
     )
 
     non_city_address_data_array: list[str] = pull_out_city_field(
-        non_prefecture_address_data_array, splittedAddressDataDictionaries
+        non_prefecture_address_data_array, AddressDataForFormatting
     )
 
     non_town_address_data: list[str] = pull_out_town_field(
-        non_city_address_data_array, splittedAddressDataDictionaries
+        non_city_address_data_array, AddressDataForFormatting
     )
 
     district_data = utils.extract.district.extract_district(non_town_address_data)
-    splittedAddressDataDictionaries.district = district_data[0]
+    AddressDataForFormatting.district = district_data[0]
     others: list = district_data[1]
 
     # 番地をいれる
@@ -53,27 +53,27 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
     others_head: list = house_number_data[0]
     house_numbers: list = house_number_data[1]
     others_tail: list = house_number_data[2]
-    splittedAddressDataDictionaries.invalid = others_head
-    splittedAddressDataDictionaries.house_number = house_numbers
+    AddressDataForFormatting.invalid = others_head
+    AddressDataForFormatting.house_number = house_numbers
 
     # check 不正なデータが存在しないかどうかを確認
-    caution: list = utils.extract.detail.check.check.check(splittedAddressDataDictionaries)
+    caution: list = utils.extract.detail.check.check.check(AddressDataForFormatting)
 
     # データ整形＋分裂してしまったデータを統合整理
-    manipulated_others_tail: list = utils.extract.detail.manipulate.manipulate(splittedAddressDataDictionaries, others_tail)
+    manipulated_others_tail: list = utils.extract.detail.manipulate.manipulate(AddressDataForFormatting, others_tail)
 
     # ビルや建物情報の詳細を取得
-    splittedAddressDataDictionaries.building_detail_info = utils.extract.detail.building_detail.extract_building_detail(splittedAddressDataDictionaries)
+    AddressDataForFormatting.building_detail_info = utils.extract.detail.building_detail.extract_building_detail(AddressDataForFormatting)
 
     # ビル情報のうちデータ散逸しているものを適切に統合
     utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(
-        splittedAddressDataDictionaries, manipulated_others_tail
+        AddressDataForFormatting, manipulated_others_tail
     )
 
     # others_tail内のデータを整形
-    utils.extract.detail.shaping.shaping(splittedAddressDataDictionaries)
+    utils.extract.detail.shaping.shaping(AddressDataForFormatting)
 
     # caution
-    utils.extract.detail.check.caution.caution(splittedAddressDataDictionaries, manipulated_others_tail, caution)
+    utils.extract.detail.check.caution.caution(AddressDataForFormatting, manipulated_others_tail, caution)
 
-    return splittedAddressDataDictionaries
+    return AddressDataForFormatting

@@ -3,9 +3,9 @@ import re
 from utils.modify.modifyExceptionAddressExpression import modify_exception_case_address2
 
 
-def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str]]) -> None:
+def re_split_by_every_fields(AddressDataForOutput: dict[str, list[str]]) -> None:
     """
-    args: splittedAddressDataDictionaries (すでに分割された住所データの辞書型, 出力用には整形済み)
+    args: AddressDataForOutput (すでに分割された住所データの辞書型, 出力用には整形済み)
     return: void
 
     address1またはaddress2 の箇所が、屋一-三八-二二-二0二-エステスクエア町 のようになってしまったものを再整形する。(再分割)
@@ -17,12 +17,12 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
 
     """
 
-    DATA_SIZE = len(splittedAddressDataDictionaries["address2"])
+    DATA_SIZE = len(AddressDataForOutput["address2"])
 
     for index in range(DATA_SIZE):
-        if re.search("-", splittedAddressDataDictionaries["address2"][index]):
+        if re.search("-", AddressDataForOutput["address2"][index]):
 
-            splittedAddressDataDictionaries["caution"][
+            AddressDataForOutput["caution"][
                 index
             ] += "CAUTION: 自動整形システムが推測によって分割している箇所があります。この行の分割が正しいか確認することを強く推奨します。 "
             # 西一-一八-一六-カモミ-ル西町 のようになっているはず
@@ -44,7 +44,7 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
             JAPANESE_STYLE_NUMBERS: list = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"]
 
             re_formated_address2_data_field: str = ""
-            for address2_data_field_character in splittedAddressDataDictionaries["address2"][index]:
+            for address2_data_field_character in AddressDataForOutput["address2"][index]:
                 """
                 address2 の fieldに入っている文字列を char ごとに走査して、漢数字を算用数字に変換する
                 """
@@ -66,114 +66,114 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                     len(re_formated_address2_data_field)
                     == re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field).end()
                 ):
-                    if splittedAddressDataDictionaries["address3"][index] == "":
-                        splittedAddressDataDictionaries["address2"][index] = re_formated_address2_data_field[
+                    if AddressDataForOutput["address3"][index] == "":
+                        AddressDataForOutput["address2"][index] = re_formated_address2_data_field[
                             :address3_start
                         ]
-                        splittedAddressDataDictionaries["address3"][index] = re_formated_address2_data_field[
+                        AddressDataForOutput["address3"][index] = re_formated_address2_data_field[
                             address3_start:address3_end
                         ]
                     else:
-                        splittedAddressDataDictionaries["address2"][index] = re_formated_address2_data_field[
+                        AddressDataForOutput["address2"][index] = re_formated_address2_data_field[
                             :address3_start
                         ]
-                        splittedAddressDataDictionaries["address3"][index] = (
+                        AddressDataForOutput["address3"][index] = (
                             re_formated_address2_data_field[address3_start:address3_end]
-                            + splittedAddressDataDictionaries["address3"][index]
+                            + AddressDataForOutput["address3"][index]
                         )
                 else:
                     # 建物名らしきものが存在する
-                    if splittedAddressDataDictionaries["address3"][index] == "":
+                    if AddressDataForOutput["address3"][index] == "":
                         # 番地情報が空
-                        splittedAddressDataDictionaries["address2"][index] = re_formated_address2_data_field[
+                        AddressDataForOutput["address2"][index] = re_formated_address2_data_field[
                             :address3_start
                         ]
-                        splittedAddressDataDictionaries["address3"][index] = re_formated_address2_data_field[
+                        AddressDataForOutput["address3"][index] = re_formated_address2_data_field[
                             address3_start:address3_end
                         ]
-                        building_information_splittedAddressDataDictionaries: str = re_formated_address2_data_field[
+                        building_information_AddressDataForOutput: str = re_formated_address2_data_field[
                             address3_end:
                         ]
-                        if re.search("[0-9]", building_information_splittedAddressDataDictionaries):
+                        if re.search("[0-9]", building_information_AddressDataForOutput):
                             # 建物名の情報に部屋番号が紛れ込んでいる
                             start_index: int = re.search(
-                                "[0-9]", building_information_splittedAddressDataDictionaries
+                                "[0-9]", building_information_AddressDataForOutput
                             ).start()
-                            splittedAddressDataDictionaries["address4"][
+                            AddressDataForOutput["address4"][
                                 index
-                            ] = building_information_splittedAddressDataDictionaries[:start_index]
+                            ] = building_information_AddressDataForOutput[:start_index]
                             # 先頭の-を削除
                             if (
-                                splittedAddressDataDictionaries["address4"][index] != ""
-                                and splittedAddressDataDictionaries["address4"][index][0] == "-"
+                                AddressDataForOutput["address4"][index] != ""
+                                and AddressDataForOutput["address4"][index][0] == "-"
                             ):
-                                if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                    splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                                if len(AddressDataForOutput["address4"][index]) >= 2:
+                                    AddressDataForOutput["address4"][index] = AddressDataForOutput[
                                         "address4"
                                     ][index][1:]
                             # address4の-をーに変更
-                            splittedAddressDataDictionaries["address4"][index] = re.sub(
-                                "-", "ー", splittedAddressDataDictionaries["address4"][index]
+                            AddressDataForOutput["address4"][index] = re.sub(
+                                "-", "ー", AddressDataForOutput["address4"][index]
                             )
                             # address5
-                            splittedAddressDataDictionaries["address5"][
+                            AddressDataForOutput["address5"][
                                 index
-                            ] = building_information_splittedAddressDataDictionaries[start_index:]
+                            ] = building_information_AddressDataForOutput[start_index:]
                         else:
                             # 建物情報のみ
-                            splittedAddressDataDictionaries["address4"][
+                            AddressDataForOutput["address4"][
                                 index
-                            ] = building_information_splittedAddressDataDictionaries
+                            ] = building_information_AddressDataForOutput
                             # 先頭の-を削除
                             if (
-                                splittedAddressDataDictionaries["address4"][index] != ""
-                                and splittedAddressDataDictionaries["address4"][index][0] == "-"
+                                AddressDataForOutput["address4"][index] != ""
+                                and AddressDataForOutput["address4"][index][0] == "-"
                             ):
-                                if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                    splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                                if len(AddressDataForOutput["address4"][index]) >= 2:
+                                    AddressDataForOutput["address4"][index] = AddressDataForOutput[
                                         "address4"
                                     ][index][1:]
                             # address4の-をーに変更
-                            splittedAddressDataDictionaries["address4"][index] = re.sub(
-                                "-", "ー", splittedAddressDataDictionaries["address4"][index]
+                            AddressDataForOutput["address4"][index] = re.sub(
+                                "-", "ー", AddressDataForOutput["address4"][index]
                             )
                     else:
                         # 番地情報に数字がある
                         # 建物情報の可能性が高いのでaddress5に移す
-                        splittedAddressDataDictionaries["address5"][index] = splittedAddressDataDictionaries["address3"][
+                        AddressDataForOutput["address5"][index] = AddressDataForOutput["address3"][
                             index
                         ]
-                        splittedAddressDataDictionaries["address2"][index] = re_formated_address2_data_field[
+                        AddressDataForOutput["address2"][index] = re_formated_address2_data_field[
                             :address3_start
                         ]
-                        splittedAddressDataDictionaries["address3"][index] = re_formated_address2_data_field[
+                        AddressDataForOutput["address3"][index] = re_formated_address2_data_field[
                             address3_start:address3_end
                         ]
-                        splittedAddressDataDictionaries["address4"][index] = re_formated_address2_data_field[
+                        AddressDataForOutput["address4"][index] = re_formated_address2_data_field[
                             address3_end:
                         ]
                         # 先頭の-を削除
                         if (
-                            splittedAddressDataDictionaries["address4"][index] != ""
-                            and splittedAddressDataDictionaries["address4"][index][0] == "-"
+                            AddressDataForOutput["address4"][index] != ""
+                            and AddressDataForOutput["address4"][index][0] == "-"
                         ):
-                            if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                            if len(AddressDataForOutput["address4"][index]) >= 2:
+                                AddressDataForOutput["address4"][index] = AddressDataForOutput[
                                     "address4"
                                 ][index][1:]
                         # address4の-をーに変更
-                        splittedAddressDataDictionaries["address4"][index] = re.sub(
-                            "-", "ー", splittedAddressDataDictionaries["address4"][index]
+                        AddressDataForOutput["address4"][index] = re.sub(
+                            "-", "ー", AddressDataForOutput["address4"][index]
                         )
 
             # 例外ケース処理
-            modify_exception_case_address2(splittedAddressDataDictionaries, index)
+            modify_exception_case_address2(AddressDataForOutput, index)
 
     # address1に - が入っているパターン
     for index in range(DATA_SIZE):
-        if re.search("-", splittedAddressDataDictionaries["address1"][index]):
+        if re.search("-", AddressDataForOutput["address1"][index]):
 
-            splittedAddressDataDictionaries["caution"][
+            AddressDataForOutput["caution"][
                 index
             ] += "CAUTION: 自動整形システムが推測によって分割している箇所があります。この行の分割が正しいか確認することを強く推奨します。 "
 
@@ -196,16 +196,16 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
 
             re_formated_address1_data_field: str = ""
 
-            splittedAddressDataDictionaries["address1"][index] += splittedAddressDataDictionaries["address2"][index]
-            splittedAddressDataDictionaries["address2"][index] = ""
+            AddressDataForOutput["address1"][index] += AddressDataForOutput["address2"][index]
+            AddressDataForOutput["address2"][index] = ""
 
-            for id in range(len(splittedAddressDataDictionaries["address1"][index])):
-                if splittedAddressDataDictionaries["address1"][index][id] in JAPANESE_STYLE_NUMBERS:
+            for id in range(len(AddressDataForOutput["address1"][index])):
+                if AddressDataForOutput["address1"][index][id] in JAPANESE_STYLE_NUMBERS:
                     re_formated_address1_data_field += MAPPING_JAPANESE_STYLE_NUMBER_TO_ALABIC_NUMBER[
-                        splittedAddressDataDictionaries["address1"][index][id]
+                        AddressDataForOutput["address1"][index][id]
                     ]
                 else:
-                    re_formated_address1_data_field += splittedAddressDataDictionaries["address1"][index][id]
+                    re_formated_address1_data_field += AddressDataForOutput["address1"][index][id]
 
             # 分割作業
             if re.search("[0-9]+", re_formated_address1_data_field):
@@ -218,108 +218,108 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                     len(re_formated_address1_data_field)
                     == re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field).end()
                 ):
-                    if splittedAddressDataDictionaries["address3"][index] == "":
-                        splittedAddressDataDictionaries["address1"][index] = re_formated_address1_data_field[
+                    if AddressDataForOutput["address3"][index] == "":
+                        AddressDataForOutput["address1"][index] = re_formated_address1_data_field[
                             :address3_start
                         ]
-                        splittedAddressDataDictionaries["address3"][index] = re_formated_address1_data_field[
+                        AddressDataForOutput["address3"][index] = re_formated_address1_data_field[
                             address3_start:address3_end
                         ]
                     else:
-                        splittedAddressDataDictionaries["address1"][index] = re_formated_address1_data_field[
+                        AddressDataForOutput["address1"][index] = re_formated_address1_data_field[
                             :address3_start
                         ]
-                        splittedAddressDataDictionaries["address3"][index] = (
+                        AddressDataForOutput["address3"][index] = (
                             re_formated_address1_data_field[address3_start:address3_end]
-                            + splittedAddressDataDictionaries["address3"][index]
+                            + AddressDataForOutput["address3"][index]
                         )
                 else:
                     # 建物名らしきものが存在する
-                    if splittedAddressDataDictionaries["address3"][index] == "":
+                    if AddressDataForOutput["address3"][index] == "":
                         # 番地情報が空
-                        splittedAddressDataDictionaries["address1"][index] = re_formated_address1_data_field[
+                        AddressDataForOutput["address1"][index] = re_formated_address1_data_field[
                             :address3_start
                         ]
-                        splittedAddressDataDictionaries["address3"][index] = re_formated_address1_data_field[
+                        AddressDataForOutput["address3"][index] = re_formated_address1_data_field[
                             address3_start:address3_end
                         ]
-                        building_information_splittedAddressDataDictionaries: str = re_formated_address1_data_field[
+                        building_information_AddressDataForOutput: str = re_formated_address1_data_field[
                             address3_end:
                         ]
-                        if re.search("[0-9]", building_information_splittedAddressDataDictionaries):
+                        if re.search("[0-9]", building_information_AddressDataForOutput):
                             # 建物名の情報に部屋番号が紛れ込んでいる
                             start_index: int = re.search(
-                                "[0-9]", building_information_splittedAddressDataDictionaries
+                                "[0-9]", building_information_AddressDataForOutput
                             ).start()
-                            splittedAddressDataDictionaries["address4"][
+                            AddressDataForOutput["address4"][
                                 index
-                            ] = building_information_splittedAddressDataDictionaries[:start_index]
+                            ] = building_information_AddressDataForOutput[:start_index]
                             # 先頭の-を削除
                             if (
-                                splittedAddressDataDictionaries["address4"][index] != ""
-                                and splittedAddressDataDictionaries["address4"][index][0] == "-"
+                                AddressDataForOutput["address4"][index] != ""
+                                and AddressDataForOutput["address4"][index][0] == "-"
                             ):
-                                if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                    splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                                if len(AddressDataForOutput["address4"][index]) >= 2:
+                                    AddressDataForOutput["address4"][index] = AddressDataForOutput[
                                         "address4"
                                     ][index][1:]
                             # address4の-をーに変更
-                            splittedAddressDataDictionaries["address4"][index] = re.sub(
-                                "-", "ー", splittedAddressDataDictionaries["address4"][index]
+                            AddressDataForOutput["address4"][index] = re.sub(
+                                "-", "ー", AddressDataForOutput["address4"][index]
                             )
                             # address5
-                            splittedAddressDataDictionaries["address5"][
+                            AddressDataForOutput["address5"][
                                 index
-                            ] = building_information_splittedAddressDataDictionaries[start_index:]
+                            ] = building_information_AddressDataForOutput[start_index:]
                         else:
                             # 建物情報のみ
-                            splittedAddressDataDictionaries["address4"][
+                            AddressDataForOutput["address4"][
                                 index
-                            ] = building_information_splittedAddressDataDictionaries
+                            ] = building_information_AddressDataForOutput
                             # 先頭の-を削除
                             if (
-                                splittedAddressDataDictionaries["address4"][index] != ""
-                                and splittedAddressDataDictionaries["address4"][index][0] == "-"
+                                AddressDataForOutput["address4"][index] != ""
+                                and AddressDataForOutput["address4"][index][0] == "-"
                             ):
-                                if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                    splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                                if len(AddressDataForOutput["address4"][index]) >= 2:
+                                    AddressDataForOutput["address4"][index] = AddressDataForOutput[
                                         "address4"
                                     ][index][1:]
                             # address4の-をーに変更
-                            splittedAddressDataDictionaries["address4"][index] = re.sub(
-                                "-", "ー", splittedAddressDataDictionaries["address4"][index]
+                            AddressDataForOutput["address4"][index] = re.sub(
+                                "-", "ー", AddressDataForOutput["address4"][index]
                             )
                     else:
                         # 番地情報に数字がある
                         # 建物情報の可能性が高いのでaddress5に移す
-                        splittedAddressDataDictionaries["address5"][index] = splittedAddressDataDictionaries["address3"][
+                        AddressDataForOutput["address5"][index] = AddressDataForOutput["address3"][
                             index
                         ]
-                        splittedAddressDataDictionaries["address1"][index] = re_formated_address1_data_field[
+                        AddressDataForOutput["address1"][index] = re_formated_address1_data_field[
                             :address3_start
                         ]
-                        splittedAddressDataDictionaries["address3"][index] = re_formated_address1_data_field[
+                        AddressDataForOutput["address3"][index] = re_formated_address1_data_field[
                             address3_start:address3_end
                         ]
-                        splittedAddressDataDictionaries["address4"][index] = re_formated_address1_data_field[
+                        AddressDataForOutput["address4"][index] = re_formated_address1_data_field[
                             address3_end:
                         ]
                         # 先頭の-を削除
                         if (
-                            splittedAddressDataDictionaries["address4"][index] != ""
-                            and splittedAddressDataDictionaries["address4"][index][0] == "-"
+                            AddressDataForOutput["address4"][index] != ""
+                            and AddressDataForOutput["address4"][index][0] == "-"
                         ):
-                            if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                            if len(AddressDataForOutput["address4"][index]) >= 2:
+                                AddressDataForOutput["address4"][index] = AddressDataForOutput[
                                     "address4"
                                 ][index][1:]
                         # address4の-をーに変更
-                        splittedAddressDataDictionaries["address4"][index] = re.sub(
-                            "-", "ー", splittedAddressDataDictionaries["address4"][index]
+                        AddressDataForOutput["address4"][index] = re.sub(
+                            "-", "ー", AddressDataForOutput["address4"][index]
                         )
 
                 # 移動処理
-                splittedAddressDataDictionaries["address2"][index] = splittedAddressDataDictionaries["address1"][index]
-                splittedAddressDataDictionaries["address1"][index] = ""
+                AddressDataForOutput["address2"][index] = AddressDataForOutput["address1"][index]
+                AddressDataForOutput["address1"][index] = ""
             else:
                 continue

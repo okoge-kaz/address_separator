@@ -2,13 +2,13 @@ from utils.extract.town import extract_town
 
 
 def pull_out_town_field(
-    non_city_address_data_array: list[str], splittedAddressDataDictionaries) -> list[str]:
+    non_city_address_data_array: list[str], AddressDataForFormatting) -> list[str]:
     """
-    args: non_city_address_data_array: list[str], splittedAddressDataDictionaries
+    args: non_city_address_data_array: list[str], AddressDataForFormatting
     return: non_town_address_data_array: list[str]
     """
     town_data_tuple = extract_town(non_city_address_data_array)
-    splittedAddressDataDictionaries.town = town_data_tuple[0]
+    AddressDataForFormatting.town = town_data_tuple[0]
 
     non_town_address_data_array: list[str] = town_data_tuple[1]
 
