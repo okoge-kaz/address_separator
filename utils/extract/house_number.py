@@ -1,7 +1,7 @@
 import re
 
 
-def operation(others: list):
+def extract_house_number(others: list):
     """
     args: others: list
     return: (others_head: list, house_numbers: list, others_tail: list)

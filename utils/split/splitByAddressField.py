@@ -3,7 +3,6 @@ import utils.extract.detail.building_detail
 import utils.extract.detail.check.caution
 import utils.extract.detail.check.check
 import utils.extract.detail.check.data_check
-import utils.extract.detail.house_number
 import utils.extract.detail.manipulate
 import utils.extract.detail.shaping
 import utils.extract.detail.shaping_building_info
@@ -13,6 +12,7 @@ from utils.split.pullOutCityField import pull_out_city_field
 from utils.split.pullOutPrefectureField import pull_out_prefecture_field
 from utils.split.pullOutTownField import pull_out_town_field
 from utils.split.pullOutDistrictField import pull_out_district_field
+from utils.split.pullOutHouseNumberAndInvalidField import pull_out_housenumber_invalid_field
 
 def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame):
     """
@@ -49,13 +49,9 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
         non_town_address_data_array, AddressDataForFormatting
     )
 
-    # 番地をいれる
-    house_number_data = utils.extract.detail.house_number.operation(others)
-    others_head: list = house_number_data[0]
-    house_numbers: list = house_number_data[1]
-    others_tail: list = house_number_data[2]
-    AddressDataForFormatting.invalid = others_head
-    AddressDataForFormatting.house_number = house_numbers
+    others_tail: list[str] = pull_out_housenumber_invalid_field(
+        others, AddressDataForFormatting
+    )
 
     # check 不正なデータが存在しないかどうかを確認
     caution: list = utils.extract.detail.check.check.check(AddressDataForFormatting)
