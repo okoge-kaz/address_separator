@@ -4,7 +4,7 @@ from utils.modify.modifySpecialPlaceNameAfterSplit import modify_special_place_n
 from utils.modify.reSplitByEveryFieldAfterSplit import re_split_by_every_fields
 
 
-def post_process(AddressDataForOutput: dict[str, list[str]]) -> None:
+def post_process(AddressDataForOutput) -> None:
     """
     args: AddressDataForOutput (すでに分割された住所データの辞書型, 出力用には整形済み)
     return: void
