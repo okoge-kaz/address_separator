@@ -12,6 +12,7 @@ from utils.dataclass.HomemadeClass import make_DataclassForFormatting
 from utils.split.pullOutCityField import pull_out_city_field
 from utils.split.pullOutPrefectureField import pull_out_prefecture_field
 from utils.split.pullOutTownField import pull_out_town_field
+from utils.split.pullOutDistrictField import pull_out_district_field
 
 def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame):
     """
@@ -40,13 +41,13 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
         non_prefecture_address_data_array, AddressDataForFormatting
     )
 
-    non_town_address_data: list[str] = pull_out_town_field(
+    non_town_address_data_array: list[str] = pull_out_town_field(
         non_city_address_data_array, AddressDataForFormatting
     )
 
-    district_data = utils.extract.district.extract_district(non_town_address_data)
-    AddressDataForFormatting.district = district_data[0]
-    others: list = district_data[1]
+    others: list[str] = pull_out_district_field(
+        non_town_address_data_array, AddressDataForFormatting
+    )
 
     # 番地をいれる
     house_number_data = utils.extract.detail.house_number.operation(others)
