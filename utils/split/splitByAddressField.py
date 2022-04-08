@@ -1,18 +1,18 @@
 import pandas as pd
-import utils.extract.detail.building_detail
 import utils.extract.detail.check.caution
-import utils.extract.detail.check.check
 import utils.extract.detail.check.data_check
-import utils.extract.detail.manipulate
 import utils.extract.detail.shaping
-import utils.extract.detail.shaping_building_info
 import utils.extract.district
+import utils.extract.detail.check.check
+import utils.extract.detail.manipulate
+
 from utils.dataclass.HomemadeClass import make_DataclassForFormatting
 from utils.split.pullOutCityField import pull_out_city_field
 from utils.split.pullOutPrefectureField import pull_out_prefecture_field
 from utils.split.pullOutTownField import pull_out_town_field
 from utils.split.pullOutDistrictField import pull_out_district_field
 from utils.split.pullOutHouseNumberAndInvalidField import pull_out_housenumber_invalid_field
+from utils.split.pullOutBuildingDetailInfo import pull_out_buildingdetailinfo
 
 def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame):
     """
@@ -59,16 +59,13 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
     # データ整形＋分裂してしまったデータを統合整理
     manipulated_others_tail: list = utils.extract.detail.manipulate.manipulate(AddressDataForFormatting, others_tail)
 
-    # ビルや建物情報の詳細を取得
-    AddressDataForFormatting.building_detail_info = utils.extract.detail.building_detail.extract_building_detail(AddressDataForFormatting)
-
-    # ビル情報のうちデータ散逸しているものを適切に統合
-    utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(
-        AddressDataForFormatting, manipulated_others_tail
-    )
+    pull_out_buildingdetailinfo(AddressDataForFormatting, manipulated_others_tail)
 
     # others_tail内のデータを整形
     utils.extract.detail.shaping.shaping(AddressDataForFormatting)
+
+    # check 不正なデータが存在しないかどうかを確認
+    caution: list = utils.extract.detail.check.check.check(AddressDataForFormatting)
 
     # caution
     utils.extract.detail.check.caution.caution(AddressDataForFormatting, manipulated_others_tail, caution)
