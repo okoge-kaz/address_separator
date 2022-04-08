@@ -16,7 +16,7 @@ def extract_building_detail(AddressDataForFormatting, manipulated_others_tail) -
         """
         def cutting_number_from_last(index: int):
             if re.search("-([0-9]+)$", AddressDataForFormatting.house_number[index]) is None:
-                print("something wrong1(123)")  # for debug
+                print("something wrong1()")  # for debug(1-7-16のような住所が記載されている前提であり、荒川 207号のように住所(○-○-○)がなく、号がある場合も引っかかる)
             else:
 
                 start: int = 0
