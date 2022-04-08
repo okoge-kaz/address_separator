@@ -19,3 +19,20 @@ def make_DataclassForFormatting():
 
     x = DataclassForFormatting
     return x
+
+def make_DataclassForOutput():
+    @dataclass
+    class DataclassForOutput():
+        original: list[str]
+        prefecture: list[str]
+        address1: list[str]
+        address2: list[str]
+        address3: list[str]
+        address4: list[str]
+        address5: list[str]
+        error1: list[str]
+        error2: list[str]
+        caution: list[str]  
+
+    x = DataclassForOutput
+    return x
