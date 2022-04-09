@@ -1,4 +1,4 @@
-import utils.data_create.shapping
+from utils.data_create.get_zenkokucsv_data import get_zenkokucsv_data
 
 
 def detail_check(AddressDataForOutput) -> None:
@@ -7,7 +7,7 @@ def detail_check(AddressDataForOutput) -> None:
     return: void
     町域に関するテスト
     """
-    AddressDataForOutput_set = utils.data_create.shapping.main()
+    zenkokucsv_data: dict = get_zenkokucsv_data()
     for index in range(len(AddressDataForOutput.address1)):
         address1_value = AddressDataForOutput.address1[index]
         if address1_value == "":
@@ -15,7 +15,7 @@ def detail_check(AddressDataForOutput) -> None:
             continue
         address2_value = AddressDataForOutput.address2[index]
         try:
-            if address2_value in AddressDataForOutput_set[address1_value]:
+            if address2_value in zenkokucsv_data[address1_value]:
                 pass
             else:
                 AddressDataForOutput.error1[index] += "ERROR: address2のデータは、自動チェック機構が参照する日本郵便のデータセットに合致しません。  "

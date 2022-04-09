@@ -3,16 +3,16 @@ import os
 import pandas as pd
 
 
-def main() -> dict:
+def get_zenkokucsv_data() -> dict:
     """
     args: void
-    return: data: dict
+    return: zenkokucsv_data: dict
     data/zenkoku.csvから町域チェック機能に必要な情報を取得後、取得したデータを参照しやすい形に整形し、dict(辞書）型として返す。
     """
     Current_Path = os.getcwd()
     csv_data: pd.DataFrame = pd.read_csv(Current_Path + "/data/zenkoku.csv")
     csv_data = csv_data.fillna("")
-    data: dict = {}
+    zenkokucsv_data: dict = {}
     city_name: list = list(csv_data["市区町村"])
     temporaly_list: list = []
     # 市区町村名が変化したら追加
@@ -24,11 +24,11 @@ def main() -> dict:
                 last_city_name = csv_data["市区町村"][index]
                 temporaly_list.append(csv_data["町域"][index])
             else:
-                data[last_city_name] = temporaly_list
+                zenkokucsv_data[last_city_name] = temporaly_list
                 last_city_name = csv_data["市区町村"][index]
                 temporaly_list = []  # 新たにつくる
                 temporaly_list.append(csv_data["町域"][index])
         else:
             temporaly_list.append(csv_data["町域"][index])
-    data[last_city_name] = temporaly_list
-    return data
+    zenkokucsv_data[last_city_name] = temporaly_list
+    return zenkokucsv_data
