@@ -3,7 +3,8 @@ import re
 
 def extract_building_detail(AddressDataForFormatting, manipulated_others_tail) -> list:
     """
-
+    args: AddressDataForFormatting, manipulated_others_tail
+    return: building_detail_info: list
     """
     building_detail_info: list = []
     

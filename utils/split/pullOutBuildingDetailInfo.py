@@ -1,7 +1,12 @@
 import utils.extract.detail.building_detail
 import utils.extract.detail.shaping_building_info
 
-def pull_out_buildingdetailinfo(AddressDataForFormatting, manipulated_others_tail):
+def pull_out_buildingdetailinfo(
+    AddressDataForFormatting, manipulated_others_tail: list[str]):
+    """
+    args:  AddressDataForFormatting, manipulated_others_tail: list[str]
+    return: void
+    """
     AddressDataForFormatting.building_detail_info = utils.extract.detail.building_detail.extract_building_detail(AddressDataForFormatting, manipulated_others_tail)
 
     # ビル情報のうちデータ散逸しているものを適切に統合

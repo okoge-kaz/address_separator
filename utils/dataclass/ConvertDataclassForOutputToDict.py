@@ -1,6 +1,8 @@
 def outputclass_to_dict(AddressDataForOutput) -> dict:
     """
-    AddressDataForOutputを辞書型に変更します
+    args: AddressDataForOutput
+    return: formated_dictionary_data: dict
+    AddressDataForOutputを辞書型に変更
     """
     
     size = len(AddressDataForOutput.original)

@@ -1,9 +1,11 @@
 from utils.extract.house_number import extract_house_number
 
 
-def pull_out_housenumber_invalid_field(others: list[str], AddressDataForFormatting) -> list[str]:
+def pull_out_housenumber_invalid_field(
+    others: list[str], AddressDataForFormatting) -> list[str]:
     """
-    setumei
+    args: others: list[str], AddressDataForFormatting
+    return: others_tail: list[str]
     """
 
     house_number_data_tuple = extract_house_number(others)

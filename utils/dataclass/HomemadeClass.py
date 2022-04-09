@@ -1,6 +1,11 @@
 from dataclasses import dataclass
 
 def make_DataclassForFormatting():
+    """
+    args: void
+    return: x
+    以下に定義するクラスの変数を返す
+    """
     @dataclass
     class DataclassForFormatting():
         original: list[str]
@@ -21,6 +26,11 @@ def make_DataclassForFormatting():
     return x
 
 def make_DataclassForOutput():
+        """
+    args: void
+    return: x
+    以下に定義するクラスの変数を返す
+    """
     @dataclass
     class DataclassForOutput():
         original: list[str]
