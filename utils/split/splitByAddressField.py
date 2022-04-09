@@ -2,7 +2,6 @@ import pandas as pd
 import utils.extract.detail.check.caution
 import utils.extract.detail.check.data_check
 import utils.extract.detail.shaping
-import utils.extract.district
 import utils.extract.detail.check.check
 import utils.extract.detail.manipulate
 
@@ -13,6 +12,7 @@ from utils.split.pullOutTownField import pull_out_town_field
 from utils.split.pullOutDistrictField import pull_out_district_field
 from utils.split.pullOutHouseNumberAndInvalidField import pull_out_housenumber_invalid_field
 from utils.split.pullOutBuildingDetailInfo import pull_out_buildingdetailinfo
+
 
 def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame):
     """
