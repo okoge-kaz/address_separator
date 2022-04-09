@@ -1,17 +1,18 @@
+from __future__ import annotations
+
 import pandas as pd
 import utils.extract.detail.check.caution
-import utils.extract.detail.check.data_check
-import utils.extract.detail.shaping
 import utils.extract.detail.check.check
+import utils.extract.detail.check.data_check
 import utils.extract.detail.manipulate
-
+import utils.extract.detail.shaping
 from utils.dataclass.HomemadeClass import make_DataclassForFormatting
+from utils.split.pullOutBuildingDetailInfo import pull_out_buildingdetailinfo
 from utils.split.pullOutCityField import pull_out_city_field
-from utils.split.pullOutPrefectureField import pull_out_prefecture_field
-from utils.split.pullOutTownField import pull_out_town_field
 from utils.split.pullOutDistrictField import pull_out_district_field
 from utils.split.pullOutHouseNumberAndInvalidField import pull_out_housenumber_invalid_field
-from utils.split.pullOutBuildingDetailInfo import pull_out_buildingdetailinfo
+from utils.split.pullOutPrefectureField import pull_out_prefecture_field
+from utils.split.pullOutTownField import pull_out_town_field
 
 
 def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd.DataFrame):
@@ -41,17 +42,11 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
         non_prefecture_address_data_array, AddressDataForFormatting
     )
 
-    non_town_address_data_array: list[str] = pull_out_town_field(
-        non_city_address_data_array, AddressDataForFormatting
-    )
+    non_town_address_data_array: list[str] = pull_out_town_field(non_city_address_data_array, AddressDataForFormatting)
 
-    others: list[str] = pull_out_district_field(
-        non_town_address_data_array, AddressDataForFormatting
-    )
+    others: list[str] = pull_out_district_field(non_town_address_data_array, AddressDataForFormatting)
 
-    others_tail: list[str] = pull_out_housenumber_invalid_field(
-        others, AddressDataForFormatting
-    )
+    others_tail: list[str] = pull_out_housenumber_invalid_field(others, AddressDataForFormatting)
 
     # check 不正なデータが存在しないかどうかを確認
     caution: list = utils.extract.detail.check.check.check(AddressDataForFormatting)

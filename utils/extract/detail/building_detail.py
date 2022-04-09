@@ -7,17 +7,18 @@ def extract_building_detail(AddressDataForFormatting, manipulated_others_tail) -
     return: building_detail_info: list
     """
     building_detail_info: list = []
-    
+
     for i in range(len(manipulated_others_tail)):
         building_detail_info.append("")
-    
-    def search_x(x: str, subject):
-        """
 
-        """
+    def search_x(x: str, subject):
+        """ """
+
         def cutting_number_from_last(index: int):
             if re.search("-([0-9]+)$", AddressDataForFormatting.house_number[index]) is None:
-                print("something wrong1()")  # for debug(1-7-16のような住所が記載されている前提であり、荒川 207号のように住所(○-○-○)がなく、号がある場合も引っかかる)
+                print(
+                    "something wrong1()"
+                )  # for debug(1-7-16のような住所が記載されている前提であり、荒川 207号のように住所(○-○-○)がなく、号がある場合も引っかかる)
             else:
 
                 start: int = 0
@@ -38,17 +39,16 @@ def extract_building_detail(AddressDataForFormatting, manipulated_others_tail) -
                 AddressDataForFormatting.house_number[index] = AddressDataForFormatting.house_number[index][:start]
 
         for i in range(len(subject)):
-            if (subject[i] == x):
+            if subject[i] == x:
                 # 空白に変える
                 subject[i] = ""
                 # special_charactersから数字をfetch
                 cutting_number_from_last(i)
             else:
-                pass #building_detail_info.append("")
-    
+                pass  # building_detail_info.append("")
+
     search_x("F", AddressDataForFormatting.special_characters)
     search_x("階", manipulated_others_tail)
     search_x("号", manipulated_others_tail)
-
 
     return building_detail_info

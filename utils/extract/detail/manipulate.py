@@ -3,7 +3,7 @@ import re
 
 def manipulate(AddressDataForFormatting, others_tail: list) -> list:
     """
-    args: (AddressDataForFormatting, others_tail: list) 
+    args: (AddressDataForFormatting, others_tail: list)
     return: manipulated_others_tail: list
     番地を取り除いた後のデータに関して、処理を行い後の操作で処理を行いやすくする。
     """
@@ -49,11 +49,15 @@ def manipulate(AddressDataForFormatting, others_tail: list) -> list:
 
     for i in range(len(manipulated_others_tail)):
         if extract_number_from_others_tail(manipulated_others_tail[i]):
-            start: int = extract_number_from_others_tail(manipulated_others_tail[i]).start()
-            end: int = extract_number_from_others_tail(manipulated_others_tail[i]).end()
+            match = extract_number_from_others_tail(manipulated_others_tail[i])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if start != 0:
                 print("something wrong")  # for debug
-            AddressDataForFormatting.house_number[i] = AddressDataForFormatting.house_number[i] + manipulated_others_tail[i][start:end]
+            AddressDataForFormatting.house_number[i] = (
+                AddressDataForFormatting.house_number[i] + manipulated_others_tail[i][start:end]
+            )
             manipulated_others_tail[i] = manipulated_others_tail[i][end:]
         else:
             pass

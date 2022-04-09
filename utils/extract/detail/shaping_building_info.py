@@ -10,125 +10,48 @@ def shaping_and_extracting_building_info(AddressDataForFormatting, manipulated_o
 
     # '-(([0-9 A-Z])+)号$' のような情報を抽出する
 
-    def extract_building_detail_info_from_others_tail_1(index: int):
-        """501号のようなかたちを検出しbuilding_detail_infoにデータを付け替える"""
-        if re.search("[0-9]+号$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("[0-9]+号$", manipulated_others_tail[index]).start()
-            end: int = re.search("[0-9]+号$", manipulated_others_tail[index]).end()
+    def extract_building_detail_info_from_others_tail(index: int, string: str):
+        if re.search(string, manipulated_others_tail[index]) is not None:
+            match = re.search(string, manipulated_others_tail[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             # ここ順番注意
             building_info = manipulated_others_tail[index][start:end]
             manipulated_others_tail[index] = manipulated_others_tail[index][:start]
             # 順番に注意
-            AddressDataForFormatting.building_detail_info[index] = building_info + AddressDataForFormatting.building_detail_info[index]
+            AddressDataForFormatting.building_detail_info[index] = (
+                building_info + AddressDataForFormatting.building_detail_info[index]
+            )
         else:
             pass
 
-    def extract_building_detail_info_from_others_tail_2(index: int):
-        """401のようなかたちを検出しbuilding_detail_infoにデータを付け替える"""
-        if re.search("(([0-9]+)-)*[0-9]+$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("(([0-9]+)-)*[0-9]+$", manipulated_others_tail[index]).start()
-            end: int = re.search("(([0-9]+)-)*[0-9]+$", manipulated_others_tail[index]).end()
-            # ここ順番注意
-            building_info = manipulated_others_tail[index][start:end]
-            manipulated_others_tail[index] = manipulated_others_tail[index][:start]
-            # 順番に注意
-            AddressDataForFormatting.building_detail_info[index] = building_info + AddressDataForFormatting.building_detail_info[index]
-        else:
-            pass
-
-    def extract_building_detail_info_from_others_tail_3(index: int):
-        """45号館のようなかたちを検出しbuilding_detail_infoにデータを付け替える"""
-        if re.search("[0-9]+号館$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("[0-9]+号館$", manipulated_others_tail[index]).start()
-            end: int = re.search("[0-9]+号館$", manipulated_others_tail[index]).end()
-            # ここ順番注意
-            building_info = manipulated_others_tail[index][start:end]
-            manipulated_others_tail[index] = manipulated_others_tail[index][:start]
-            # 順番に注意
-            AddressDataForFormatting.building_detail_info[index] = building_info + AddressDataForFormatting.building_detail_info[index]
-        else:
-            pass
-
-    def extract_building_detail_info_from_others_tail_4(index: int):
-        """C号のようなかたちを検出しbuilding_detail_infoにデータを付け替える"""
-        if re.search("-[A-Z]号$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("-[A-Z]号$", manipulated_others_tail[index]).start()
-            end: int = re.search("-[A-Z]号$", manipulated_others_tail[index]).end()
-            # ここ順番注意
-            building_info = manipulated_others_tail[index][start:end]
-            manipulated_others_tail[index] = manipulated_others_tail[index][:start]
-            # 順番に注意
-            AddressDataForFormatting.building_detail_info[index] = building_info + AddressDataForFormatting.building_detail_info[index]
-        else:
-            pass
-
-    def extract_building_detail_info_from_others_tail_5(index: int):
-        """C館のようなかたちを検出しbuilding_detail_infoにデータを付け替える"""
-        if re.search("[A-Z]館$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("[A-Z]館$", manipulated_others_tail[index]).start()
-            end: int = re.search("[A-Z]館$", manipulated_others_tail[index]).end()
-            # ここ順番注意
-            building_info = manipulated_others_tail[index][start:end]
-            manipulated_others_tail[index] = manipulated_others_tail[index][:start]
-            # 順番に注意
-            AddressDataForFormatting.building_detail_info[index] = building_info + AddressDataForFormatting.building_detail_info[index]
-        else:
-            pass
-
-    def extract_building_detail_info_from_others_tail_6(index: int):
-        """45号館のようなかたちを検出しbuilding_detail_infoにデータを付け替える"""
-        if re.search("[0-9]+号室$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("[0-9]+号室$", manipulated_others_tail[index]).start()
-            end: int = re.search("[0-9]+号室$", manipulated_others_tail[index]).end()
-            # ここ順番注意
-            building_info = manipulated_others_tail[index][start:end]
-            manipulated_others_tail[index] = manipulated_others_tail[index][:start]
-            # 順番に注意
-            AddressDataForFormatting.building_detail_info[index] = building_info + AddressDataForFormatting.building_detail_info[index]
-        else:
-            pass
-
-    def extract_building_detail_info_from_others_tail_7(index: int):
-        """45Fのようなかたちを検出しbuilding_detail_infoにデータを付け替える"""
-        if re.search("[0-9]+F$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("[0-9]+F$", manipulated_others_tail[index]).start()
-            end: int = re.search("[0-9]+F$", manipulated_others_tail[index]).end()
-            # ここ順番注意
-            building_info = manipulated_others_tail[index][start:end]
-            manipulated_others_tail[index] = manipulated_others_tail[index][:start]
-            # 順番に注意
-            AddressDataForFormatting.building_detail_info[index] = building_info + AddressDataForFormatting.building_detail_info[index]
-        else:
-            pass
-
-    def extract_building_detail_info_from_others_tail_8(index: int):
-        """45階のようなかたちを検出しbuilding_detail_infoにデータを付け替える"""
-        if re.search("[0-9]+階$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("[0-9]+階$", manipulated_others_tail[index]).start()
-            end: int = re.search("[0-9]+階$", manipulated_others_tail[index]).end()
-            # ここ順番注意
-            building_info = manipulated_others_tail[index][start:end]
-            manipulated_others_tail[index] = manipulated_others_tail[index][:start]
-            # 順番に注意
-            AddressDataForFormatting.building_detail_info[index] = building_info + AddressDataForFormatting.building_detail_info[index]
-        else:
-            pass
-
-    def extract_building_detail_info_from_others_tail_9(index: int):
+    def eliminate_last_hyphen(index: int):
         """最後が-のものを取り除く"""
         if re.search("-$", manipulated_others_tail[index]) is not None:
-            start: int = re.search("-$", manipulated_others_tail[index]).start()
+            match = re.search("-$", manipulated_others_tail[index])
+            assert match is not None
+            start: int = match.start()
             manipulated_others_tail[index] = manipulated_others_tail[index][:start]
         else:
             pass
 
     for index in range(len(manipulated_others_tail)):
-        extract_building_detail_info_from_others_tail_1(index)
-        extract_building_detail_info_from_others_tail_2(index)
-        extract_building_detail_info_from_others_tail_3(index)
-        extract_building_detail_info_from_others_tail_4(index)
-        extract_building_detail_info_from_others_tail_5(index)
-        extract_building_detail_info_from_others_tail_6(index)
-        extract_building_detail_info_from_others_tail_7(index)
-        extract_building_detail_info_from_others_tail_8(index)
-        extract_building_detail_info_from_others_tail_9(index)
+        # 501号のようなかたちを検出しbuilding_detail_infoにデータを付け替える
+        extract_building_detail_info_from_others_tail(index, "[0-9]+号$")
+        # 401のようなかたちを検出しbuilding_detail_infoにデータを付け替える
+        extract_building_detail_info_from_others_tail(index, "(([0-9]+)-)*[0-9]+$")
+        # 45号館のようなかたちを検出しbuilding_detail_infoにデータを付け替える
+        extract_building_detail_info_from_others_tail(index, "[0-9]+号館$")
+        # C号のようなかたちを検出しbuilding_detail_infoにデータを付け替える
+        extract_building_detail_info_from_others_tail(index, "-[A-Z]号$")
+        # C館のようなかたちを検出しbuilding_detail_infoにデータを付け替える
+        extract_building_detail_info_from_others_tail(index, "[A-Z]館$")
+        # 45号館のようなかたちを検出しbuilding_detail_infoにデータを付け替える
+        extract_building_detail_info_from_others_tail(index, "[0-9]+号室$")
+        # 45Fのようなかたちを検出しbuilding_detail_infoにデータを付け替える
+        extract_building_detail_info_from_others_tail(index, "[0-9]+F$")
+        # 45階のようなかたちを検出しbuilding_detail_infoにデータを付け替える
+        extract_building_detail_info_from_others_tail(index, "[0-9]+階$")
+        # 最後が-のものを取り除く
+        eliminate_last_hyphen(index)

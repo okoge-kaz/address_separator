@@ -105,8 +105,13 @@ def caution(AddressDataForFormatting, munipulated_others_tail: list, caution: li
             pass
     # building_info が空なのに building_detail_infoが空ではなかったらcaution
     for index in range(len(AddressDataForFormatting.building_info)):
-        if AddressDataForFormatting.building_info[index] == "" and AddressDataForFormatting.building_detail_info[index] != "":
-            AddressDataForFormatting.caution[index] += "CAUTION: address4と、address5のデータには不正な文字列が含まれている可能性があります。両方について確認することを推奨します。  "
+        if (
+            AddressDataForFormatting.building_info[index] == ""
+            and AddressDataForFormatting.building_detail_info[index] != ""
+        ):
+            AddressDataForFormatting.caution[
+                index
+            ] += "CAUTION: address4と、address5のデータには不正な文字列が含まれている可能性があります。両方について確認することを推奨します。  "
     # 都道府県名が空欄ならcaution
     for index in range(len(AddressDataForFormatting.prefecture)):
         if AddressDataForFormatting.prefecture[index] == "":

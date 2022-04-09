@@ -2,7 +2,6 @@ import os
 import re
 
 import pandas as pd
-
 from utils.dataclass.HomemadeClass import make_DataclassForOutput
 
 
@@ -38,7 +37,9 @@ def shape(AddressDataForFormatting):
     # 町域について
     address2: list = []
     for index in range(len(AddressDataForFormatting.town)):
-        if re.search("[0-9 -]", AddressDataForFormatting.town[index]) or re.search("[0-9 -]", AddressDataForFormatting.district[index]):
+        if re.search("[0-9 -]", AddressDataForFormatting.town[index]) or re.search(
+            "[0-9 -]", AddressDataForFormatting.district[index]
+        ):
             # 不正な文字が存在する caution
             address2.append(AddressDataForFormatting.town[index] + AddressDataForFormatting.district[index])
         else:
@@ -58,7 +59,9 @@ def shape(AddressDataForFormatting):
     for index in range(len(AddressDataForFormatting.building_info)):
         if AddressDataForFormatting.special_characters[index]:
             # special_charactersのセルが空ではない caution
-            address4.append(AddressDataForFormatting.special_characters[index] + AddressDataForFormatting.building_info[index])
+            address4.append(
+                AddressDataForFormatting.special_characters[index] + AddressDataForFormatting.building_info[index]
+            )
         else:
             # special_charactersが空
             address4.append(AddressDataForFormatting.building_info[index])
@@ -75,8 +78,10 @@ def shape(AddressDataForFormatting):
     # address4について
     for index in range(len(AddressDataForOutput.address4)):
         if re.search("[0-9]+$", AddressDataForOutput.address4[index]):
-            start: int = re.search("[0-9]+$", AddressDataForOutput.address4[index]).start()
-            end: int = re.search("[0-9]+$", AddressDataForOutput.address4[index]).end()
+            match = re.search("[0-9]+$", AddressDataForOutput.address4[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if AddressDataForOutput.address5[index] == "":
                 AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index][start:end]
                 AddressDataForOutput.address4[index] = AddressDataForOutput.address4[index][:start]
@@ -100,10 +105,14 @@ def shape(AddressDataForFormatting):
         if AddressDataForOutput.address4[index] == "":
             continue
         if re.search("センタ$", AddressDataForOutput.address4[index]):
-            start: int = re.search("センタ$", AddressDataForOutput.address4[index]).start()
+            match = re.search("センタ$", AddressDataForOutput.address4[index])
+            assert match is not None
+            start: int = match.start()
             AddressDataForOutput.address4[index] = AddressDataForOutput.address4[index][:start] + "センター"
         if re.search("タワ$", AddressDataForOutput.address4[index]):
-            start: int = re.search("タワ$", AddressDataForOutput.address4[index]).start()
+            match = re.search("タワ$", AddressDataForOutput.address4[index])
+            assert match is not None
+            start: int = match.start()
             AddressDataForOutput.address4[index] = AddressDataForOutput.address4[index][:start] + "タワー"
         if re.search("^ー*$", AddressDataForOutput.address4[index]):
             # 空白が-に置換されたことで生じるーを消去
@@ -127,7 +136,9 @@ def shape(AddressDataForFormatting):
         if AddressDataForOutput.address4[index] == "" and AddressDataForOutput.address5[index] == "":
             if re.search("([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)", AddressDataForOutput.address3[index]):
                 if re.search("([0-9]+)-([0-9]+)-([0-9]+)-([0-9]{3,})", AddressDataForOutput.address3[index]):
-                    start: int = re.search("-[0-9]+$", AddressDataForOutput.address3[index]).start()
+                    match = re.search("-[0-9]+$", AddressDataForOutput.address3[index])
+                    assert match is not None
+                    start: int = match.start()
                     # 3-5-4-809 の809の部分をaddress5に移行する
                     AddressDataForOutput.address5[index] = AddressDataForOutput.address3[index][start + 1 :]
                     AddressDataForOutput.address3[index] = AddressDataForOutput.address3[index][:start]

@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 def modify_exception_case_address2(AddressDataForOutput, target_index: int) -> None:
     """
     address2が不正な形になっている(具体的には、 - が混在している状態: 屋一-三八-二二-二0二-エステスクエア町)
@@ -5,10 +8,7 @@ def modify_exception_case_address2(AddressDataForOutput, target_index: int) -> N
     """
 
     # 町 屋 1-38-22-202 となるケース
-    if (
-        AddressDataForOutput.address1[target_index] == "町"
-        and AddressDataForOutput.address2[target_index] == "屋"
-    ):
+    if AddressDataForOutput.address1[target_index] == "町" and AddressDataForOutput.address2[target_index] == "屋":
         AddressDataForOutput.address2[target_index] = "町屋"
         AddressDataForOutput.address1[target_index] = ""
 

@@ -1,8 +1,9 @@
+from __future__ import annotations
+
 from utils.extract.town import extract_town
 
 
-def pull_out_town_field(
-    non_city_address_data_array: list[str], AddressDataForFormatting) -> list[str]:
+def pull_out_town_field(non_city_address_data_array: list[str], AddressDataForFormatting) -> list[str]:
     """
     args: non_city_address_data_array: list[str], AddressDataForFormatting
     return: non_town_address_data_array: list[str]

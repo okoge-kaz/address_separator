@@ -59,7 +59,9 @@ def shaping(AddressDataForFormatting) -> None:
                     shaped += char
             # 一-町 -> 一番町に変える
             if re.search("[一-九]-町", shaped):
-                start: int = re.search("[一-九]-町", shaped).start()
+                match = re.search("[一-九]-町", shaped)
+                assert match is not None
+                start: int = match.start()
                 shaped = shaped[: start + 1] + "番" + shaped[start + 2 :]
 
             AddressDataForFormatting.town[index] = shaped
@@ -113,8 +115,10 @@ def shaping(AddressDataForFormatting) -> None:
     # 市川市
     for index in range(len(AddressDataForFormatting.city)):
         if AddressDataForFormatting.city[index] == "市" and re.search("^川市", AddressDataForFormatting.district[index]):
-            start: int = re.search("^川市", AddressDataForFormatting.district[index]).start()
-            end: int = re.search("^川市", AddressDataForFormatting.district[index]).end()
+            match = re.search("^川市", AddressDataForFormatting.district[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if start != 0:
                 print("something wrong")  # for debug
             AddressDataForFormatting.city[index] = "市川市"
@@ -123,8 +127,10 @@ def shaping(AddressDataForFormatting) -> None:
         elif AddressDataForFormatting.district[index] == "":
             # どこに残骸があるか不明なので
             if AddressDataForFormatting.city[index] == "市" and re.search("^川市", AddressDataForFormatting.town[index]):
-                start: int = re.search("^川市", AddressDataForFormatting.town[index]).start()
-                end: int = re.search("^川市", AddressDataForFormatting.town[index]).end()
+                match = re.search("^川市", AddressDataForFormatting.town[index])
+                assert match is not None
+                start: int = match.start()
+                end: int = match.end()
                 if start != 0:
                     print("something wrong")  # for debug
                 AddressDataForFormatting.city[index] = "市川市"
@@ -132,8 +138,10 @@ def shaping(AddressDataForFormatting) -> None:
     # 市原市
     for index in range(len(AddressDataForFormatting.city)):
         if AddressDataForFormatting.city[index] == "市" and re.search("^原市", AddressDataForFormatting.district[index]):
-            start: int = re.search("^原市", AddressDataForFormatting.district[index]).start()
-            end: int = re.search("^原市", AddressDataForFormatting.district[index]).end()
+            match = re.search("^原市", AddressDataForFormatting.district[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if start != 0:
                 print("something wrong")  # for debug
             AddressDataForFormatting.city[index] = "市原市"
@@ -142,8 +150,10 @@ def shaping(AddressDataForFormatting) -> None:
         elif AddressDataForFormatting.district[index] == "":
             # どこに残骸があるか不明なので
             if AddressDataForFormatting.city[index] == "市" and re.search("^原市", AddressDataForFormatting.town[index]):
-                start: int = re.search("^原市", AddressDataForFormatting.town[index]).start()
-                end: int = re.search("^原市", AddressDataForFormatting.town[index]).end()
+                match = re.search("^原市", AddressDataForFormatting.town[index])
+                assert match is not None
+                start: int = match.start()
+                end: int = match.end()
                 if start != 0:
                     print("something wrong")  # for debug
                 AddressDataForFormatting.city[index] = "市原市"
@@ -151,8 +161,10 @@ def shaping(AddressDataForFormatting) -> None:
     # 野々市市
     for index in range(len(AddressDataForFormatting.city)):
         if AddressDataForFormatting.city[index] == "野々市" and re.search("^市", AddressDataForFormatting.district[index]):
-            start: int = re.search("^市", AddressDataForFormatting.district[index]).start()
-            end: int = re.search("^市", AddressDataForFormatting.district[index]).end()
+            match = re.search("^市", AddressDataForFormatting.district[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if start != 0:
                 print("something wrong")  # for debug
             AddressDataForFormatting.city[index] = "野々市市"
@@ -161,8 +173,10 @@ def shaping(AddressDataForFormatting) -> None:
         elif AddressDataForFormatting.district[index] == "":
             # どこに残骸があるか不明なので
             if AddressDataForFormatting.city[index] == "野々市" and re.search("^市", AddressDataForFormatting.town[index]):
-                start: int = re.search("^市", AddressDataForFormatting.town[index]).start()
-                end: int = re.search("^市", AddressDataForFormatting.town[index]).end()
+                match = re.search("^市", AddressDataForFormatting.town[index])
+                assert match is not None
+                start: int = match.start()
+                end: int = match.end()
                 if start != 0:
                     print("something wrong")  # for debug
                 AddressDataForFormatting.city[index] = "野々市市"
@@ -170,8 +184,10 @@ def shaping(AddressDataForFormatting) -> None:
     # 四日市市
     for index in range(len(AddressDataForFormatting.city)):
         if AddressDataForFormatting.city[index] == "四日市" and re.search("^市", AddressDataForFormatting.district[index]):
-            start: int = re.search("^市", AddressDataForFormatting.district[index]).start()
-            end: int = re.search("^市", AddressDataForFormatting.district[index]).end()
+            match = re.search("^市", AddressDataForFormatting.district[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if start != 0:
                 print("something wrong")  # for debug
             AddressDataForFormatting.city[index] = "四日市市"
@@ -180,8 +196,10 @@ def shaping(AddressDataForFormatting) -> None:
         elif AddressDataForFormatting.district[index] == "":
             # どこに残骸があるか不明なので
             if AddressDataForFormatting.city[index] == "四日市" and re.search("^市", AddressDataForFormatting.town[index]):
-                start: int = re.search("^市", AddressDataForFormatting.town[index]).start()
-                end: int = re.search("^市", AddressDataForFormatting.town[index]).end()
+                match = re.search("^市", AddressDataForFormatting.town[index])
+                assert match is not None
+                start: int = match.start()
+                end: int = match.end()
                 if start != 0:
                     print("something wrong")  # for debug
                 AddressDataForFormatting.city[index] = "四日市市"
@@ -189,8 +207,10 @@ def shaping(AddressDataForFormatting) -> None:
     # 廿日市市
     for index in range(len(AddressDataForFormatting.city)):
         if AddressDataForFormatting.city[index] == "廿日市" and re.search("^市", AddressDataForFormatting.district[index]):
-            start: int = re.search("^市", AddressDataForFormatting.district[index]).start()
-            end: int = re.search("^市", AddressDataForFormatting.district[index]).end()
+            match = re.search("^市", AddressDataForFormatting.district[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if start != 0:
                 print("something wrong")  # for debug
             AddressDataForFormatting.city[index] = "廿日市市"
@@ -199,8 +219,10 @@ def shaping(AddressDataForFormatting) -> None:
         elif AddressDataForFormatting.district[index] == "":
             # どこに残骸があるか不明なので
             if AddressDataForFormatting.city[index] == "廿日市" and re.search("^市", AddressDataForFormatting.town[index]):
-                start: int = re.search("^市", AddressDataForFormatting.town[index]).start()
-                end: int = re.search("^市", AddressDataForFormatting.town[index]).end()
+                match = re.search("^市", AddressDataForFormatting.town[index])
+                assert match is not None
+                start: int = match.start()
+                end: int = match.end()
                 if start != 0:
                     print("something wrong")  # for debug
                 AddressDataForFormatting.city[index] = "廿日市市"
@@ -208,8 +230,10 @@ def shaping(AddressDataForFormatting) -> None:
     # 余市軍
     for index in range(len(AddressDataForFormatting.city)):
         if AddressDataForFormatting.city[index] == "余市" and re.search("^郡", AddressDataForFormatting.district[index]):
-            start: int = re.search("^郡", AddressDataForFormatting.district[index]).start()
-            end: int = re.search("^郡", AddressDataForFormatting.district[index]).end()
+            match = re.search("^郡", AddressDataForFormatting.district[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if start != 0:
                 print("something wrong")  # for debug
             AddressDataForFormatting.city[index] = "余市郡"
@@ -218,8 +242,10 @@ def shaping(AddressDataForFormatting) -> None:
         elif AddressDataForFormatting.district[index] == "":
             # どこに残骸があるか不明なので
             if AddressDataForFormatting.city[index] == "余市" and re.search("^郡", AddressDataForFormatting.town[index]):
-                start: int = re.search("^郡", AddressDataForFormatting.town[index]).start()
-                end: int = re.search("^郡", AddressDataForFormatting.town[index]).end()
+                match = re.search("^郡", AddressDataForFormatting.town[index])
+                assert match is not None
+                start: int = match.start()
+                end: int = match.end()
                 if start != 0:
                     print("something wrong")  # for debug
                 AddressDataForFormatting.city[index] = "余市郡"
@@ -227,29 +253,37 @@ def shaping(AddressDataForFormatting) -> None:
         elif re.search("^[- 0-9 町 市]", AddressDataForFormatting.district[index]) is None:
             # どこに残骸があるか不明なので
             if AddressDataForFormatting.city[index] == "余市" and re.search("^郡", AddressDataForFormatting.town[index]):
-                start: int = re.search("^郡", AddressDataForFormatting.town[index]).start()
-                end: int = re.search("^郡", AddressDataForFormatting.town[index]).end()
+                match = re.search("^郡", AddressDataForFormatting.town[index])
+                assert match is not None
+                start: int = match.start()
+                end: int = match.end()
                 if start != 0:
                     print("something wrong")  # for debug
                 AddressDataForFormatting.city[index] = "余市郡"
                 AddressDataForFormatting.town[index] = AddressDataForFormatting.town[index][end:]
-                if AddressDataForFormatting.town[index] == "" and re.search("[町]$", AddressDataForFormatting.district[index]):
+                if AddressDataForFormatting.town[index] == "" and re.search(
+                    "[町]$", AddressDataForFormatting.district[index]
+                ):
                     # 文字列の分解位置をずらす
                     AddressDataForFormatting.town[index] = AddressDataForFormatting.district[index]
                     AddressDataForFormatting.district[index] = ""
     # 市貝町
     for index in range(len(AddressDataForFormatting.city)):
         if re.search("-市$", AddressDataForFormatting.city[index]):
-            start: int = re.search("-市$", AddressDataForFormatting.city[index]).start()
-            end: int = re.search("-市$", AddressDataForFormatting.city[index]).end()
+            match = re.search("-市$", AddressDataForFormatting.city[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if AddressDataForFormatting.town[index] == "貝町":
                 AddressDataForFormatting.town[index] = "市貝町"
                 AddressDataForFormatting.city[index] = AddressDataForFormatting.city[index][:start]
     # 市川三郷町
     for index in range(len(AddressDataForFormatting.city)):
         if re.search("-市$", AddressDataForFormatting.city[index]):
-            start: int = re.search("-市$", AddressDataForFormatting.city[index]).start()
-            end: int = re.search("-市$", AddressDataForFormatting.city[index]).end()
+            match = re.search("-市$", AddressDataForFormatting.city[index])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if AddressDataForFormatting.town[index] == "川3郷町":
                 AddressDataForFormatting.town[index] = "市川三郷町"
                 AddressDataForFormatting.city[index] = AddressDataForFormatting.city[index][:start]

@@ -1,4 +1,8 @@
+from __future__ import annotations
+
 import time
+
+import pandas as pd
 
 import utils.extract.detail.check.detail_data_check
 import utils.shape.output_data_shaping
@@ -8,6 +12,7 @@ from utils.os.output import create_output_data
 from utils.preprocess.pretreatment import pretreatment
 from utils.split.splitByAddressField import split_by_address_field
 
+
 def main() -> None:
 
     CSV_DATA: pd.DataFrame = get_input_csv_data()
@@ -15,7 +20,7 @@ def main() -> None:
     formatted_address_data_array: list[str] = pretreatment(CSV_DATA)
 
     AddressDataForFormatting = split_by_address_field(formatted_address_data_array, CSV_DATA)
-    
+
     # 出力形式用にデータを再整形
     AddressDataForOutput = utils.shape.output_data_shaping.shape(AddressDataForFormatting)
 

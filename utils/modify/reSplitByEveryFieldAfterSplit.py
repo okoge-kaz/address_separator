@@ -22,9 +22,7 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
     for index in range(DATA_SIZE):
         if re.search("-", AddressDataForOutput.address2[index]):
 
-            AddressDataForOutput.caution[
-                index
-            ] += "CAUTION: 自動整形システムが推測によって分割している箇所があります。この行の分割が正しいか確認することを強く推奨します。 "
+            AddressDataForOutput.caution[index] += "CAUTION: 自動整形システムが推測によって分割している箇所があります。この行の分割が正しいか確認することを強く推奨します。 "
             # 西一-一八-一六-カモミ-ル西町 のようになっているはず
 
             MAPPING_JAPANESE_STYLE_NUMBER_TO_ALABIC_NUMBER: dict = {
@@ -59,24 +57,23 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
 
             if re.search("[0-9]+", re_formated_address2_data_field):
                 # 数字がある
-                address3_start: int = re.search("[0-9]+", re_formated_address2_data_field).start()
-                address3_end: int = re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field).end()
+                match = re.search("[0-9]+", re_formated_address2_data_field)
+                assert match is not None
+                address3_start: int = match.start()
+                match = re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field)
+                assert match is not None
+                address3_end: int = match.end()
                 # 数字で終わる
-                if (
-                    len(re_formated_address2_data_field)
-                    == re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field).end()
-                ):
+                match = re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field)
+                assert match is not None
+                if len(re_formated_address2_data_field) == match.end():
                     if AddressDataForOutput.address3[index] == "":
-                        AddressDataForOutput.address2[index] = re_formated_address2_data_field[
-                            :address3_start
-                        ]
+                        AddressDataForOutput.address2[index] = re_formated_address2_data_field[:address3_start]
                         AddressDataForOutput.address3[index] = re_formated_address2_data_field[
                             address3_start:address3_end
                         ]
                     else:
-                        AddressDataForOutput.address2[index] = re_formated_address2_data_field[
-                            :address3_start
-                        ]
+                        AddressDataForOutput.address2[index] = re_formated_address2_data_field[:address3_start]
                         AddressDataForOutput.address3[index] = (
                             re_formated_address2_data_field[address3_start:address3_end]
                             + AddressDataForOutput.address3[index]
@@ -85,23 +82,19 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
                     # 建物名らしきものが存在する
                     if AddressDataForOutput.address3[index] == "":
                         # 番地情報が空
-                        AddressDataForOutput.address2[index] = re_formated_address2_data_field[
-                            :address3_start
-                        ]
+                        AddressDataForOutput.address2[index] = re_formated_address2_data_field[:address3_start]
                         AddressDataForOutput.address3[index] = re_formated_address2_data_field[
                             address3_start:address3_end
                         ]
-                        building_information_AddressDataForOutput: str = re_formated_address2_data_field[
-                            address3_end:
-                        ]
+                        building_information_AddressDataForOutput: str = re_formated_address2_data_field[address3_end:]
                         if re.search("[0-9]", building_information_AddressDataForOutput):
                             # 建物名の情報に部屋番号が紛れ込んでいる
-                            start_index: int = re.search(
-                                "[0-9]", building_information_AddressDataForOutput
-                            ).start()
-                            AddressDataForOutput.address4[
-                                index
-                            ] = building_information_AddressDataForOutput[:start_index]
+                            match = re.search("[0-9]", building_information_AddressDataForOutput)
+                            assert match is not None
+                            start_index: int = match.start()
+                            AddressDataForOutput.address4[index] = building_information_AddressDataForOutput[
+                                :start_index
+                            ]
                             # 先頭の-を削除
                             if (
                                 AddressDataForOutput.address4[index] != ""
@@ -114,14 +107,12 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
                                 "-", "ー", AddressDataForOutput.address4[index]
                             )
                             # address5
-                            AddressDataForOutput.address5[
-                                index
-                            ] = building_information_AddressDataForOutput[start_index:]
+                            AddressDataForOutput.address5[index] = building_information_AddressDataForOutput[
+                                start_index:
+                            ]
                         else:
                             # 建物情報のみ
-                            AddressDataForOutput.address4[
-                                index
-                            ] = building_information_AddressDataForOutput
+                            AddressDataForOutput.address4[index] = building_information_AddressDataForOutput
                             # 先頭の-を削除
                             if (
                                 AddressDataForOutput.address4[index] != ""
@@ -136,18 +127,12 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
                     else:
                         # 番地情報に数字がある
                         # 建物情報の可能性が高いのでaddress5に移す
-                        AddressDataForOutput.address5[index] = AddressDataForOutput.address3[
-                            index
-                        ]
-                        AddressDataForOutput.address2[index] = re_formated_address2_data_field[
-                            :address3_start
-                        ]
+                        AddressDataForOutput.address5[index] = AddressDataForOutput.address3[index]
+                        AddressDataForOutput.address2[index] = re_formated_address2_data_field[:address3_start]
                         AddressDataForOutput.address3[index] = re_formated_address2_data_field[
                             address3_start:address3_end
                         ]
-                        AddressDataForOutput.address4[index] = re_formated_address2_data_field[
-                            address3_end:
-                        ]
+                        AddressDataForOutput.address4[index] = re_formated_address2_data_field[address3_end:]
                         # 先頭の-を削除
                         if (
                             AddressDataForOutput.address4[index] != ""
@@ -156,9 +141,7 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
                             if len(AddressDataForOutput.address4[index]) >= 2:
                                 AddressDataForOutput.address4[index] = AddressDataForOutput.address4[index][1:]
                         # address4の-をーに変更
-                        AddressDataForOutput.address4[index] = re.sub(
-                            "-", "ー", AddressDataForOutput.address4[index]
-                        )
+                        AddressDataForOutput.address4[index] = re.sub("-", "ー", AddressDataForOutput.address4[index])
 
             # 例外ケース処理
             modify_exception_case_address2(AddressDataForOutput, index)
@@ -167,9 +150,7 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
     for index in range(DATA_SIZE):
         if re.search("-", AddressDataForOutput.address1[index]):
 
-            AddressDataForOutput.caution[
-                index
-            ] += "CAUTION: 自動整形システムが推測によって分割している箇所があります。この行の分割が正しいか確認することを強く推奨します。 "
+            AddressDataForOutput.caution[index] += "CAUTION: 自動整形システムが推測によって分割している箇所があります。この行の分割が正しいか確認することを強く推奨します。 "
 
             # 羽若町四九三-一-市 のようになっているはず
             MAPPING_JAPANESE_STYLE_NUMBER_TO_ALABIC_NUMBER: dict = {
@@ -205,24 +186,23 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
             if re.search("[0-9]+", re_formated_address1_data_field):
                 # 数字がある
                 regular_expression_search_result = re.search("[0-9]+", re_formated_address1_data_field)
-                address3_start: int = re.search("[0-9]+", re_formated_address1_data_field).start()
-                address3_end: int = re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field).end()
+                match = re.search("[0-9]+", re_formated_address1_data_field)
+                assert match is not None
+                address3_start: int = match.start()
+                match = re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field)
+                assert match is not None
+                address3_end: int = match.end()
                 # 数字で終わる
-                if (
-                    len(re_formated_address1_data_field)
-                    == re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field).end()
-                ):
+                match = re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field)
+                assert match is not None
+                if len(re_formated_address1_data_field) == match.end():
                     if AddressDataForOutput.address3[index] == "":
-                        AddressDataForOutput.address1[index] = re_formated_address1_data_field[
-                            :address3_start
-                        ]
+                        AddressDataForOutput.address1[index] = re_formated_address1_data_field[:address3_start]
                         AddressDataForOutput.address3[index] = re_formated_address1_data_field[
                             address3_start:address3_end
                         ]
                     else:
-                        AddressDataForOutput.address1[index] = re_formated_address1_data_field[
-                            :address3_start
-                        ]
+                        AddressDataForOutput.address1[index] = re_formated_address1_data_field[:address3_start]
                         AddressDataForOutput.address3[index] = (
                             re_formated_address1_data_field[address3_start:address3_end]
                             + AddressDataForOutput.address3[index]
@@ -231,23 +211,19 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
                     # 建物名らしきものが存在する
                     if AddressDataForOutput.address3[index] == "":
                         # 番地情報が空
-                        AddressDataForOutput.address1[index] = re_formated_address1_data_field[
-                            :address3_start
-                        ]
+                        AddressDataForOutput.address1[index] = re_formated_address1_data_field[:address3_start]
                         AddressDataForOutput.address3[index] = re_formated_address1_data_field[
                             address3_start:address3_end
                         ]
-                        building_information_AddressDataForOutput: str = re_formated_address1_data_field[
-                            address3_end:
-                        ]
+                        building_information_AddressDataForOutput: str = re_formated_address1_data_field[address3_end:]
                         if re.search("[0-9]", building_information_AddressDataForOutput):
                             # 建物名の情報に部屋番号が紛れ込んでいる
-                            start_index: int = re.search(
-                                "[0-9]", building_information_AddressDataForOutput
-                            ).start()
-                            AddressDataForOutput.address4[
-                                index
-                            ] = building_information_AddressDataForOutput[:start_index]
+                            match = re.search("[0-9]", building_information_AddressDataForOutput)
+                            assert match is not None
+                            start_index: int = match.start()
+                            AddressDataForOutput.address4[index] = building_information_AddressDataForOutput[
+                                :start_index
+                            ]
                             # 先頭の-を削除
                             if (
                                 AddressDataForOutput.address4[index] != ""
@@ -260,14 +236,12 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
                                 "-", "ー", AddressDataForOutput.address4[index]
                             )
                             # address5
-                            AddressDataForOutput.address5[
-                                index
-                            ] = building_information_AddressDataForOutput[start_index:]
+                            AddressDataForOutput.address5[index] = building_information_AddressDataForOutput[
+                                start_index:
+                            ]
                         else:
                             # 建物情報のみ
-                            AddressDataForOutput.address4[
-                                index
-                            ] = building_information_AddressDataForOutput
+                            AddressDataForOutput.address4[index] = building_information_AddressDataForOutput
                             # 先頭の-を削除
                             if (
                                 AddressDataForOutput.address4[index] != ""
@@ -282,18 +256,12 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
                     else:
                         # 番地情報に数字がある
                         # 建物情報の可能性が高いのでaddress5に移す
-                        AddressDataForOutput.address5[index] = AddressDataForOutput.address3[
-                            index
-                        ]
-                        AddressDataForOutput.address1[index] = re_formated_address1_data_field[
-                            :address3_start
-                        ]
+                        AddressDataForOutput.address5[index] = AddressDataForOutput.address3[index]
+                        AddressDataForOutput.address1[index] = re_formated_address1_data_field[:address3_start]
                         AddressDataForOutput.address3[index] = re_formated_address1_data_field[
                             address3_start:address3_end
                         ]
-                        AddressDataForOutput.address4[index] = re_formated_address1_data_field[
-                            address3_end:
-                        ]
+                        AddressDataForOutput.address4[index] = re_formated_address1_data_field[address3_end:]
                         # 先頭の-を削除
                         if (
                             AddressDataForOutput.address4[index] != ""
@@ -302,9 +270,7 @@ def re_split_by_every_fields(AddressDataForOutput) -> None:
                             if len(AddressDataForOutput.address4[index]) >= 2:
                                 AddressDataForOutput.address4[index] = AddressDataForOutput.address4[index][1:]
                         # address4の-をーに変更
-                        AddressDataForOutput.address4[index] = re.sub(
-                            "-", "ー", AddressDataForOutput.address4[index]
-                        )
+                        AddressDataForOutput.address4[index] = re.sub("-", "ー", AddressDataForOutput.address4[index])
 
                 # 移動処理
                 AddressDataForOutput.address2[index] = AddressDataForOutput.address1[index]

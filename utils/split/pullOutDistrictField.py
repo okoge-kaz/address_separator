@@ -1,8 +1,9 @@
+from __future__ import annotations
+
 from utils.extract.district import extract_district
 
 
-def pull_out_district_field(
-    non_town_address_data_array: list[str], AddressDataForFormatting) -> list[str]:
+def pull_out_district_field(non_town_address_data_array: list[str], AddressDataForFormatting) -> list[str]:
     """
     args: non_town_address_data_array: list[str], AddressDataForFormatting
     return: others: list[str]

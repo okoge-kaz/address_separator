@@ -15,16 +15,11 @@ def handle_miscellaneous_bugs(AddressDataForOutput) -> None:
     # address2に-があったらerror
     for index in range(len(AddressDataForOutput.address2)):
         if re.search("-", AddressDataForOutput.address2[index]):
-            AddressDataForOutput.error1[
-                index
-            ] += "ERROR: address2に存在する情報は秩序だっていません。整形エラーが発生している可能性が高いです。  "
+            AddressDataForOutput.error1[index] += "ERROR: address2に存在する情報は秩序だっていません。整形エラーが発生している可能性が高いです。  "
 
     # address5に~号 とあるがaddress4が空で、かつaddress3に-が2未満なとき
     for index in range(len(AddressDataForOutput.address5)):
-        if (
-            re.search("^[0-9]+号$", AddressDataForOutput.address5[index])
-            and AddressDataForOutput.address4[index] == ""
-        ):
+        if re.search("^[0-9]+号$", AddressDataForOutput.address5[index]) and AddressDataForOutput.address4[index] == "":
             if re.search("^[0-9]+(-[0-9]+)*$", AddressDataForOutput.address3[index]):
                 # address3が正常かどうか
                 if re.search("^[0-9]+(-[0-9]+){2,}$", AddressDataForOutput.address3[index]):
@@ -33,9 +28,7 @@ def handle_miscellaneous_bugs(AddressDataForOutput) -> None:
                 else:
                     # 2回未満
                     # ~号というものをaddress3に追加する(号を消して)
-                    AddressDataForOutput.address3[index] += (
-                        "-" + AddressDataForOutput.address5[index][:-1]
-                    )
+                    AddressDataForOutput.address3[index] += "-" + AddressDataForOutput.address5[index][:-1]
                     AddressDataForOutput.address5[index] = ""
             else:
                 AddressDataForOutput.error1[index] += "ERROR: address3のデータ形式が不正です。 "
@@ -46,17 +39,12 @@ def handle_miscellaneous_bugs(AddressDataForOutput) -> None:
             if AddressDataForOutput.address5[index] != "":
                 AddressDataForOutput.caution[index] += "CAUTION: address4にはaddress5にあるべきデータが存在するやもしれません。  "
                 continue
-            AddressDataForOutput.address5[index] = re.sub(
-                "ー", "-", AddressDataForOutput.address4[index]
-            )
+            AddressDataForOutput.address5[index] = re.sub("ー", "-", AddressDataForOutput.address4[index])
             AddressDataForOutput.address4[index] = ""
 
     # 番地がないデータの処理
     for index in range(len(AddressDataForOutput.address4)):
-        if (
-            AddressDataForOutput.address4[index] != ""
-            and AddressDataForOutput.address3[index] == ""
-        ):
+        if AddressDataForOutput.address4[index] != "" and AddressDataForOutput.address3[index] == "":
             # address4にある町域データと思しきものを移動
             if re.search("[a-z A-Z 0-9 - ?]", AddressDataForOutput.address4[index]):
                 # マンション名にありそうなものを除く

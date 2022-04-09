@@ -29,73 +29,46 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
 
     # address4に単独で 棟 とあったら
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address3[index] != ""
-            and AddressDataForOutput.address4[index] == "棟"
-        ):
+        if AddressDataForOutput.address3[index] != "" and AddressDataForOutput.address4[index] == "棟":
             if re.search("-[0-9]+$", AddressDataForOutput.address3[index]):
-                regular_expression_search_result = re.search(
-                    "-[0-9]+$", AddressDataForOutput.address3[index]
-                )
+                regular_expression_search_result = re.search("-[0-9]+$", AddressDataForOutput.address3[index])
 
                 if regular_expression_search_result is not None:
                     start: int = regular_expression_search_result.start()
 
                     AddressDataForOutput.address5[index] = (
-                        AddressDataForOutput.address3[index][start + 1 :]
-                        + "棟"
-                        + AddressDataForOutput.address5[index]
+                        AddressDataForOutput.address3[index][start + 1 :] + "棟" + AddressDataForOutput.address5[index]
                     )
-                    AddressDataForOutput.address3[index] = AddressDataForOutput.address3[
-                        index
-                    ][:start]
+                    AddressDataForOutput.address3[index] = AddressDataForOutput.address3[index][:start]
                     AddressDataForOutput.address4[index] = ""
 
     # address4に単独で 号棟 とあったら
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address3[index] != ""
-            and AddressDataForOutput.address4[index] == "号棟"
-        ):
+        if AddressDataForOutput.address3[index] != "" and AddressDataForOutput.address4[index] == "号棟":
             if re.search("-[0-9]+$", AddressDataForOutput.address3[index]):
-                regular_expression_search_result = re.search(
-                    "-[0-9]+$", AddressDataForOutput.address3[index]
-                )
+                regular_expression_search_result = re.search("-[0-9]+$", AddressDataForOutput.address3[index])
 
                 if regular_expression_search_result is not None:
                     start: int = regular_expression_search_result.start()
 
                     AddressDataForOutput.address5[index] = (
-                        AddressDataForOutput.address3[index][start + 1 :]
-                        + "号棟"
-                        + AddressDataForOutput.address5[index]
+                        AddressDataForOutput.address3[index][start + 1 :] + "号棟" + AddressDataForOutput.address5[index]
                     )
-                    AddressDataForOutput.address3[index] = AddressDataForOutput.address3[
-                        index
-                    ][:start]
+                    AddressDataForOutput.address3[index] = AddressDataForOutput.address3[index][:start]
                     AddressDataForOutput.address4[index] = ""
 
     # address4に単独で 号室 とあったら
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address3[index] != ""
-            and AddressDataForOutput.address4[index] == "号室"
-        ):
+        if AddressDataForOutput.address3[index] != "" and AddressDataForOutput.address4[index] == "号室":
             if re.search("-[0-9]+$", AddressDataForOutput.address3[index]):
-                regular_expression_search_result = re.search(
-                    "-[0-9]+$", AddressDataForOutput.address3[index]
-                )
+                regular_expression_search_result = re.search("-[0-9]+$", AddressDataForOutput.address3[index])
 
                 if regular_expression_search_result is not None:
                     start: int = regular_expression_search_result.start()
                     AddressDataForOutput.address5[index] = (
-                        AddressDataForOutput.address3[index][start + 1 :]
-                        + "号室"
-                        + AddressDataForOutput.address5[index]
+                        AddressDataForOutput.address3[index][start + 1 :] + "号室" + AddressDataForOutput.address5[index]
                     )
-                    AddressDataForOutput.address3[index] = AddressDataForOutput.address3[
-                        index
-                    ][:start]
+                    AddressDataForOutput.address3[index] = AddressDataForOutput.address3[index][:start]
                     AddressDataForOutput.address4[index] = ""
 
     # address4に〜号室があるとき
@@ -103,27 +76,21 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         # 902号室のようなもの
         if re.search("^[0-9]+号室$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5 != "":
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
         # c号室のようなもの
         elif re.search("^[a-z]号室$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5 != "":
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
         # C号室のようなもの
         elif re.search("^[A-Z]号室$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5 != "":
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -137,24 +104,16 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
     for index in range(DATA_SIZE):
         if AddressDataForOutput.address4[index] == "号室":
             if re.search("-[0-9]+", AddressDataForOutput.address3[index]):
-                regular_expression_search_result = re.search(
-                    "-[0-9]+", AddressDataForOutput.address3[index]
-                )
+                regular_expression_search_result = re.search("-[0-9]+", AddressDataForOutput.address3[index])
 
                 if regular_expression_search_result is not None:
                     start: int = regular_expression_search_result.start()
                     if AddressDataForOutput.address5 != "":
-                        AddressDataForOutput.caution[
-                            index
-                        ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                        AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                         continue
-                    AddressDataForOutput.address5[index] = (
-                        AddressDataForOutput.address3[index][start + 1 :] + "号室"
-                    )
+                    AddressDataForOutput.address5[index] = AddressDataForOutput.address3[index][start + 1 :] + "号室"
                     AddressDataForOutput.address4[index] = ""
-                    AddressDataForOutput.address3[index] = AddressDataForOutput.address3[
-                        index
-                    ][:start]
+                    AddressDataForOutput.address3[index] = AddressDataForOutput.address3[index][:start]
 
     # address4にある()のようなデータのかっこをはずし、適切な位置へ
     for index in range(DATA_SIZE):
@@ -164,9 +123,7 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         if re.search("^[0-9]{3,}$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5[index] != "":
                 # address5が空ではない
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -174,9 +131,7 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         elif re.search("^[0-9]F$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5[index] != "":
                 # address5が空ではない
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -184,9 +139,7 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         elif re.search("^[0-9]階$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5[index] != "":
                 # address5が空ではない
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -194,9 +147,7 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         elif re.search("^[a-z]号室$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5[index] != "":
                 # address5が空ではない
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -204,9 +155,7 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         elif re.search("^[a-z]号室$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5[index] != "":
                 # address5が空ではない
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -214,9 +163,7 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         elif re.search("^[0-9]+号室$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5[index] != "":
                 # address5が空ではない
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -224,9 +171,7 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         elif re.search("^[A-Z]号室$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5[index] != "":
                 # address5が空ではない
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -234,9 +179,7 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
         elif re.search("^[A-Z]号室$", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address5[index] != "":
                 # address5が空ではない
-                AddressDataForOutput.caution[
-                    index
-                ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
+                AddressDataForOutput.caution[index] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
             AddressDataForOutput.address5[index] = AddressDataForOutput.address4[index]
             AddressDataForOutput.address4[index] = ""
@@ -248,12 +191,8 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
 
             if regular_expression_search_result is not None:
                 end: int = regular_expression_search_result.end()
-                AddressDataForOutput.address3[index] += AddressDataForOutput.address4[index][
-                    1 : end - 1
-                ]
-                AddressDataForOutput.address4[index] = AddressDataForOutput.address4[index][
-                    end:
-                ]
+                AddressDataForOutput.address3[index] += AddressDataForOutput.address4[index][1 : end - 1]
+                AddressDataForOutput.address4[index] = AddressDataForOutput.address4[index][end:]
 
     # address4に # が単独であったら
     for index in range(DATA_SIZE):
@@ -264,8 +203,5 @@ def modify_building_dat_field(AddressDataForOutput) -> None:
     for index in range(DATA_SIZE):
         if AddressDataForOutput.address4[index] == "":
             continue
-        if (
-            AddressDataForOutput.address4[index][0] == "ー"
-            and len(AddressDataForOutput.address4[index]) >= 1
-        ):
+        if AddressDataForOutput.address4[index][0] == "ー" and len(AddressDataForOutput.address4[index]) >= 1:
             AddressDataForOutput.address4[index] = AddressDataForOutput.address4[index][1:]

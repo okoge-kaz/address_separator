@@ -16,10 +16,7 @@ def modify_special_place_name(AddressDataForOutput) -> None:
 
     # 一宮
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address3[index] == "1"
-            and AddressDataForOutput.address4[index] == "宮"
-        ):
+        if AddressDataForOutput.address3[index] == "1" and AddressDataForOutput.address4[index] == "宮":
             if AddressDataForOutput.address2[index] != "":
                 AddressDataForOutput.error1[index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
@@ -30,10 +27,7 @@ def modify_special_place_name(AddressDataForOutput) -> None:
 
     # 一宮徳谷
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address3[index] == "1"
-            and AddressDataForOutput.address4[index] == "宮徳谷"
-        ):
+        if AddressDataForOutput.address3[index] == "1" and AddressDataForOutput.address4[index] == "宮徳谷":
             if AddressDataForOutput.address2[index] != "":
                 AddressDataForOutput.error1[index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
@@ -44,10 +38,7 @@ def modify_special_place_name(AddressDataForOutput) -> None:
 
     # 五台山
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address3[index] == "5"
-            and AddressDataForOutput.address4[index] == "台山"
-        ):
+        if AddressDataForOutput.address3[index] == "5" and AddressDataForOutput.address4[index] == "台山":
             if AddressDataForOutput.address2[index] != "":
                 AddressDataForOutput.error1[index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
@@ -58,24 +49,17 @@ def modify_special_place_name(AddressDataForOutput) -> None:
 
     # 五台山〜
     for index in range(DATA_SIZE):
-        if AddressDataForOutput.address3[index] == "5" and re.search(
-            "^台山.+", AddressDataForOutput.address4[index]
-        ):
+        if AddressDataForOutput.address3[index] == "5" and re.search("^台山.+", AddressDataForOutput.address4[index]):
             if AddressDataForOutput.address2[index] != "":
                 AddressDataForOutput.error1[index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
                 AddressDataForOutput.address2[index] = ""
                 AddressDataForOutput.address3[index] = ""
-                AddressDataForOutput.address4[index] = (
-                    "五" + AddressDataForOutput.address4[index]
-                )
+                AddressDataForOutput.address4[index] = "五" + AddressDataForOutput.address4[index]
 
     # 三谷
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address3[index] == "3"
-            and AddressDataForOutput.address4[index] == "谷"
-        ):
+        if AddressDataForOutput.address3[index] == "3" and AddressDataForOutput.address4[index] == "谷":
             if AddressDataForOutput.address2[index] != "":
                 AddressDataForOutput.error1[index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
@@ -86,10 +70,7 @@ def modify_special_place_name(AddressDataForOutput) -> None:
 
     # 三原
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address3[index] == "3"
-            and AddressDataForOutput.address4[index] == "原"
-        ):
+        if AddressDataForOutput.address3[index] == "3" and AddressDataForOutput.address4[index] == "原":
             if AddressDataForOutput.address2[index] != "":
                 AddressDataForOutput.error1[index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
@@ -102,10 +83,7 @@ def modify_special_place_name(AddressDataForOutput) -> None:
     for index in range(DATA_SIZE):
         if AddressDataForOutput.address3[index] == "":
             continue
-        if (
-            re.search("^重城", AddressDataForOutput.address4[index])
-            and AddressDataForOutput.address3[index][-1] == "3"
-        ):
+        if re.search("^重城", AddressDataForOutput.address4[index]) and AddressDataForOutput.address3[index][-1] == "3":
             if len(AddressDataForOutput.address3[index]) < 2:
                 continue
             AddressDataForOutput.address3[index] = AddressDataForOutput.address3[index][:-2]
@@ -113,9 +91,6 @@ def modify_special_place_name(AddressDataForOutput) -> None:
 
     # 町屋
     for index in range(DATA_SIZE):
-        if (
-            AddressDataForOutput.address1[index] == "町"
-            and AddressDataForOutput.address2[index] == "屋"
-        ):
+        if AddressDataForOutput.address1[index] == "町" and AddressDataForOutput.address2[index] == "屋":
             AddressDataForOutput.address2[index] = "町屋"
             AddressDataForOutput.address1[index] = ""

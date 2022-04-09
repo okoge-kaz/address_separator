@@ -1,5 +1,6 @@
-import pandas as pd
 import os
+
+import pandas as pd
 from utils.dataclass.ConvertDataclassForOutputToDict import outputclass_to_dict
 
 
@@ -9,7 +10,7 @@ def create_output_data(AddressDataForOutput, Relative_PATH: str = "/output/outpu
     return: void
     """
 
-    #DataclassForOutputを辞書型に変換
+    # DataclassForOutputを辞書型に変換
     formated_dictionary_data = outputclass_to_dict(AddressDataForOutput)
     Current_PATH = os.getcwd()
     PATH = Current_PATH + Relative_PATH

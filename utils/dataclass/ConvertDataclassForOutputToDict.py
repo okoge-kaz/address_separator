@@ -4,11 +4,19 @@ def outputclass_to_dict(AddressDataForOutput) -> dict:
     return: formated_dictionary_data: dict
     AddressDataForOutputを辞書型に変更
     """
-    
+
     size = len(AddressDataForOutput.original)
     formated_dictionary_data: dict = {
-        "original" : [], "prefecture" : [], "address1" : [], "address2" : [], "address3" : [],
-        "address4" : [], "address5" : [], "error1" : [], "error2" : [], "caution" : []
+        "original": [],
+        "prefecture": [],
+        "address1": [],
+        "address2": [],
+        "address3": [],
+        "address4": [],
+        "address5": [],
+        "error1": [],
+        "error2": [],
+        "caution": [],
     }
 
     for i in range(size):
