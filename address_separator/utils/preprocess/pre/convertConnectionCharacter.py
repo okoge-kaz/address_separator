@@ -17,4 +17,5 @@ def convertConnectionCharacter(address_data: str) -> str:
     address_data = re.sub("\n", "-", address_data)
     # 正規表現で/を-に置き換える
     formatted_address_data = re.sub("/", "-", address_data)
+
     return formatted_address_data
