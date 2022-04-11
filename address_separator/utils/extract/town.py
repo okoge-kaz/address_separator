@@ -2,8 +2,8 @@ def extract_town(non_city_address_data: list):
     """
     市町村よりさらに細かな地区行政区分を文字列から取得する
     """
-    towns: list = []
-    non_town_address_data: list = []
+    towns: list[str] = []
+    non_town_address_data: list[str] = []
 
     for town_address_data in non_city_address_data:
         if "区" in town_address_data:
@@ -38,4 +38,5 @@ def extract_town(non_city_address_data: list):
         else:
             towns.append("")
             non_town_address_data.append(town_address_data)
+
     return (towns, non_town_address_data)
