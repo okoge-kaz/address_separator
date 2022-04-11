@@ -7,7 +7,7 @@ def convertJapaneseStyleNumberToAlabicNumber(address_data: str) -> str:
     return: formatted_address_data: str (example: 東京都港区元麻布1-6-9)
     """
 
-    JAPANSE_STYLE_NUMBER: list = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"]
+    JAPANESE_STYLE_NUMBER: list = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"]
     MAPPING_DICTIONARY: dict = {
         "１": "1",
         "２": "2",
@@ -39,7 +39,7 @@ def convertJapaneseStyleNumberToAlabicNumber(address_data: str) -> str:
     for character in address_data:
 
         _formatted_character: str = ""
-        if character in JAPANSE_STYLE_NUMBER:
+        if character in JAPANESE_STYLE_NUMBER:
             # 漢数字を算用数字に変換
             _formatted_character += DICTIONARY_JAPANESE_STYLE_NUMBER[character]
         else:
@@ -51,4 +51,5 @@ def convertJapaneseStyleNumberToAlabicNumber(address_data: str) -> str:
             response += _formatted_character
 
     formatted_address_data: str = response
+
     return formatted_address_data
