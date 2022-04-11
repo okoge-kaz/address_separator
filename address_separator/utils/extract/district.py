@@ -20,7 +20,7 @@ def extract_district(non_town_address_data_list: list[str]) -> tuple[list[str], 
     for non_town_address_data in non_town_address_data_list:
 
         district_tuple_data = pull_out_district_field(non_town_address_data)
-        
+
         districts_data_list.append(district_tuple_data[0])
         other_address_data_list.append(district_tuple_data[1])
 

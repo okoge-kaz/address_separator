@@ -2,7 +2,7 @@ def pull_out_district_field(non_town_address_data: str) -> tuple[str, str]:
     """_summary_
 
     Args:
-        non_town_address_data (str): 
+        non_town_address_data (str):
 
     Returns:
         tuple[str, str]:
