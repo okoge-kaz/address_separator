@@ -1,24 +1,24 @@
 import re
 
 
-def reshape_exceptional_address_address_data_array(address_data_array: list[str]):
+def reshape_exceptional_address_address_data_array(address_data_array: list[str]) -> None:
     """
     args: 住所データ
     return: void, 配列データ自体を修正する
     """
 
-    ADDRESS_address_data_array_ARRAY_SIZE: int = len(address_data_array)
+    ADDRESS_ARRAY_SIZE: int = len(address_data_array)
 
     # ‐ -> - 変換
-    for index in range(ADDRESS_address_data_array_ARRAY_SIZE):
+    for index in range(ADDRESS_ARRAY_SIZE):
         address_data_array[index] = re.sub("‐", "-", address_data_array[index])
 
     # ｰ -> - 変換
-    for index in range(ADDRESS_address_data_array_ARRAY_SIZE):
+    for index in range(ADDRESS_ARRAY_SIZE):
         address_data_array[index] = re.sub("ｰ", "-", address_data_array[index])
 
     # 漢数字が含まれる市町村名、町域などを正常な形に直す
-    for index in range(ADDRESS_address_data_array_ARRAY_SIZE):
+    for index in range(ADDRESS_ARRAY_SIZE):
         """
         地名に漢数字が含まれている地名を正常な形に直す
         ルールベースの処理
@@ -137,7 +137,7 @@ def reshape_exceptional_address_address_data_array(address_data_array: list[str]
         address_data_array[index] = re.sub("", "", address_data_array[index])
 
     # 文字化け関連
-    for index in range(len(address_data_array)):
+    for index in range(ADDRESS_ARRAY_SIZE):
         # アパ-ト
         address_data_array[index] = re.sub("アパ-ト", "アパート", address_data_array[index])
         # コ-ポ
@@ -154,11 +154,11 @@ def reshape_exceptional_address_address_data_array(address_data_array: list[str]
         address_data_array[index] = re.sub("テ-ラ-", "テーラー", address_data_array[index])
 
     # -が2回連続する箇所を-に直す
-    for index in range(len(address_data_array)):
+    for index in range(ADDRESS_ARRAY_SIZE):
         address_data_array[index] = re.sub("-{1,}", "-", address_data_array[index])
 
     # -の を -に置換する
-    for index in range(len(address_data_array)):
+    for index in range(ADDRESS_ARRAY_SIZE):
         if re.search("-の[0-9]+", address_data_array[index]):
             address_data_array[index] = re.sub("-の", "-", address_data_array[index])
         if re.search("[0-9]+の[0-9]+", address_data_array[index]):
@@ -171,7 +171,7 @@ def reshape_exceptional_address_address_data_array(address_data_array: list[str]
                         and address_data_array[index][id + 1] >= "0"
                         and address_data_array[index][id + 1] <= "9"
                     ):
-                        # 〜の〜　前後が数字であるとき
+                        # 〜の〜 前後が数字であるとき
                         shaped_string += "-"
                     else:
                         shaped_string += address_data_array[index][id]
