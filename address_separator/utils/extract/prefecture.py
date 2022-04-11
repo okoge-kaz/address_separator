@@ -1,8 +1,21 @@
-def extract_prefecture(string: str):
+def extract_prefecture(address_data: str):
     """
-    都道府県を抽出するための関数
+    extract prefecture: 都道府県を抽出する
+
+    Parameters
+    ----------
+    address_data : str
+        住所データ
+
+    Returns
+    -------
+    prefecture_data: str
+        都道府県データ
+
+    non_prefecture_address_data: str
+        都道府県を抽出した残りの住所データ
     """
-    prefectures: list = [
+    PREFECTURES: list[str] = [
         "北海道",
         "青森県",
         "岩手県",
@@ -52,8 +65,9 @@ def extract_prefecture(string: str):
         "沖縄県",
     ]
 
-    for prefecture in prefectures:
-        if prefecture in string:
-            return (prefecture, string.replace(prefecture, ""))
+    for prefecture in PREFECTURES:
+        if prefecture in address_data:
+            return (prefecture, address_data.replace(prefecture, ""))
+
     # 県名が存在しない
-    return ("", string)
+    return ("", address_data)

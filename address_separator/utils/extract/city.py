@@ -1,10 +1,10 @@
-def extract_city(non_prefecture_address_data: list):
+def extract_city(non_prefecture_address_data: list[str]) -> tuple[list[str], list[str]]:
     """
     市、区、群、町、村の順で文字列を探索し、分割する。
     if文の順番が 市->区->郡->町->村であるのは、分割パターンの都合上最もうまくいくように
     """
-    cities: list = []
-    non_city_address_data: list = []
+    cities: list[str] = []
+    non_city_address_data: list[str] = []
 
     for city_address_data in non_prefecture_address_data:
         if "市" in city_address_data:
@@ -46,4 +46,5 @@ def extract_city(non_prefecture_address_data: list):
         else:
             cities.append("")
             non_city_address_data.append(city_address_data)
+
     return (cities, non_city_address_data)
