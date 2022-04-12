@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 
 
@@ -21,10 +23,14 @@ def modify_special_place_name(splitted_address_data_dictionaries: dict[str, list
             and splitted_address_data_dictionaries["address4"][index] == "宮"
         ):
             if splitted_address_data_dictionaries["address2"][index] != "":
-                splitted_address_data_dictionaries["error1"][index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
+                splitted_address_data_dictionaries["error1"][
+                    index
+                ] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
                 splitted_address_data_dictionaries["address2"][index] = "一宮"
-                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][index]
+                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][
+                    index
+                ]
                 splitted_address_data_dictionaries["address4"][index] = ""
                 splitted_address_data_dictionaries["address5"][index] = ""
 
@@ -35,10 +41,14 @@ def modify_special_place_name(splitted_address_data_dictionaries: dict[str, list
             and splitted_address_data_dictionaries["address4"][index] == "宮徳谷"
         ):
             if splitted_address_data_dictionaries["address2"][index] != "":
-                splitted_address_data_dictionaries["error1"][index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
+                splitted_address_data_dictionaries["error1"][
+                    index
+                ] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
                 splitted_address_data_dictionaries["address2"][index] = "一宮徳谷"
-                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][index]
+                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][
+                    index
+                ]
                 splitted_address_data_dictionaries["address4"][index] = ""
                 splitted_address_data_dictionaries["address5"][index] = ""
 
@@ -49,10 +59,14 @@ def modify_special_place_name(splitted_address_data_dictionaries: dict[str, list
             and splitted_address_data_dictionaries["address4"][index] == "台山"
         ):
             if splitted_address_data_dictionaries["address2"][index] != "":
-                splitted_address_data_dictionaries["error1"][index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
+                splitted_address_data_dictionaries["error1"][
+                    index
+                ] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
                 splitted_address_data_dictionaries["address2"][index] = "五台山"
-                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][index]
+                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][
+                    index
+                ]
                 splitted_address_data_dictionaries["address4"][index] = ""
                 splitted_address_data_dictionaries["address5"][index] = ""
 
@@ -62,7 +76,9 @@ def modify_special_place_name(splitted_address_data_dictionaries: dict[str, list
             "^台山.+", splitted_address_data_dictionaries["address4"][index]
         ):
             if splitted_address_data_dictionaries["address2"][index] != "":
-                splitted_address_data_dictionaries["error1"][index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
+                splitted_address_data_dictionaries["error1"][
+                    index
+                ] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
                 splitted_address_data_dictionaries["address2"][index] = ""
                 splitted_address_data_dictionaries["address3"][index] = ""
@@ -77,10 +93,14 @@ def modify_special_place_name(splitted_address_data_dictionaries: dict[str, list
             and splitted_address_data_dictionaries["address4"][index] == "谷"
         ):
             if splitted_address_data_dictionaries["address2"][index] != "":
-                splitted_address_data_dictionaries["error1"][index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
+                splitted_address_data_dictionaries["error1"][
+                    index
+                ] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
                 splitted_address_data_dictionaries["address2"][index] = "三谷"
-                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][index]
+                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][
+                    index
+                ]
                 splitted_address_data_dictionaries["address4"][index] = ""
                 splitted_address_data_dictionaries["address5"][index] = ""
 
@@ -91,10 +111,14 @@ def modify_special_place_name(splitted_address_data_dictionaries: dict[str, list
             and splitted_address_data_dictionaries["address4"][index] == "原"
         ):
             if splitted_address_data_dictionaries["address2"][index] != "":
-                splitted_address_data_dictionaries["error1"][index] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
+                splitted_address_data_dictionaries["error1"][
+                    index
+                ] += "ERROR: 町域と判断される文字列が２つあります。自動整形システムは正しく動作しません。  "
             else:
                 splitted_address_data_dictionaries["address2"][index] = "三原"
-                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][index]
+                splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address5"][
+                    index
+                ]
                 splitted_address_data_dictionaries["address4"][index] = ""
                 splitted_address_data_dictionaries["address5"][index] = ""
 
@@ -108,8 +132,12 @@ def modify_special_place_name(splitted_address_data_dictionaries: dict[str, list
         ):
             if len(splitted_address_data_dictionaries["address3"][index]) < 2:
                 continue
-            splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address3"][index][:-2]
-            splitted_address_data_dictionaries["address4"][index] = "三" + splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address3"][
+                index
+            ][:-2]
+            splitted_address_data_dictionaries["address4"][index] = (
+                "三" + splitted_address_data_dictionaries["address4"][index]
+            )
 
     # 町屋
     for index in range(DATA_SIZE):

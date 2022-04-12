@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 def extract_city(non_prefecture_address_data: list[str]) -> tuple[list[str], list[str]]:
     """
     市、区、群、町、村の順で文字列を探索し、分割する。

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 
 from utils.preprocess.pre.convertConnectionCharacter import convertConnectionCharacter

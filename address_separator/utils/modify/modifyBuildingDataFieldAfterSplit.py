@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 
 
@@ -46,9 +48,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                         + "棟"
                         + splitted_address_data_dictionaries["address5"][index]
                     )
-                    splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address3"][
-                        index
-                    ][:start]
+                    splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries[
+                        "address3"
+                    ][index][:start]
                     splitted_address_data_dictionaries["address4"][index] = ""
 
     # address4に単独で 号棟 とあったら
@@ -70,9 +72,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                         + "号棟"
                         + splitted_address_data_dictionaries["address5"][index]
                     )
-                    splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address3"][
-                        index
-                    ][:start]
+                    splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries[
+                        "address3"
+                    ][index][:start]
                     splitted_address_data_dictionaries["address4"][index] = ""
 
     # address4に単独で 号室 とあったら
@@ -93,9 +95,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                         + "号室"
                         + splitted_address_data_dictionaries["address5"][index]
                     )
-                    splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address3"][
-                        index
-                    ][:start]
+                    splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries[
+                        "address3"
+                    ][index][:start]
                     splitted_address_data_dictionaries["address4"][index] = ""
 
     # address4に〜号室があるとき
@@ -107,7 +109,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # c号室のようなもの
         elif re.search("^[a-z]号室$", splitted_address_data_dictionaries["address4"][index]):
@@ -116,7 +120,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # C号室のようなもの
         elif re.search("^[A-Z]号室$", splitted_address_data_dictionaries["address4"][index]):
@@ -125,13 +131,17 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
 
     # address4の先頭のーを除去
     for index in range(DATA_SIZE):
         if splitted_address_data_dictionaries["address4"][index] == "ー":
-            splitted_address_data_dictionaries["address4"][index] = splitted_address_data_dictionaries["address4"][index][1:]
+            splitted_address_data_dictionaries["address4"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ][1:]
 
     # address4に 号室だけがあるとき
     for index in range(DATA_SIZE):
@@ -152,14 +162,16 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                         splitted_address_data_dictionaries["address3"][index][start + 1 :] + "号室"
                     )
                     splitted_address_data_dictionaries["address4"][index] = ""
-                    splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries["address3"][
-                        index
-                    ][:start]
+                    splitted_address_data_dictionaries["address3"][index] = splitted_address_data_dictionaries[
+                        "address3"
+                    ][index][:start]
 
     # address4にある()のようなデータのかっこをはずし、適切な位置へ
     for index in range(DATA_SIZE):
         if re.search("^\\(.+\\)$", splitted_address_data_dictionaries["address4"][index]):
-            splitted_address_data_dictionaries["address4"][index] = splitted_address_data_dictionaries["address4"][index][1:-1]
+            splitted_address_data_dictionaries["address4"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ][1:-1]
         # 3桁以上の数字
         if re.search("^[0-9]{3,}$", splitted_address_data_dictionaries["address4"][index]):
             if splitted_address_data_dictionaries["address5"][index] != "":
@@ -168,7 +180,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # 3F
         elif re.search("^[0-9]F$", splitted_address_data_dictionaries["address4"][index]):
@@ -178,7 +192,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # 3階
         elif re.search("^[0-9]階$", splitted_address_data_dictionaries["address4"][index]):
@@ -188,7 +204,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # c号室(半角)
         elif re.search("^[a-z]号室$", splitted_address_data_dictionaries["address4"][index]):
@@ -198,7 +216,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # c号室（全角)
         elif re.search("^[a-z]号室$", splitted_address_data_dictionaries["address4"][index]):
@@ -208,7 +228,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # 204号室
         elif re.search("^[0-9]+号室$", splitted_address_data_dictionaries["address4"][index]):
@@ -218,7 +240,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # C号室(半角)
         elif re.search("^[A-Z]号室$", splitted_address_data_dictionaries["address4"][index]):
@@ -228,7 +252,9 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
         # C号室(全角)
         elif re.search("^[A-Z]号室$", splitted_address_data_dictionaries["address4"][index]):
@@ -238,22 +264,26 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
                     index
                 ] += "CAUTION: address4のデータはaddress5にあるべきデータである可能性があります。 "
                 continue
-            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][index]
+            splitted_address_data_dictionaries["address5"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ]
             splitted_address_data_dictionaries["address4"][index] = ""
 
     # address4の先頭に の[数字]ー があったとき
     for index in range(DATA_SIZE):
         if re.search("^の[0-9]+ー", splitted_address_data_dictionaries["address4"][index]):
-            regular_expression_search_result = re.search("^の[0-9]+ー", splitted_address_data_dictionaries["address4"][index])
+            regular_expression_search_result = re.search(
+                "^の[0-9]+ー", splitted_address_data_dictionaries["address4"][index]
+            )
 
             if regular_expression_search_result is not None:
                 end: int = regular_expression_search_result.end()
-                splitted_address_data_dictionaries["address3"][index] += splitted_address_data_dictionaries["address4"][index][
-                    1 : end - 1
-                ]
-                splitted_address_data_dictionaries["address4"][index] = splitted_address_data_dictionaries["address4"][index][
-                    end:
-                ]
+                splitted_address_data_dictionaries["address3"][index] += splitted_address_data_dictionaries[
+                    "address4"
+                ][index][1 : end - 1]
+                splitted_address_data_dictionaries["address4"][index] = splitted_address_data_dictionaries["address4"][
+                    index
+                ][end:]
 
     # address4に # が単独であったら
     for index in range(DATA_SIZE):
@@ -268,4 +298,6 @@ def modify_building_dat_field(splitted_address_data_dictionaries: dict[str, list
             splitted_address_data_dictionaries["address4"][index][0] == "ー"
             and len(splitted_address_data_dictionaries["address4"][index]) >= 1
         ):
-            splitted_address_data_dictionaries["address4"][index] = splitted_address_data_dictionaries["address4"][index][1:]
+            splitted_address_data_dictionaries["address4"][index] = splitted_address_data_dictionaries["address4"][
+                index
+            ][1:]

@@ -45,8 +45,10 @@ def manipulate(data: dict, others_tail: list):
 
     for i in range(len(manipulated_others_tail)):
         if extract_number_from_others_tail(manipulated_others_tail[i]):
-            start: int = extract_number_from_others_tail(manipulated_others_tail[i]).start()
-            end: int = extract_number_from_others_tail(manipulated_others_tail[i]).end()
+            match = extract_number_from_others_tail(manipulated_others_tail[i])
+            assert match is not None
+            start: int = match.start()
+            end: int = match.end()
             if start != 0:
                 print("something wrong")  # for debug
             data["house_number"][i] = data["house_number"][i] + manipulated_others_tail[i][start:end]

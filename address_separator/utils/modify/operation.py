@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from utils.modify.handleMiscellaneousBug import handle_miscellaneous_bugs
 from utils.modify.modifyBuildingDataFieldAfterSplit import modify_building_dat_field
 from utils.modify.modifySpecialPlaceNameAfterSplit import modify_special_place_name
