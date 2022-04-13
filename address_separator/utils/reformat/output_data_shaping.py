@@ -5,7 +5,7 @@ from typing import Match, Union
 import pandas as pd
 
 
-def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]]):
+def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]]) -> dict[str, list[str]]:
     """
     format for output: 出力するcsvファイルとして望ましい形に整形する
 
@@ -18,7 +18,7 @@ def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]])
     -------
 
     """
-    res_splitted_address_data_dictionaries: dict = {}
+    res_splitted_address_data_dictionaries: dict[str, list[str]] = {}
     # 政令指定都市かどうかを判別するためのデータ
     CURRENT_PATH = os.getcwd()
     PATH: str = CURRENT_PATH + "/splitted_address_data_dictionaries/Ordinance_designated_city.csv"

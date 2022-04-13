@@ -22,7 +22,7 @@ def main():
     )
 
     # 出力形式用にデータを再整形
-    splittedAddressDataDictionaries = formart_for_output(splitted_address_data_dictionaries)
+    splittedAddressDataDictionaries: dict[str, list[str]] = formart_for_output(splitted_address_data_dictionaries)
 
     # 特殊な町域などの経験則的修正
     post_process(splittedAddressDataDictionaries)
