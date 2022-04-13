@@ -59,13 +59,20 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
 
             if re.search("[0-9]+", re_formated_address2_data_field):
                 # 数字がある
-                address3_start: int = re.search("[0-9]+", re_formated_address2_data_field).start()
-                address3_end: int = re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field).end()
+
+                match_start = re.search("[0-9]+", re_formated_address2_data_field)
+                match_end = re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field)
+
+                assert match_start is not None
+                assert match_end is not None
+
+                address3_start: int = match_start.start()
+                address3_end: int = match_end.end()
+
+                match = re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field)
+                assert match is not None
                 # 数字で終わる
-                if (
-                    len(re_formated_address2_data_field)
-                    == re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field).end()
-                ):
+                if len(re_formated_address2_data_field) == match.end():
                     if splittedAddressDataDictionaries["address3"][index] == "":
                         splittedAddressDataDictionaries["address2"][index] = re_formated_address2_data_field[
                             :address3_start
@@ -96,9 +103,10 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                         ]
                         if re.search("[0-9]", building_information_splittedAddressDataDictionaries):
                             # 建物名の情報に部屋番号が紛れ込んでいる
-                            start_index: int = re.search(
-                                "[0-9]", building_information_splittedAddressDataDictionaries
-                            ).start()
+                            match = re.search("[0-9]", building_information_splittedAddressDataDictionaries)
+                            assert match is not None
+                            start_index: int = match.start()
+
                             splittedAddressDataDictionaries["address4"][
                                 index
                             ] = building_information_splittedAddressDataDictionaries[:start_index]
@@ -210,14 +218,19 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
             # 分割作業
             if re.search("[0-9]+", re_formated_address1_data_field):
                 # 数字がある
-                regular_expression_search_result = re.search("[0-9]+", re_formated_address1_data_field)
-                address3_start: int = re.search("[0-9]+", re_formated_address1_data_field).start()
-                address3_end: int = re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field).end()
+                match_start = re.search("[0-9]+", re_formated_address1_data_field)
+                match_end = re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field)
+
+                assert match_start is not None
+                assert match_end is not None
+
+                address3_start: int = match_start.start()
+                address3_end: int = match_end.end()
                 # 数字で終わる
-                if (
-                    len(re_formated_address1_data_field)
-                    == re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field).end()
-                ):
+                match = re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field)
+                assert match is not None
+
+                if len(re_formated_address1_data_field) == match.end():
                     if splittedAddressDataDictionaries["address3"][index] == "":
                         splittedAddressDataDictionaries["address1"][index] = re_formated_address1_data_field[
                             :address3_start
@@ -248,9 +261,10 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                         ]
                         if re.search("[0-9]", building_information_splittedAddressDataDictionaries):
                             # 建物名の情報に部屋番号が紛れ込んでいる
-                            start_index: int = re.search(
-                                "[0-9]", building_information_splittedAddressDataDictionaries
-                            ).start()
+                            match = re.search("[0-9]", building_information_splittedAddressDataDictionaries)
+                            assert match is not None
+
+                            start_index: int = match.start()
                             splittedAddressDataDictionaries["address4"][
                                 index
                             ] = building_information_splittedAddressDataDictionaries[:start_index]
