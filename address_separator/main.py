@@ -22,15 +22,15 @@ def main():
     )
 
     # 出力形式用にデータを再整形
-    splittedAddressDataDictionaries: dict[str, list[str]] = formart_for_output(splitted_address_data_dictionaries)
+    splitted_address_data_dictionaries: dict[str, list[str]] = formart_for_output(splitted_address_data_dictionaries)
 
     # 特殊な町域などの経験則的修正
-    post_process(splittedAddressDataDictionaries)
+    post_process(splitted_address_data_dictionaries)
 
     # 実在する町域かどうかのチェック + 出力形式チェック
-    utils.extract.detail.check.detail_data_check.detail_check(splittedAddressDataDictionaries)
+    utils.extract.detail.check.detail_data_check.detail_check(splitted_address_data_dictionaries)
 
-    create_output_data(splittedAddressDataDictionaries)
+    create_output_data(splitted_address_data_dictionaries)
 
 
 if __name__ == "__main__":
