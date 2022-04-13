@@ -1,4 +1,4 @@
-def extract_prefecture(address_data: str):
+def extract_prefecture(address_data: str) -> tuple[str, str]:
     """
     extract prefecture: 都道府県を抽出する
 
