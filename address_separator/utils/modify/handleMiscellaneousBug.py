@@ -44,7 +44,9 @@ def handle_miscellaneous_bugs(splitted_address_data_dictionaries: dict[str, list
     for index in range(len(splitted_address_data_dictionaries["address4"])):
         if re.search("[0-9]+(ー[0-9]+)*", splitted_address_data_dictionaries["address4"][index]):
             if splitted_address_data_dictionaries["address5"][index] != "":
-                splitted_address_data_dictionaries["caution"][index] += "CAUTION: address4にはaddress5にあるべきデータが存在するやもしれません。  "
+                splitted_address_data_dictionaries["caution"][
+                    index
+                ] += "CAUTION: address4にはaddress5にあるべきデータが存在するやもしれません。  "
                 continue
             splitted_address_data_dictionaries["address5"][index] = re.sub(
                 "ー", "-", splitted_address_data_dictionaries["address4"][index]
@@ -68,6 +70,7 @@ def handle_miscellaneous_bugs(splitted_address_data_dictionaries: dict[str, list
                 continue
             else:
                 splitted_address_data_dictionaries["address2"][index] = (
-                    splitted_address_data_dictionaries["address2"][index] + splitted_address_data_dictionaries["address4"][index]
+                    splitted_address_data_dictionaries["address2"][index]
+                    + splitted_address_data_dictionaries["address4"][index]
                 )
                 splitted_address_data_dictionaries["address4"][index] = ""
