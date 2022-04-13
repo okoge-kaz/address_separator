@@ -1,6 +1,3 @@
-from __future__ import annotations
-
-
 def pull_out_district_field(non_town_address_data: str) -> tuple[str, str]:
     """_summary_
 

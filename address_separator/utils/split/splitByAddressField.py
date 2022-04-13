@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import pandas as pd
 import utils.extract.detail.building_detail
 import utils.extract.detail.check.caution
@@ -42,9 +40,7 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
         non_prefecture_address_data_array, splitted_address_data_dictionaries
     )
 
-    non_town_address_data: list[str] = pull_out_town_field(
-        non_city_address_data_array, splitted_address_data_dictionaries
-    )
+    non_town_address_data: list[str] = pull_out_town_field(non_city_address_data_array, splitted_address_data_dictionaries)
 
     district_data = utils.extract.district.extract_district(non_town_address_data)
     splitted_address_data_dictionaries["district"] = district_data[0]
@@ -62,14 +58,12 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
     caution: list = utils.extract.detail.check.check.check(splitted_address_data_dictionaries)
 
     # データ整形＋分裂してしまったデータを統合整理
-    manipulated_others_tail = utils.extract.detail.manipulate.manipulate(
-        splitted_address_data_dictionaries, others_tail
-    )
+    manipulated_others_tail = utils.extract.detail.manipulate.manipulate(splitted_address_data_dictionaries, others_tail)
 
     # ビルや建物情報の詳細を取得
     splitted_address_data_dictionaries[
         "building_detail_info"
-    ] = utils.extract.detail.building_detail.extract_building_detail(splitted_address_data_dictionaries, manipulated_others_tail)
+    ] = utils.extract.detail.building_detail.extract_building_detail(splitted_address_data_dictionaries)
 
     # ビル情報のうちデータ散逸しているものを適切に統合
     utils.extract.detail.shaping_building_info.shaping_and_extracting_building_info(

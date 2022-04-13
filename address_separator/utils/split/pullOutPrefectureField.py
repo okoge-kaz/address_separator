@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from utils.extract.prefecture import extract_prefecture
 
 

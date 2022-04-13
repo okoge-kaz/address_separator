@@ -1,9 +1,4 @@
-from __future__ import annotations
-
-
-def modify_exception_case_address2(
-    splitted_address_data_dictionaries: dict[str, list[str]], target_index: int
-) -> None:
+def modify_exception_case_address2(splitted_address_data_dictionaries: dict[str, list[str]], target_index: int) -> None:
     """
     address2が不正な形になっている(具体的には、 - が混在している状態: 屋一-三八-二二-二0二-エステスクエア町)
     このような際に行われる再整形（際分割）処理後もなお、正しく整形されない例外的ケースに対応する処理

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import pandas as pd
 import utils.preprocess.post.fixSpecialNameAddress as post
 import utils.preprocess.pre.processJapaneseAddressExpression as pre

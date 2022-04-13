@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import re
 
 from utils.modify.modifyExceptionAddressExpression import modify_exception_case_address2
@@ -61,14 +59,13 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
 
             if re.search("[0-9]+", re_formated_address2_data_field):
                 # 数字がある
-                match = re.search("[0-9]+", re_formated_address2_data_field)
-                assert match is not None
-                address3_start: int = match.start()
-                match = re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field)
-                assert match is not None
-                address3_end: int = match.end()
+                address3_start: int = re.search("[0-9]+", re_formated_address2_data_field).start()
+                address3_end: int = re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field).end()
                 # 数字で終わる
-                if len(re_formated_address2_data_field) == match.end():
+                if (
+                    len(re_formated_address2_data_field)
+                    == re.search("[0-9]+(-[0-9]+)*", re_formated_address2_data_field).end()
+                ):
                     if splittedAddressDataDictionaries["address3"][index] == "":
                         splittedAddressDataDictionaries["address2"][index] = re_formated_address2_data_field[
                             :address3_start
@@ -99,9 +96,9 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                         ]
                         if re.search("[0-9]", building_information_splittedAddressDataDictionaries):
                             # 建物名の情報に部屋番号が紛れ込んでいる
-                            match = re.search("[0-9]", building_information_splittedAddressDataDictionaries)
-                            assert match is not None
-                            start_index: int = match.start()
+                            start_index: int = re.search(
+                                "[0-9]", building_information_splittedAddressDataDictionaries
+                            ).start()
                             splittedAddressDataDictionaries["address4"][
                                 index
                             ] = building_information_splittedAddressDataDictionaries[:start_index]
@@ -111,9 +108,9 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                                 and splittedAddressDataDictionaries["address4"][index][0] == "-"
                             ):
                                 if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                    splittedAddressDataDictionaries["address4"][
-                                        index
-                                    ] = splittedAddressDataDictionaries["address4"][index][1:]
+                                    splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                                        "address4"
+                                    ][index][1:]
                             # address4の-をーに変更
                             splittedAddressDataDictionaries["address4"][index] = re.sub(
                                 "-", "ー", splittedAddressDataDictionaries["address4"][index]
@@ -133,9 +130,9 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                                 and splittedAddressDataDictionaries["address4"][index][0] == "-"
                             ):
                                 if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                    splittedAddressDataDictionaries["address4"][
-                                        index
-                                    ] = splittedAddressDataDictionaries["address4"][index][1:]
+                                    splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                                        "address4"
+                                    ][index][1:]
                             # address4の-をーに変更
                             splittedAddressDataDictionaries["address4"][index] = re.sub(
                                 "-", "ー", splittedAddressDataDictionaries["address4"][index]
@@ -143,9 +140,9 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                     else:
                         # 番地情報に数字がある
                         # 建物情報の可能性が高いのでaddress5に移す
-                        splittedAddressDataDictionaries["address5"][index] = splittedAddressDataDictionaries[
-                            "address3"
-                        ][index]
+                        splittedAddressDataDictionaries["address5"][index] = splittedAddressDataDictionaries["address3"][
+                            index
+                        ]
                         splittedAddressDataDictionaries["address2"][index] = re_formated_address2_data_field[
                             :address3_start
                         ]
@@ -214,14 +211,13 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
             if re.search("[0-9]+", re_formated_address1_data_field):
                 # 数字がある
                 regular_expression_search_result = re.search("[0-9]+", re_formated_address1_data_field)
-                match = re.search("[0-9]+", re_formated_address1_data_field)
-                assert match is not None
-                address3_start: int = match.start()
-                match = re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field)
-                assert match is not None
-                address3_end: int = match.end()
+                address3_start: int = re.search("[0-9]+", re_formated_address1_data_field).start()
+                address3_end: int = re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field).end()
                 # 数字で終わる
-                if len(re_formated_address1_data_field) == match.end():
+                if (
+                    len(re_formated_address1_data_field)
+                    == re.search("[0-9]+(-[0-9]+)*", re_formated_address1_data_field).end()
+                ):
                     if splittedAddressDataDictionaries["address3"][index] == "":
                         splittedAddressDataDictionaries["address1"][index] = re_formated_address1_data_field[
                             :address3_start
@@ -252,9 +248,9 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                         ]
                         if re.search("[0-9]", building_information_splittedAddressDataDictionaries):
                             # 建物名の情報に部屋番号が紛れ込んでいる
-                            match = re.search("[0-9]", building_information_splittedAddressDataDictionaries)
-                            assert match is not None
-                            start_index: int = match.start()
+                            start_index: int = re.search(
+                                "[0-9]", building_information_splittedAddressDataDictionaries
+                            ).start()
                             splittedAddressDataDictionaries["address4"][
                                 index
                             ] = building_information_splittedAddressDataDictionaries[:start_index]
@@ -264,9 +260,9 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                                 and splittedAddressDataDictionaries["address4"][index][0] == "-"
                             ):
                                 if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                    splittedAddressDataDictionaries["address4"][
-                                        index
-                                    ] = splittedAddressDataDictionaries["address4"][index][1:]
+                                    splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                                        "address4"
+                                    ][index][1:]
                             # address4の-をーに変更
                             splittedAddressDataDictionaries["address4"][index] = re.sub(
                                 "-", "ー", splittedAddressDataDictionaries["address4"][index]
@@ -286,9 +282,9 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                                 and splittedAddressDataDictionaries["address4"][index][0] == "-"
                             ):
                                 if len(splittedAddressDataDictionaries["address4"][index]) >= 2:
-                                    splittedAddressDataDictionaries["address4"][
-                                        index
-                                    ] = splittedAddressDataDictionaries["address4"][index][1:]
+                                    splittedAddressDataDictionaries["address4"][index] = splittedAddressDataDictionaries[
+                                        "address4"
+                                    ][index][1:]
                             # address4の-をーに変更
                             splittedAddressDataDictionaries["address4"][index] = re.sub(
                                 "-", "ー", splittedAddressDataDictionaries["address4"][index]
@@ -296,9 +292,9 @@ def re_split_by_every_fields(splittedAddressDataDictionaries: dict[str, list[str
                     else:
                         # 番地情報に数字がある
                         # 建物情報の可能性が高いのでaddress5に移す
-                        splittedAddressDataDictionaries["address5"][index] = splittedAddressDataDictionaries[
-                            "address3"
-                        ][index]
+                        splittedAddressDataDictionaries["address5"][index] = splittedAddressDataDictionaries["address3"][
+                            index
+                        ]
                         splittedAddressDataDictionaries["address1"][index] = re_formated_address1_data_field[
                             :address3_start
                         ]

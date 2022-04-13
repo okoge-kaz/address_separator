@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import os
 import re
 from typing import Match, Union
@@ -22,10 +20,9 @@ def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]])
     """
     res_splitted_address_data_dictionaries: dict = {}
     # 政令指定都市かどうかを判別するためのデータ
-    # os.chdir("..")
     CURRENT_PATH = os.getcwd()
-    PATH: str = CURRENT_PATH + "/data/Ordinance_designated_city.csv"
-    # os.chdir("address_separator")
+    PATH: str = CURRENT_PATH + "/splitted_address_data_dictionaries/Ordinance_designated_city.csv"
+
     ORDINANCE_DISTRICTED_CITY_CSV: pd.DataFrame = pd.read_csv(PATH)
     # データをコピー
     res_splitted_address_data_dictionaries["original"] = splitted_address_data_dictionaries["original"]
