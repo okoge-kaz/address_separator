@@ -1,7 +1,7 @@
 import re
 
-from utils.preprocess.pre.convertConnectionCharacter import convertConnectionCharacter
-from utils.preprocess.pre.convertJapaneseStyleNumberToAlabicNumber import convertJapaneseStyleNumberToAlabicNumber
+from utils.preprocess.pre.convert_connection_character import convertConnectionCharacter
+from utils.preprocess.pre.convert_japanese_style_number_to_alabic_number import convertJapaneseStyleNumberToAlabicNumber
 
 
 def process_japanese_style_address_expression(address_data: str) -> str:
