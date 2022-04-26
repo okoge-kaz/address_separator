@@ -133,6 +133,24 @@ def reshape_exceptional_address_address_data_array(address_data_array: list[str]
         address_data_array[index] = re.sub("3重県", "三重県", address_data_array[index])
         # 3園平
         address_data_array[index] = re.sub("3園平", "三園平", address_data_array[index])
+        # 東京都千代田区五番町
+        address_data_array[index] = re.sub("東京都千代田区5番町", "東京都千代田区五番町", address_data_array[index])
+        # 三条町
+        address_data_array[index] = re.sub("3条町", "三条町", address_data_array[index])
+        # 五番町
+        address_data_array[index] = re.sub("五番町", "5番町", address_data_array[index])
+        # 二ツ宮
+        address_data_array[index] = re.sub("2ツ宮", "二ツ宮", address_data_array[index])
+        # 四番町
+        address_data_array[index] = re.sub("4番町", "四番町", address_data_array[index])
+        # 三崎
+        address_data_array[index] = re.sub("3崎", "三崎", address_data_array[index])
+        # 三ヶ尻
+        address_data_array[index] = re.sub("3ヶ尻", "三ヶ尻", address_data_array[index])
+        # 八條
+        address_data_array[index] = re.sub("8條", "八條", address_data_array[index])
+        # 二番町
+        address_data_array[index] = re.sub("2番町", "二番町", address_data_array[index])
         #
         address_data_array[index] = re.sub("", "", address_data_array[index])
 
