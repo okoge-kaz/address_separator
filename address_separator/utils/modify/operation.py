@@ -1,7 +1,7 @@
-from utils.modify.handleMiscellaneousBug import handle_miscellaneous_bugs
-from utils.modify.modifyBuildingDataFieldAfterSplit import modify_building_dat_field
-from utils.modify.modifySpecialPlaceNameAfterSplit import modify_special_place_name
-from utils.modify.reSplitByEveryFieldAfterSplit import re_split_by_every_fields
+from utils.modify.handle_miscellaneous_bug import handle_miscellaneous_bugs
+from utils.modify.modify_building_data_field_after_split import modify_building_dat_field
+from utils.modify.modify_special_place_name_after_split import modify_special_place_name
+from utils.modify.resplit_by_every_field_after_split import re_split_by_every_fields
 
 
 def post_process(splittedAddressDataDictionaries: dict[str, list[str]]):
