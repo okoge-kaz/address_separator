@@ -21,7 +21,7 @@ def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]])
     res_splitted_address_data_dictionaries: dict[str, list[str]] = {}
     # 政令指定都市かどうかを判別するためのデータ
     CURRENT_PATH = os.getcwd()
-    PATH: str = CURRENT_PATH + "/splitted_address_data_dictionaries/Ordinance_designated_city.csv"
+    PATH: str = CURRENT_PATH + "/data/Ordinance_designated_city.csv"
 
     ORDINANCE_DISTRICTED_CITY_CSV: pd.DataFrame = pd.read_csv(PATH)
     # データをコピー
@@ -29,7 +29,7 @@ def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]])
     res_splitted_address_data_dictionaries["prefecture"] = splitted_address_data_dictionaries["prefecture"]
 
     # 最終出力結果に合わせて整形 市区町村郡
-    address1: list = []
+    address1: list[str] = []
     for index in range(len(splitted_address_data_dictionaries["city"])):
         if splitted_address_data_dictionaries["city"][index] in list(ORDINANCE_DISTRICTED_CITY_CSV):
             # 政令指定都市ならば
@@ -47,7 +47,7 @@ def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]])
             address1.append(splitted_address_data_dictionaries["city"][index])
     res_splitted_address_data_dictionaries["address1"] = address1
     # 町域について
-    address2: list = []
+    address2: list[str] = []
     for index in range(len(splitted_address_data_dictionaries["town"])):
         if re.search("[0-9 -]", splitted_address_data_dictionaries["town"][index]) or re.search(
             "[0-9 -]", splitted_address_data_dictionaries["district"][index]
@@ -64,7 +64,7 @@ def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]])
             )
     res_splitted_address_data_dictionaries["address2"] = address2
     # 番地について
-    address3: list = []
+    address3: list[str] = []
     for index in range(len(splitted_address_data_dictionaries["house_number"])):
         if re.search("(([0-9]+)-)* [0-9]+", splitted_address_data_dictionaries["house_number"][index]):
             address3.append(splitted_address_data_dictionaries["house_number"][index])
@@ -73,7 +73,7 @@ def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]])
             address3.append(splitted_address_data_dictionaries["house_number"][index])
     res_splitted_address_data_dictionaries["address3"] = address3
     # 建物名
-    address4: list = []
+    address4: list[str] = []
     for index in range(len(splitted_address_data_dictionaries["building_info"])):
         if splitted_address_data_dictionaries["special_characters"][index]:
             # special_charactersのセルが空ではない caution
@@ -86,7 +86,7 @@ def formart_for_output(splitted_address_data_dictionaries: dict[str, list[str]])
             address4.append(splitted_address_data_dictionaries["building_info"][index])
     res_splitted_address_data_dictionaries["address4"] = address4
     # 部屋番号
-    address5: list = []
+    address5: list[str] = []
     for index in range(len(splitted_address_data_dictionaries["building_detail_info"])):
         address5.append(splitted_address_data_dictionaries["building_detail_info"][index])
     res_splitted_address_data_dictionaries["address5"] = address5
