@@ -1,6 +1,6 @@
 import pandas as pd
-import utils.preprocess.post.fixSpecialNameAddress as post
-import utils.preprocess.pre.processJapaneseAddressExpression as pre
+import utils.preprocess.post.fix_special_name_address as post
+import utils.preprocess.pre.process_japanese_address_expression as pre
 
 
 def pretreatment(CSV_DATA: pd.DataFrame) -> list[str]:
