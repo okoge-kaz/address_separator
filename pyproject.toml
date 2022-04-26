@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "address-separator"
+name = "address_separator"
 version = "0.1.0"
 description = ""
 authors = ["kazuki <kaz.tokyo.tech20@gmail.com>"]
@@ -8,7 +8,6 @@ authors = ["kazuki <kaz.tokyo.tech20@gmail.com>"]
 python = "^3.9"
 pandas = "^1.4.2"
 openpyxl = "^3.0.9"
-xlrd = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 
