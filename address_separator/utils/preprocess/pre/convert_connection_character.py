@@ -1,7 +1,7 @@
 import re
 
 
-def convertConnectionCharacter(address_data: str) -> str:
+def convert_connection_character(address_data: str) -> str:
     """
     args: address_data: str (example: 東京都港区元麻布1 6/9)
     return: formatted_address_data: str (example: 東京都港区元麻布1-6-9)

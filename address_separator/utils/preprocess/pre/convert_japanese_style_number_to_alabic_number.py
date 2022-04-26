@@ -1,7 +1,7 @@
 import re
 
 
-def convertJapaneseStyleNumberToAlabicNumber(address_data: str) -> str:
+def convert_japanese_style_number_to_alabic_number(address_data: str) -> str:
     """
     args: address_data: str (example: 東京都港区元麻布1-六-9)
     return: formatted_address_data: str (example: 東京都港区元麻布1-6-9)

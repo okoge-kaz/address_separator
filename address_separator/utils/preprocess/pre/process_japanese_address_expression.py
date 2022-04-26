@@ -1,7 +1,7 @@
 import re
 
-from utils.preprocess.pre.convert_connection_character import convertConnectionCharacter
-from utils.preprocess.pre.convert_japanese_style_number_to_alabic_number import convertJapaneseStyleNumberToAlabicNumber
+from utils.preprocess.pre.convert_connection_character import convert_connection_character
+from utils.preprocess.pre.convert_japanese_style_number_to_alabic_number import convert_japanese_style_number_to_alabic_number
 
 
 def process_japanese_style_address_expression(address_data: str) -> str:
@@ -70,10 +70,10 @@ def process_japanese_style_address_expression(address_data: str) -> str:
             formatted_address_data = formatted_address_data[0:-1]
 
     # つなぎ文字を - に変換
-    formatted_address_data = convertConnectionCharacter(formatted_address_data)
+    formatted_address_data = convert_connection_character(formatted_address_data)
 
     # 漢数字 と 全角数字を変換
-    formatted_address_data = convertJapaneseStyleNumberToAlabicNumber(formatted_address_data)
+    formatted_address_data = convert_japanese_style_number_to_alabic_number(formatted_address_data)
 
     formatted_address_data = re.sub("ー", "-", formatted_address_data)
 
