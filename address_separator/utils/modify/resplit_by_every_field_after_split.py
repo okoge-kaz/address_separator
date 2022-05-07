@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 
 from utils.modify.modify_exception_address_expression import modify_exception_case_address2

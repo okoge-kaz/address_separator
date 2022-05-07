@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from utils.extract.town import extract_town
 
 

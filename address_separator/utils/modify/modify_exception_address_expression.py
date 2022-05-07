@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 def modify_exception_case_address2(
     splitted_address_data_dictionaries: dict[str, list[str]], target_index: int
 ) -> None:
