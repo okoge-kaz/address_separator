@@ -12,7 +12,7 @@ def process_japanese_style_address_expression(address_data: str) -> str:
     detail: 丁目, 番, 番地 という日本語表現を - に変換する処理を行う
     """
     if "丁目" in address_data:
-        pass
+        address_data = re.sub("丁目", "-", address_data)
     if "番地" in address_data:
         address_data = re.sub("番地", "-", address_data)
     if "番" in address_data:
