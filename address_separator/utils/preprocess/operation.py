@@ -17,6 +17,7 @@ def pretreatment(CSV_DATA: pd.DataFrame) -> list[str]:
     list[str]
         分割後のデータ
     """
+    CSV_DATA.fillna('#', inplace=True)
     address_data_array: pd.Series = CSV_DATA["address"]
 
     formatted_address_data_array = list(map(pre.process_japanese_style_address_expression, address_data_array))

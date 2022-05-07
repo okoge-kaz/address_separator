@@ -30,6 +30,7 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
     splitted_address_data_dictionaries: dict[str, list[str]] = {}
 
     # 分割処理を施す前のデータも事前に格納しておく
+    CSV_DATA.fillna('#', inplace=True)
     splitted_address_data_dictionaries["original"] = CSV_DATA["address"].to_list()
 
     non_prefecture_address_data_array: list[str] = pull_out_prefecture_field(
