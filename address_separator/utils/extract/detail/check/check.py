@@ -3,13 +3,23 @@ from __future__ import annotations
 import re
 
 
-def check(data: dict) -> list[str]:
+def check(data: dict, others_tail) -> list[str]:
     """
     cautionの配列を生成する
     """
 
     def check_vaild_word_or_not(index: int):
-        if re.search("^([0-9ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠])+$", data["invalid"][index]) is not None:
+        if re.search("^([0-9ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠-])+$", data["invalid"][index]) is not None:
+            # 愛知県名古屋市天白区天白町平針黒石２８４５平針住宅14-24
+            if re.search("^[0-9]{2,}", data["invalid"][index]) is not None:
+                match = re.search("^[0-9]{2,}", data["invalid"][index])
+                assert match is not None
+                string = data["invalid"][index]
+                if index is not None:
+                    others_tail[index] = string[match.end() :] + data["house_number"][index] + others_tail[index]
+                    data["house_number"][index] = string[0 : match.end()]
+                    data["invalid"][index] = ""
+
             mapping_arithmetic_number_to_japanese_number: dict = {
                 "1": "一",
                 "2": "二",

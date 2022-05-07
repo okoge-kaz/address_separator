@@ -59,7 +59,7 @@ def split_by_address_field(formatted_address_data_array: list[str], CSV_DATA: pd
     splitted_address_data_dictionaries["house_number"] = house_numbers
 
     # check 不正なデータが存在しないかどうかを確認
-    caution: list = utils.extract.detail.check.check.check(splitted_address_data_dictionaries)
+    caution: list = utils.extract.detail.check.check.check(splitted_address_data_dictionaries, others_tail)
 
     # データ整形＋分裂してしまったデータを統合整理
     manipulated_others_tail = utils.extract.detail.manipulate.manipulate(
