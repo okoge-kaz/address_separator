@@ -25,7 +25,7 @@ def process_japanese_style_address_expression(address_data: str) -> str:
     if "番" in address_data:
         address_data = escape_special_building_name(address_data, "番")
         address_data = re.sub("番", "-", address_data)
-        address_data = escape_special_building_name(address_data, "番")
+        address_data = rename_special_building_name(address_data, "番")
     if "の" in address_data:
 
         while re.search("[0-9 ０-９]+の[0-9 ０-９]", address_data) is not None:
