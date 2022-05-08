@@ -4,7 +4,7 @@ import re
 import pandas as pd
 
 
-def data_check(data: dict):
+def data_check(data: dict[str, list[str]]):
     """
     総務省のデータから実在する市町村であるかどうか調べる
     """

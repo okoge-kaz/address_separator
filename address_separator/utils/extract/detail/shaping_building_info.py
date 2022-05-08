@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 
-def shaping_and_extracting_building_info(data: dict, manipulated_others_tail: list):
+def shaping_and_extracting_building_info(data: dict[str, list[str]], manipulated_others_tail: list):
     """ビル名、建物名など、building_infoに含まれる。または、building_detail_infoに含まれるデータを抽出、整形する"""
 
     def find_kai(string: str):

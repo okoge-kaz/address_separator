@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 
-def operation(others: list):
+def operation(others: list[str]):
     """1-7-6 のような番地を抽出する。"""
     house_numbers: list = []
     others_head: list = []

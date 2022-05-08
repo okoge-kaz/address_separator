@@ -1,7 +1,7 @@
 import utils.data_create.shapping
 
 
-def detail_check(data: dict):
+def detail_check(data: dict[str, list[str]]):
     # 町域に関するテスト
     data_set = utils.data_create.shapping.main()
     for index in range(len(data["address1"])):

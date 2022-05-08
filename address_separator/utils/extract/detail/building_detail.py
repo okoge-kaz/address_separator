@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 
-def extract_building_detail(data: dict):
+def extract_building_detail(data: dict[str, list[str]]):
     # special_chractersのなかの F のみ抽出
     building_detail_info: list = []
 
