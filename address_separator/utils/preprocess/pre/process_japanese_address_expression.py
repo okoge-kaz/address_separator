@@ -1,7 +1,10 @@
 import re
 
 from utils.preprocess.pre.convert_connection_character import convert_connection_character
-from utils.preprocess.pre.convert_japanese_style_number_to_alabic_number import convert_japanese_style_number_to_alabic_number
+from utils.preprocess.pre.convert_japanese_style_number_to_alabic_number import (
+    convert_japanese_style_number_to_alabic_number,
+)
+from utils.preprocess.pre.fix_special_building_name import escape_special_building_name, rename_special_building_name
 
 
 def process_japanese_style_address_expression(address_data: str) -> str:
@@ -12,11 +15,17 @@ def process_japanese_style_address_expression(address_data: str) -> str:
     detail: 丁目, 番, 番地 という日本語表現を - に変換する処理を行う
     """
     if "丁目" in address_data:
-        pass
+        address_data = escape_special_building_name(address_data, "丁目")
+        address_data = re.sub("丁目", "-", address_data)
+        address_data = rename_special_building_name(address_data, "丁目")
     if "番地" in address_data:
+        address_data = escape_special_building_name(address_data, "番地")
         address_data = re.sub("番地", "-", address_data)
+        address_data = rename_special_building_name(address_data, "番地")
     if "番" in address_data:
+        address_data = escape_special_building_name(address_data, "番")
         address_data = re.sub("番", "-", address_data)
+        address_data = rename_special_building_name(address_data, "番")
     if "の" in address_data:
 
         while re.search("[0-9 ０-９]+の[0-9 ０-９]", address_data) is not None:

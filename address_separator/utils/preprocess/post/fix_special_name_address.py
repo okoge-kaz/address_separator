@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 
 
@@ -151,6 +153,17 @@ def reshape_exceptional_address_address_data_array(address_data_array: list[str]
         address_data_array[index] = re.sub("8條", "八條", address_data_array[index])
         # 二番町
         address_data_array[index] = re.sub("2番町", "二番町", address_data_array[index])
+        # 八幡
+        address_data_array[index] = re.sub("8幡", "八幡", address_data_array[index])
+        # 八山
+        address_data_array[index] = re.sub("8山", "八山", address_data_array[index])
+        # 八事
+        address_data_array[index] = re.sub("8事", "八事", address_data_array[index])
+        # 一つ山
+        address_data_array[index] = re.sub("1つ山", "一つ山", address_data_array[index])
+        # 三旺
+        address_data_array[index] = re.sub("3旺", "三旺", address_data_array[index])
+
         #
         address_data_array[index] = re.sub("", "", address_data_array[index])
 

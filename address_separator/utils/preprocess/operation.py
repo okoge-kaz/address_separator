@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import pandas as pd
 import utils.preprocess.post.fix_special_name_address as post
 import utils.preprocess.pre.process_japanese_address_expression as pre

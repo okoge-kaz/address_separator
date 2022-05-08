@@ -1,13 +1,17 @@
+from __future__ import annotations
+
 import re
 
 
-def manipulate(data: dict, others_tail: list):
+def manipulate(splitted_address_data_dictionaries: dict[str, list[str]], others_tail: list):
     """番地を取り除いた後のデータに関して、処理を行い後の操作で処理を行いやすくする。"""
     manipulated_others_tail: list = []
 
     for id in range(len(others_tail)):
         if re.match("[0-9]+$", others_tail[id]):
-            data["house_number"][id] = data["house_number"][id] + others_tail[id]
+            splitted_address_data_dictionaries["house_number"][id] = (
+                splitted_address_data_dictionaries["house_number"][id] + others_tail[id]
+            )
             manipulated_others_tail.append("")
         else:
             manipulated_others_tail.append(others_tail[id])
@@ -35,7 +39,7 @@ def manipulate(data: dict, others_tail: list):
         else:
             pass
 
-    data["special_characters"] = special_characters
+    splitted_address_data_dictionaries["special_characters"] = special_characters
 
     def extract_number_from_others_tail(string: str):
         if string == "":
@@ -49,7 +53,9 @@ def manipulate(data: dict, others_tail: list):
             end: int = extract_number_from_others_tail(manipulated_others_tail[i]).end()
             if start != 0:
                 print("something wrong")  # for debug
-            data["house_number"][i] = data["house_number"][i] + manipulated_others_tail[i][start:end]
+            splitted_address_data_dictionaries["house_number"][i] = (
+                splitted_address_data_dictionaries["house_number"][i] + manipulated_others_tail[i][start:end]
+            )
             manipulated_others_tail[i] = manipulated_others_tail[i][end:]
         else:
             pass
