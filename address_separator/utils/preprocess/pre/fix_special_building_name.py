@@ -21,7 +21,6 @@ def escape_special_building_name(address_data: str, special_building_name: str) 
 
 
 def rename_special_building_name(address_data: str, special_building_name: str) -> str:
-    # 丁目ビル,丁目ビルディング
     if "escape_special_building_name" in address_data:
         address_data = re.sub("escape_special_building_name", special_building_name, address_data)
 
