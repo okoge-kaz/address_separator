@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 
-def check(data: dict, others_tail) -> list[str]:
+def check(data: dict, others_tail: list[str]) -> list[str]:
     """
     cautionの配列を生成する
     """
