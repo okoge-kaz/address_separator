@@ -18,8 +18,8 @@ def caution(
                 res = res + char
         return res
 
-    for i in range(len(manipulated_others_tail)):
-        manipulated_others_tail[i] = replace_half_hyphen_with_full_width_hyphen(manipulated_others_tail[i])
+    for index in range(len(manipulated_others_tail)):
+        manipulated_others_tail[index] = replace_half_hyphen_with_full_width_hyphen(manipulated_others_tail[index])
 
     splitted_address_data_dictionaries["building_info"] = manipulated_others_tail
     splitted_address_data_dictionaries["building_detail_info"] = splitted_address_data_dictionaries[
