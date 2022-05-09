@@ -22,8 +22,8 @@ def data_check(splitted_address_data_dictionaries: dict[str, list[str]]):
         else:
             splitted_address_data_dictionaries["error1"][index] += "ERROR: address1の列の情報が不正です。自動整形過程で何らかの問題が発生しました。  "
     # 政令指定都市に関してはさらに詳しくチェック
-    CHECH_PATH = "data/Ordinance_designated_city.csv"
-    Ordinance_designated_city_csv: pd.DataFrame = pd.read_csv(CHECH_PATH)
+    CHECK_PATH = "data/Ordinance_designated_city.csv"
+    Ordinance_designated_city_csv: pd.DataFrame = pd.read_csv(CHECK_PATH)
     for index in range(len(splitted_address_data_dictionaries["city"])):
         if splitted_address_data_dictionaries["city"][index] in list(Ordinance_designated_city_csv.columns):
             city_name = splitted_address_data_dictionaries["city"][index]
