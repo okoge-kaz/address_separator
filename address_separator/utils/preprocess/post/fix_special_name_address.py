@@ -169,7 +169,7 @@ def reshape_exceptional_address_address_data_array(address_data_array: list[str]
         address_data_array[index] = re.sub("南あわじ市8木", "南あわじ市八木", address_data_array[index])
         # 四季
         address_data_array[index] = re.sub("4季", "四季", address_data_array[index])
-        # 
+        #
         address_data_array[index] = re.sub("", "", address_data_array[index])
 
     # 文字化け関連
