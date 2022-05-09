@@ -2,7 +2,7 @@ import re
 
 
 def caution(
-    splitted_address_data_dictionaries: dict[str, list[str]], munipulated_others_tail: list[str], caution: list[str]
+    splitted_address_data_dictionaries: dict[str, list[str]], manipulated_others_tail: list[str], caution: list[str]
 ):
     """
     不適切な形で分割されていると思われるデータを検知し、cautionを出す。一部データ整形機能も持つ
