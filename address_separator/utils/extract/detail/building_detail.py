@@ -43,12 +43,12 @@ def extract_building_detail(splitted_address_data_dictionaries: dict[str, list[s
                 "house_number"
             ][index][:start]
 
-    for i in range(len(splitted_address_data_dictionaries["special_characters"])):
-        if find_F(splitted_address_data_dictionaries["special_characters"][i]):
+    for index in range(len(splitted_address_data_dictionaries["special_characters"])):
+        if find_F(splitted_address_data_dictionaries["special_characters"][index]):
             # 空白に変える
-            splitted_address_data_dictionaries["special_characters"][i] = ""
+            splitted_address_data_dictionaries["special_characters"][index] = ""
             # special_charactersから数字をfetch
-            cutting_number_from_last(i)
+            cutting_number_from_last(index)
         else:
             building_detail_info.append("")
     return building_detail_info

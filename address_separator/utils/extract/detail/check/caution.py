@@ -2,14 +2,14 @@ import re
 
 
 def caution(
-    splitted_address_data_dictionaries: dict[str, list[str]], munipulated_others_tail: list[str], caution: list[str]
+    splitted_address_data_dictionaries: dict[str, list[str]], manipulated_others_tail: list[str], caution: list[str]
 ):
     """
     不適切な形で分割されていると思われるデータを検知し、cautionを出す。一部データ整形機能も持つ
     エラー文は、文字列を結合させていく方式で連結していく。
     """
     # others_tail内部の半角-を全角に直す
-    def replace_half_hypen_with_full_width_hypen(string: str):
+    def replace_half_hyphen_with_full_width_hyphen(string: str):
         res: str = ""
         for char in string:
             if char == "-":
@@ -18,10 +18,10 @@ def caution(
                 res = res + char
         return res
 
-    for i in range(len(munipulated_others_tail)):
-        munipulated_others_tail[i] = replace_half_hypen_with_full_width_hypen(munipulated_others_tail[i])
+    for index in range(len(manipulated_others_tail)):
+        manipulated_others_tail[index] = replace_half_hyphen_with_full_width_hyphen(manipulated_others_tail[index])
 
-    splitted_address_data_dictionaries["building_info"] = munipulated_others_tail
+    splitted_address_data_dictionaries["building_info"] = manipulated_others_tail
     splitted_address_data_dictionaries["building_detail_info"] = splitted_address_data_dictionaries[
         "building_detail_info"
     ]
