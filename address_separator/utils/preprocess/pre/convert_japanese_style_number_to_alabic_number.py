@@ -39,11 +39,12 @@ def convert_japanese_style_number_to_alabic_number(address_data: str) -> str:
     for character in address_data:
 
         _formatted_character: str = ""
-        if character in JAPANESE_STYLE_NUMBER:
-            # 漢数字を算用数字に変換
-            _formatted_character += DICTIONARY_JAPANESE_STYLE_NUMBER[character]
-        else:
-            _formatted_character += character
+        # if character in JAPANESE_STYLE_NUMBER:
+        #     # 漢数字を算用数字に変換
+        #     _formatted_character += DICTIONARY_JAPANESE_STYLE_NUMBER[character]
+        # else:
+        #     _formatted_character += character
+        _formatted_character += character
 
         if re.search("[０-９]", _formatted_character):
             response += MAPPING_DICTIONARY[_formatted_character]
