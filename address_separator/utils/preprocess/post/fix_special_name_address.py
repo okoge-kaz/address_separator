@@ -169,6 +169,38 @@ def reshape_exceptional_address_address_data_array(address_data_array: list[str]
         address_data_array[index] = re.sub("南あわじ市8木", "南あわじ市八木", address_data_array[index])
         # 四季
         address_data_array[index] = re.sub("4季", "四季", address_data_array[index])
+        # 高岡市五十里
+        address_data_array[index] = re.sub("高岡市5十里", "高岡市五十里", address_data_array[index])
+        # 高岡市三ケ
+        address_data_array[index] = re.sub("高岡市3ケ", "高岡市三ケ", address_data_array[index])
+        # 高岡市四屋
+        address_data_array[index] = re.sub("高岡市4屋", "高岡市四屋", address_data_array[index])
+        # 高岡市四日市
+        address_data_array[index] = re.sub("高岡市4日市", "高岡市四日市", address_data_array[index])
+        # 高岡市二塚
+        address_data_array[index] = re.sub("高岡市2塚", "高岡市二塚", address_data_array[index])
+        # 高岡市八口
+        address_data_array[index] = re.sub("高岡市8口", "高岡市八口", address_data_array[index])
+        # 高岡市六家
+        address_data_array[index] = re.sub("高岡市6家", "高岡市六家", address_data_array[index])
+        # 黒部市三日市
+        address_data_array[index] = re.sub("黒部市3日市", "黒部市三日市", address_data_array[index])
+        # 射水市七美
+        address_data_array[index] = re.sub("射水市7美", "射水市七美", address_data_array[index])
+        # 射水市三ケ
+        address_data_array[index] = re.sub("射水市3ケ", "射水市三ケ", address_data_array[index])
+        # 五郎丸
+        address_data_array[index] = re.sub("5郎丸", "五郎丸", address_data_array[index])
+        # 三郎丸
+        address_data_array[index] = re.sub("3郎丸", "三郎丸", address_data_array[index])
+        # 三清東
+        address_data_array[index] = re.sub("3清東", "三清東", address_data_array[index])
+        # 富山市四方
+        address_data_array[index] = re.sub("富山市4方", "富山市四方", address_data_array[index])
+        # 富山市二松
+        address_data_array[index] = re.sub("富山市2松", "富山市二松", address_data_array[index])
+        # 富山市八川
+        address_data_array[index] = re.sub("富山市8川", "富山市八川", address_data_array[index])
         #
         address_data_array[index] = re.sub("", "", address_data_array[index])
 
